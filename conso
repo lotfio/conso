@@ -10,22 +10,3 @@
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
-
-require 'vendor/autoload.php';
-
-use Conso\Input;
-use Conso\Output;
-use OoFile\Conf;
-
-/**
- * load config
- */
-Conf::add(__DIR__ . '/src/Conso/conf');
-/**
- * get instance
- */
-$app = new Conso\App(new Input, new Output);
-
-
-// start application
-$app->run();
