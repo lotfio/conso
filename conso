@@ -1,0 +1,12 @@
+#!/usr/bin/php
+<?php
+
+require 'autoload.php';
+
+use Conso\Input;
+Use Conso\Output;
+
+
+
+$inp = new Conso\App(new Input, new Output);
+$inp->run();
