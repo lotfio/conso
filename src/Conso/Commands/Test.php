@@ -1,4 +1,4 @@
-<?php namespace Conso\Contracts;
+<?php namespace Conso\Commands;
 
 /**
  * 
@@ -10,6 +10,12 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-interface InputInterface
+use Conso\Command;
+
+class Test extends Command
 {
+    public function description()
+    {
+        return "Hello from the other side !";
+    }
 }

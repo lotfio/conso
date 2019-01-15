@@ -12,7 +12,7 @@
 
 use Conso\Command;
 
-class Info extends Command
+class Help extends Command
 {
 
     public function capture($options, $flags) // play around with your captured inputs here
@@ -25,7 +25,10 @@ class Info extends Command
     {
         $this->output->writeLn('Hello World => ' . $action . "\n");
         $this->output->writeLn('Hello World => ' . $action);
-        print_r($this->options);
-        print_r($this->flags);
+    }
+
+    public function description()
+    {
+        return "Display information about the application";
     }
 }

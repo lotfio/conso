@@ -10,7 +10,6 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
- interface ExceptionInterface extends \Throwable 
- {
-     
- }
+interface ExceptionInterface extends \Throwable 
+{
+}

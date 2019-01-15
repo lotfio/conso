@@ -12,6 +12,5 @@
 use Conso\Contracts\ExceptionInterface;
 
 class RunTimeException extends \Exception implements ExceptionInterface
-{
-    
+{  
 }

@@ -12,6 +12,5 @@
 use Conso\Contracts\ExceptionInterface;
 
 class NotFoundException extends \Exception implements ExceptionInterface
-{
-    
+{ 
 }

@@ -86,7 +86,7 @@ class Output implements OutputInterface
      * @param  integer $ms delay in seconds
      * @return void
      */
-    public function timer(int $ms = 5000)
+    public function timer($ms = 5000)
     {
         $this->writeLn("[");
         for($i = 0; $i <= 20; $i++)
@@ -97,7 +97,12 @@ class Output implements OutputInterface
         $this->writeLn("]");
     }
 
-
+    public function whiteSpace($number)
+    {
+        for ($i=0; $i < $number; $i++) { 
+            $this->writeLn(" ");
+        }
+    }
     /**
      * output forrmatter
      *
