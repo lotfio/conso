@@ -66,7 +66,7 @@ class Output implements OutputInterface
      */
     public function warning($msg)
     {
-        return $this->writeLn("\n" . $msg . " ", "white", "orange", 1);
+        return $this->writeLn("\n" . $msg . " ", "white", "yellow", 1);
     }
     
     /**
@@ -79,7 +79,7 @@ class Output implements OutputInterface
     {
         return $this->writeLn("\n" . $msg . " ", "white", "green", 1);
     }
-    
+
     /**
      * Otput timer
      *
