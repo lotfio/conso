@@ -1,4 +1,4 @@
-<?php namespace Conso\Commands;
+<?php namespace Conso\Exceptions;
 
 /**
  * 
@@ -9,13 +9,8 @@
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
+use Conso\Contracts\ExceptionInterface;
 
-use Conso\Command;
-
-class Test extends Command
-{
-    public function description()
-    {
-        return "Hello from the other side !";
-    }
+class CommandNotFoundException extends \Exception implements ExceptionInterface
+{ 
 }

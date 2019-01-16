@@ -15,8 +15,16 @@ use Conso\Contracts\CommandInterface;
 
 class Command implements CommandInterface
 {
+    /**
+     * output
+     */
     protected $output;
 
+    /**
+     * available commands
+     *
+     * @var array
+     */
     public $availableCommands = [];
 
     /**
@@ -99,4 +107,5 @@ class Command implements CommandInterface
         }, $keys);
         return $keys[$key];
     }
+
 }

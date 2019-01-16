@@ -1,7 +1,7 @@
 <?php namespace Conso;
 
 use Conso\Contracts\OutputInterface;
-
+use Conso\Exceptions\NotFoundException;
 /**
  * 
  * @author    <contact@lotfio.net>
@@ -55,7 +55,7 @@ class Output implements OutputInterface
      */
     public function error($msg)
     {
-        return exit($this->writeLn("\n" . $msg . "\n\n", "white", "red", 1));
+        die($this->writeLn("\n" . $msg . "\n\n", "white", "red", 1));
     }
 
     /**
@@ -66,7 +66,7 @@ class Output implements OutputInterface
      */
     public function warning($msg)
     {
-        return $this->writeLn("\n" . $msg . " ", "white", "yellow", 1);
+        die($this->writeLn("\n" . $msg . " ", "white", "yellow", 1));
     }
     
     /**
@@ -77,7 +77,18 @@ class Output implements OutputInterface
      */
     public function success($msg)
     {
-        return $this->writeLn("\n" . $msg . " ", "white", "green", 1);
+        die($this->writeLn("\n" . $msg . " ", "white", "green", 1));
+    }
+
+    /**
+     * output help message method
+     *
+     * @param string $msg
+     * @return void
+     */
+    public function helpMessage($msg)
+    {
+        return $this->writeLn($msg);
     }
 
     /**
@@ -97,6 +108,12 @@ class Output implements OutputInterface
         $this->writeLn("]");
     }
 
+    /**
+     * writing white spaces method
+     *
+     * @param  int $number
+     * @return void
+     */
     public function whiteSpace($number)
     {
         for ($i=0; $i < $number; $i++) { 

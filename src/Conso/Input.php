@@ -15,12 +15,46 @@ use Conso\Contracts\InputInterface;
 class Input implements InputInterface
 {
 
+    /**
+     * input command
+     *
+     * @var string
+     */
     public $command;
 
+    /**
+     * default options and flags
+     *
+     * @var array
+     */
+    public $standardCommands = [
+        "-h","--help",
+        "-v","--version",
+        "-q","--quiet",
+        "--ansi","--no-ansi",
+        "n", "--no-interaction",
+        "--profile",
+        "--no-plugins",
+        ""
+    ];
+
+    /**
+     * input options
+     *
+     * @var array
+     */
     public $option;
 
+    /**
+     * input flags
+     *
+     * @var array
+     */
     public $flags;
 
+    /**
+     * trigger capture method
+     */
     public function __construct()
     {
         $this->capture(); // capture input
