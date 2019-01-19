@@ -10,13 +10,23 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Contracts\CommandInterface;
 
 class Command implements CommandInterface
 {
     /**
+     * inout 
+     *
+     * @var object
+     */
+    protected $input;
+
+    /**
      * output
+     *
+     * @var object
      */
     protected $output;
 
@@ -33,11 +43,42 @@ class Command implements CommandInterface
      *
      * @param OutputInterface $output
      */
-    public function __construct(OutputInterface $output)
+    public function __construct(InputInterface $input ,OutputInterface $output)
     {
         $this->output = $output;
-        $this->listCommands();
+        $this->input  = $input;
+
+        $this->listCommands(); // list defined commands 
+        $this->standardCommands(); // trigger standard commands
     }
+
+    /**
+     * bstandard commands method
+     *
+     * @return void
+     */
+    public function standardCommands()
+    {
+       if((@$this->input->options[0] == "-h" || @$this->input->flags[0] == "--help")){ 
+           
+            if(method_exists(static::class, 'help')){ $this->output->helpMessage(static::class, static::help());}
+        } 
+
+       if((@$this->input->options[0] == "-v" || @$this->input->flags[0] == "--version")){ 
+
+            die(
+                $this->output->writeLn(static::version())
+            );
+        }
+
+        if((@$this->input->options[0] == "-q" || @$this->input->flags[0] == "--quiet")){ 
+
+            die(
+                //$this->output->writeLn(static::version())
+            );
+        }
+    }
+
 
 
     /**
@@ -59,14 +100,12 @@ class Command implements CommandInterface
 
             if(class_exists($command))
             {
-                $commandMethod = new \ReflectionClass($command);
+                $comm = new \ReflectionClass($command);
 
-                if($commandMethod->hasMethod('description'))
-                {
-                    $this->availableCommands[strtolower($class)] = $command::description();
-                }else{
-                    $this->availableCommands[strtolower($class)] = "";
-                }
+                $comm->hasMethod('description')  // if has description
+                ? $this->availableCommands[strtolower($class)] = $command::description() // call
+                : $this->availableCommands[strtolower($class)] = ""; // else
+
             }
         }
         return $this->availableCommands;
@@ -80,7 +119,7 @@ class Command implements CommandInterface
     public function displayAvailableCommands()
     {
         $i = 0;
-        $this->output->writeLn("Available Commands :\n\n", "yellow");
+        $this->output->writeLn("Available commands :\n\n", "yellow");
         foreach ($this->availableCommands as $command => $description) {
            
             $this->output->writeLn("  $command", "green");

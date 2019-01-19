@@ -14,23 +14,9 @@ use Conso\Command;
 
 class Make extends Command
 {
-    public function capture($options, $flags)
-    {
-        $this->options = $options;
-        $this->flags   = $flags;
-    }
-
     public function execute($sub)
     {
-        switch ($sub) {
-            case 'make' :
-                $this->makeController() ;
-                break;
-            
-            default:
-               echo "zazazaz";
-                break;
-        }
+        echo $sub;
     }
  
 
@@ -38,6 +24,8 @@ class Make extends Command
 
 
 
-    public function help(){return "Make command help you to create files and store them to spesific location";}
+
+
+    public function help(){return "This command help you to create files and store them to spesific location";}
     public function description(){return "Make command help you to create files and store them to spesific location";}
 }

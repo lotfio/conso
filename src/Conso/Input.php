@@ -20,7 +20,7 @@ class Input implements InputInterface
      *
      * @var string
      */
-    public $command;
+    public $commands;
 
     /**
      * default options and flags
@@ -32,10 +32,9 @@ class Input implements InputInterface
         "-v","--version",
         "-q","--quiet",
         "--ansi","--no-ansi",
-        "n", "--no-interaction",
+        "-n", "--no-interaction",
         "--profile",
         "--no-plugins",
-        ""
     ];
 
     /**
@@ -43,7 +42,7 @@ class Input implements InputInterface
      *
      * @var array
      */
-    public $option;
+    public $options;
 
     /**
      * input flags
@@ -74,15 +73,24 @@ class Input implements InputInterface
         // sort commands
         $commands = array_values($commands);
 
-        // command + method
-        @$this->command = explode(':', $commands[0]);  
-        unset($commands[0]);
+        if(isset($commands[0]) && !preg_match("/^\-/", $commands[0]))
+        {
+            $this->commands = explode(':', $commands[0]);
+        }
+        
 
-        //
+        //options
         $this->options = array_values(array_filter($commands, function($elem){
-            return \preg_match("/^\-{0,1}+[a-z]+/", $elem);
+            return \preg_match("/^\-{0,1}+[a-z]+$/", $elem);
         }));
 
+        if(isset($this->commands[0])) // remove command from option
+        {
+            unset($this->options[0]);
+            $this->options = array_values($this->options);
+        }
+
+        // flags
         $this->flags = array_values(array_filter($commands, function($elem){
             return \preg_match("/^\--[a-z]+/", $elem);
         }));

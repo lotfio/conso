@@ -30,6 +30,12 @@ class App
      */
     private $output;
 
+    /**
+     * constructor
+     *
+     * @param InputInterface $input
+     * @param OutputInterface $output
+     */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
         $this->input   = $input;
@@ -44,47 +50,38 @@ class App
     public function bind() // bind the imput with the exact command and pass options and flags 
     {
         // bind commands with input  capture input
-        
-        $class = 'Conso\\Commands\\' . ucfirst($this->input->command[0]); // command
+        if(isset($this->input->commands[0])) $class = ucfirst($this->input->commands[0]);
 
-        /**
-         * if command exists
-         */
-        if(class_exists($class)) // bind commands here
-        {
-            $command = new $class($this->output); // instantiate command
-            $command->capture($this->input->options, $this->input->flags); // capture input options and flags
+        if(isset($class) && class_exists('Conso\\Commands\\' . $class))
+        {   
+            $class   = 'Conso\\Commands\\' . $class; // command
+            $command = new $class($this->input, $this->output);
+            $command->execute($this->input->commands[1] ?? NULL, $this->input->options ?? NULL, $this->input->flags ?? NULL); // sub command or null
+            exit;
 
-            if((@$this->input->options[0] == "-h") || (@$this->input->flags[0] == "--help")) // display help message of the controller
+        }else{
+
+            if(empty($class) || \in_array($class, $this->input->standardCommands))
             {
-                $this->output->helpMessage($command->help());
-            }
-
-            $command->execute($this->input->command[1] ?? ""); // execute sub command
-            exit(1);
-
-        }else{ // no command exists
-
-            if(\in_array($this->input->command[0], $this->input->standardCommands))
-            {
-                $class   = 'Conso\\Commands\\Help';
-                $command = new $class($this->output); // instantiate command
-                $command->capture($this->input->options, $this->input->flags); // capture input options and flags
-                $command->execute($this->input->command ?? ""); // execute commands
-                exit(1);
+                $command = 'Conso\\Commands\\' . DEFAULT_COMMAND;
+                $command = new $command($this->input, $this->output);
+                $command->execute($this->input->commands ?? NULL, $this->input->options ?? NULL, $this->input->flags ?? NULL); // sub command or null
+                exit;
             }
         }
 
-        throw new CommandNotFoundException('Command ' . $this->input->command[0] . ' not Found ');
+        throw new CommandNotFoundException('Command ' . $this->input->commands[0] . ' not Found ');
     }
 
+    /**
+     * 
+     */
     public function run()  // run the application
     {
         try{
             
             $this->bind();
-            // execute all command here
-            // load all commands from // command
+
         }catch(\Exception $e)
         {
             $this->output->error("[".get_class($e) . "] \n " . $e->getMessage());

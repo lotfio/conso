@@ -12,22 +12,8 @@
 
 use Conso\Command;
 
-class Help extends Command
+class Info extends Command
 {
-
-    /**
-     * capture options and flags inputs
-     *
-     * @param  array $options
-     * @param  array $flags
-     * @return void
-     */
-    public function capture($options, $flags) // play around with your captured inputs here
-    {
-        $this->options = $options;
-        $this->flags   = $flags;
-    }
-
     /**
      * execute command and sub commands
      *
@@ -36,7 +22,6 @@ class Help extends Command
      */
     public function execute($commands) //here rather then found commands we pass the commands in others we pas the sub command
     {   
-        $this->defaultOptionsAndFlags($commands[0]);
         $this->logo();
         $this->basicInfo();
         $this->displayAvailableCommands(); // from parent
@@ -69,19 +54,19 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
      */
     public function basicInfo()
     {
-        $this->output->writeLn(APP_NAME, 'yellow','black', 1);
+        $this->output->writeLn(APP_NAME, 'yellow');
         $this->output->writeLn(" version ".APP_VERSION);
         $this->output->writeLn(" " .APP_RELEASE_DATE."\n\n", "green");
         $this->output->writeLn("Usage :\n\n", 'yellow');
         $this->output->writeLn("  command:subcommand [options] [flags] \n\n");
         $this->output->writeLn("Options, flags :\n\n", 'yellow');
-        $this->optionsAndFlags("-h, --help", "               Display this help message");
-        $this->optionsAndFlags("-q, --quiet", "              Do not output any message");
-        $this->optionsAndFlags("-v, --version", "            Display this application version");
-        $this->optionsAndFlags("    --ansi", "               Enable ANSI output");
-        $this->optionsAndFlags("    --no-ansi", "            Disable ANSI output");
-        $this->optionsAndFlags("-n, --no-interaction", "     Do not ask any interactive question");
-        $this->optionsAndFlags("    --profile", "            Display timing and memory usage information\n");
+        $this->optionsAndFlags("-h, --help", "           Display this help message");
+        $this->optionsAndFlags("-q, --quiet", "          Do not output any message");
+        $this->optionsAndFlags("-v, --version", "        Display this application version");
+        $this->optionsAndFlags("    --ansi", "           Enable ANSI output");
+        $this->optionsAndFlags("    --no-ansi", "        Disable ANSI output");
+        $this->optionsAndFlags("-n, --no-interaction", " Do not ask any interactive question");
+        $this->optionsAndFlags("    --profile", "        Display timing and memory usage information\n");
     }
 
     /**
@@ -99,23 +84,22 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
     }
 
     /**
-     * Undocumented function
+     * display application version
      *
-     * @param [type] $command
      * @return void
      */
-    public function defaultOptionsAndFlags($command)
+    public function version()
     {
-        if(($command == "-v" || $command == "--version")){ 
-            $this->output->writeLn("\n".APP_NAME, 'yellow','black', 1);
-            $this->output->writeLn(" version ".APP_VERSION);
-            $this->output->writeLn(" " .APP_RELEASE_DATE."\n", "green");
-            exit(1);
-        }
+        $this->output->writeLn("\n".APP_NAME, 'yellow','black', 1);
+        $this->output->writeLn(" version ".APP_VERSION);
+        $this->output->writeLn(" " .APP_RELEASE_DATE."\n", "green");
+        exit(1);
     }
-
-    public function description()
-    {
-        return "Display this help message !";
-    }
+    
+    /**
+     * display command description
+     *
+     * @return void
+     */
+    public function description(){return "Display this help message !";}
 }

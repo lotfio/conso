@@ -86,9 +86,18 @@ class Output implements OutputInterface
      * @param string $msg
      * @return void
      */
-    public function helpMessage($msg)
+    public function helpMessage($helpCommand, $msg)
     {
-        return $this->writeLn($msg);
+        $command = explode('\\', $helpCommand);
+        $command = strtolower($command[count($command) - 1]);
+
+        if($command != strtolower(DEFAULT_COMMAND)) // if not default command
+        {
+            $this->writeLn( "\n[ $command ]  ", "yellow");
+            die (
+                $this->writeLn($msg . "\n")
+            );
+        }
     }
 
     /**
@@ -131,8 +140,8 @@ class Output implements OutputInterface
      */
     public function outputFormater(string $line, string $color, string $bg, int $bold)
     {
-        if(!isset($this->colors[$color])) exit("error color not found");
-        if(!isset($this->bgColors[$bg]))  exit("error background color not found");
+        if(!isset($this->colors[$color])) throw new NotFoundException("error color not found");
+        if(!isset($this->bgColors[$bg]))  throw new NotFoundException("error background color not found");
         return "\e[". $bold .";" . $this->colors[$color] . ";" . $this->bgColors[$bg] . "m" . $line . "\e[0m";
     }
 }
