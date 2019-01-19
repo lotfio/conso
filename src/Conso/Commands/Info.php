@@ -11,8 +11,9 @@
  */
 
 use Conso\Command;
+use Conso\Contracts\CommandInterface;
 
-class Info extends Command
+class Info extends Command implements CommandInterface
 {
     /**
      * execute command and sub commands
@@ -20,7 +21,7 @@ class Info extends Command
      * @param  string $commands
      * @return void
      */
-    public function execute($commands) //here rather then found commands we pass the commands in others we pas the sub command
+    public function execute($subCommand, $options, $flags) //here rather then found commands we pass the commands in others we pas the sub command
     {   
         $this->logo();
         $this->basicInfo();
@@ -90,7 +91,7 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
      */
     public function version()
     {
-        $this->output->writeLn("\n".APP_NAME, 'yellow','black', 1);
+        $this->output->writeLn("\n".APP_NAME, 'yellow');
         $this->output->writeLn(" version ".APP_VERSION);
         $this->output->writeLn(" " .APP_RELEASE_DATE."\n", "green");
         exit(1);

@@ -12,9 +12,8 @@
 
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
-use Conso\Contracts\CommandInterface;
 
-class Command implements CommandInterface
+class Command
 {
     /**
      * inout 
@@ -134,7 +133,7 @@ class Command implements CommandInterface
      * this method helps to display commands
      * in a table way like
      *
-     * @param [type] $key
+     * @param  int $key
      * @return void
      */
     public function commandWhiteSpaceLength($key)

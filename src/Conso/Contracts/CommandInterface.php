@@ -12,4 +12,13 @@
 
 interface CommandInterface
 { 
+    /**
+     * execute command method
+     *
+     * @param string $subCommand if we have an additional command
+     * @param array $options
+     * @param array $flags
+     * @return void
+     */
+    public function execute($subCommand, $options, $flags);
 }

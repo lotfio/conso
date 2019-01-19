@@ -84,7 +84,7 @@ class Input implements InputInterface
             return \preg_match("/^\-{0,1}+[a-z]+$/", $elem);
         }));
 
-        if(isset($this->commands[0])) // remove command from option
+        if(isset($this->commands[0]) && $this->commands[0] == $this->options[0]) // remove command from option
         {
             unset($this->options[0]);
             $this->options = array_values($this->options);
