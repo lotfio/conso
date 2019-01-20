@@ -1,7 +1,5 @@
 <?php namespace Conso;
 
-use Conso\Contracts\InputInterface;
-
 /**
  * 
  * @author    <contact@lotfio.net>
@@ -11,6 +9,8 @@ use Conso\Contracts\InputInterface;
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
+
+use Conso\Contracts\InputInterface;
 
 class Input implements InputInterface
 {
@@ -27,7 +27,7 @@ class Input implements InputInterface
      *
      * @var array
      */
-    public $standardCommands = [
+    public $defaultFlags = [
         "-h","--help",
         "-v","--version",
         "-q","--quiet",
@@ -68,31 +68,80 @@ class Input implements InputInterface
     public function capture()
     {
         // unsetting arg0 
-        $commands = $_SERVER['argv'];unset($commands[0]);
+        $commands = $_SERVER['argv']; unset($commands[0]); // remove file.php
         
         // sort commands
         $commands = array_values($commands);
 
-        if(isset($commands[0]) && !preg_match("/^\-/", $commands[0]))
+        if(isset($commands[0]) && !preg_match("/^\-{1,2}[a-z]+/", $commands[0])) // if command is set and not flag
         {
-            $this->commands = explode(':', $commands[0]);
+            if(strstr($commands[0], ":")) // if sub command 
+            {
+                $this->commands = explode(':', $commands[0]);
+                unset($commands[0]);
+            }else{
+    
+                $this->commands[] = $commands[0];
+                unset($commands[0]);
+            }
+        }else{ // if not isset command 0
+
+            $this->commands = [];
         }
         
-
-        //options
+        // input options 
         $this->options = array_values(array_filter($commands, function($elem){
-            return \preg_match("/^\-{0,1}+[a-z]+$/", $elem);
+            return !preg_match("/^\-{1,2}[a-z]+/", $elem);
         }));
+        
 
-        if(isset($this->commands[0]) && $this->commands[0] == $this->options[0]) // remove command from option
-        {
-            unset($this->options[0]);
-            $this->options = array_values($this->options);
-        }
-
-        // flags
+        // input flags
         $this->flags = array_values(array_filter($commands, function($elem){
-            return \preg_match("/^\--[a-z]+/", $elem);
+            return \preg_match("/^\-{1,2}[a-z]+/", $elem);
         }));
+    }
+
+    /**
+     * input command method
+     *
+     * @param  int $index
+     * @return void
+     */
+    public function commands(int $index)
+    {
+        return $this->commands[$index] ?? FALSE; 
+    }
+
+    /**
+     * input options method
+     *
+     * @param  int $index
+     * @return void
+     */
+    public function options(int $index)
+    {
+        return $this->options[$index] ?? FALSE;
+    }
+
+    /**
+     * input flags method
+     *
+     * @param  int $index
+     * @return void
+     */
+    public function flags(int $index)
+    {
+        return $this->flags[$index] ?? FALSE;
+    }
+
+    /**
+     * default input flags method
+     *
+     * @param  int $index
+     * @return void
+     */
+    public function defaultFlags(int $index)
+    {
+        return $this->defaultFlags[$index] ?? FALSE;
     }
 }

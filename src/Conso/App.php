@@ -50,27 +50,27 @@ class App
     public function bind() // bind the imput with the exact command and pass options and flags 
     {
         // bind commands with input  capture input
-        if(isset($this->input->commands[0])) $class = ucfirst($this->input->commands[0]);
+        $class = ucfirst($this->input->commands(0));
 
         if(isset($class) && class_exists('Conso\\Commands\\' . $class))
         {   
             $class   = 'Conso\\Commands\\' . $class; // command
             $command = new $class($this->input, $this->output);
-            $command->execute($this->input->commands[1] ?? NULL, $this->input->options ?? NULL, $this->input->flags ?? NULL); // sub command or null
+            $command->execute($this->input->commands(0), $this->input->options, $this->input->flags); // sub command or null
             exit;
 
         }else{
 
-            if(empty($class) || \in_array($class, $this->input->standardCommands))
+            if(empty($class) || \in_array($class, $this->input->defaultFlags))
             {
                 $command = 'Conso\\Commands\\' . DEFAULT_COMMAND;
                 $command = new $command($this->input, $this->output);
-                $command->execute($this->input->commands ?? NULL, $this->input->options ?? NULL, $this->input->flags ?? NULL); // sub command or null
+                $command->execute($this->input->commands, $this->input->options , $this->input->flags); // sub command or null
                 exit;
             }
         }
 
-        throw new CommandNotFoundException('Command ' . $this->input->commands[0] . ' not Found ');
+        throw new CommandNotFoundException('Command ' . $this->input->commands(0) . ' not Found ');
     }
 
     /**

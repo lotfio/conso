@@ -83,19 +83,6 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
         $this->output->writeLn("       ");
         $this->output->writeLn("$message\n");
     }
-
-    /**
-     * display application version
-     *
-     * @return void
-     */
-    public function version()
-    {
-        $this->output->writeLn("\n".APP_NAME, 'yellow');
-        $this->output->writeLn(" version ".APP_VERSION);
-        $this->output->writeLn(" " .APP_RELEASE_DATE."\n", "green");
-        exit(1);
-    }
     
     /**
      * display command description

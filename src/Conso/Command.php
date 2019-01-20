@@ -12,6 +12,7 @@
 
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
+use Conso\Exceptions\FlagNotFoundException;
 
 class Command
 {
@@ -48,7 +49,7 @@ class Command
         $this->input  = $input;
 
         $this->listCommands(); // list defined commands 
-        $this->standardCommands(); // trigger standard commands
+        $this->defaultFlags(); // trigger standard commands
     }
 
     /**
@@ -56,25 +57,29 @@ class Command
      *
      * @return void
      */
-    public function standardCommands()
+    public function defaultFlags()
     {
-       if((@$this->input->options[0] == "-h" || @$this->input->flags[0] == "--help")){ 
-           
-            if(method_exists(static::class, 'help')){ $this->output->helpMessage(static::class, static::help());}
-        } 
+        if(!empty($this->input->flags) && in_array($this->input->flags(0), $this->input->defaultFlags)) // if there is flags
+        {
+            switch ($this->input->flags(0)) {
+                case "--help":
+                case "-h":
+                    if(method_exists(static::class, 'help')){ $this->output->helpMessage(static::class, static::help());}
+                    break;
+                
+                case "--version":
+                case "-v":
+                     die($this->output->writeLn(self::version()));
+                    break;
+                case "--quiet":
+                case "-q":
+                     die();
+                    break;
 
-       if((@$this->input->options[0] == "-v" || @$this->input->flags[0] == "--version")){ 
-
-            die(
-                $this->output->writeLn(static::version())
-            );
-        }
-
-        if((@$this->input->options[0] == "-q" || @$this->input->flags[0] == "--quiet")){ 
-
-            die(
-                //$this->output->writeLn(static::version())
-            );
+                default:
+                    throw new FlagNotFoundException("Flag ". $this->input->flags(0) . " not found !");
+                    break;
+            }
         }
     }
 
@@ -144,6 +149,19 @@ class Command
             return $max - $elem + 5; // + desired number of white spaces
         }, $keys);
         return $keys[$key];
+    }
+
+    /**
+     * display application version
+     *
+     * @return void
+     */
+    public function version()
+    {
+        $this->output->writeLn("\n".APP_NAME, 'yellow');
+        $this->output->writeLn(" version ".APP_VERSION);
+        $this->output->writeLn(" " .APP_RELEASE_DATE."\n", "green");
+        exit(1);
     }
 
 }

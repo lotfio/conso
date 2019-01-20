@@ -12,6 +12,6 @@
 
 use Conso\Contracts\ExceptionInterface;
 
-class CommandNotFoundException extends \Exception implements ExceptionInterface
+class OptionNotFoundException extends \Exception implements ExceptionInterface
 { 
 }
