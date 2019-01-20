@@ -23,21 +23,6 @@ class Input implements InputInterface
     public $commands;
 
     /**
-     * default options and flags
-     *
-     * @var array
-     */
-    public $defaultFlags = [
-        "-h","--help",
-        "-v","--version",
-        "-q","--quiet",
-        "--ansi","--no-ansi",
-        "-n", "--no-interaction",
-        "--profile",
-        "--no-plugins",
-    ];
-
-    /**
      * input options
      *
      * @var array
@@ -50,6 +35,21 @@ class Input implements InputInterface
      * @var array
      */
     public $flags;
+
+    /**
+     * default  flags
+     *
+     * @var array
+     */
+    public $defaultFlags = [
+        "-h","--help",
+        "-v","--version",
+        "-q","--quiet",
+        "--ansi","--no-ansi",
+        "-n", "--no-interaction",
+        "--profile",
+        "--no-plugins",
+    ];
 
     /**
      * trigger capture method

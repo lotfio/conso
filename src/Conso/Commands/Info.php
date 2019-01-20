@@ -12,6 +12,7 @@
 
 use Conso\Command;
 use Conso\Contracts\CommandInterface;
+use Conso\Exceptions\FlagNotFoundException;
 
 class Info extends Command implements CommandInterface
 {
@@ -21,7 +22,7 @@ class Info extends Command implements CommandInterface
      * @param  string $commands
      * @return void
      */
-    public function execute($subCommand, $options, $flags) //here rather then found commands we pass the commands in others we pas the sub command
+    public function execute($sub, $options, $flags) //here rather then found commands we pass the commands in others we pas the sub command
     {   
         $this->logo();
         $this->basicInfo();
