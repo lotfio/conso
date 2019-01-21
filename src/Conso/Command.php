@@ -59,31 +59,42 @@ class Command
      */
     public function defaultFlags()
     {
-        if(!empty($this->input->flags) && in_array($this->input->flags(0), $this->input->defaultFlags)) // if there is flags
+        if($this->input->flags(0)) // if there is flags
         {
-            switch ($this->input->flags(0)) {
-                case "--help":
-                case "-h":
-                    if(method_exists(static::class, 'help')){ $this->output->helpMessage(static::class, static::help());}
-                    break;
-                
-                case "--version":
-                case "-v":
-                     die($this->output->writeLn(self::version()));
-                    break;
-                case "--quiet":
-                case "-q":
-                     die();
-                    break;
-
-                default:
-                    throw new FlagNotFoundException("Flag ". $this->input->flags(0) . " not found !");
-                    break;
+            if(in_array($this->input->flags(0), $this->input->defaultFlags)) // execute default commands here 
+            {
+                switch ($this->input->flags(0)) {
+                    case "--help":
+                    case "-h":
+                        if(method_exists(static::class, 'help')){ $this->output->helpMessage(static::class, static::help());}
+                        break;
+                    
+                    case "--version":
+                    case "-v":
+                         die($this->output->writeLn(self::version()));
+                        break;
+                    case "--quiet":
+                    case "-q":
+                         die();
+                        break;
+                }
             }
         }
     }
 
-
+    /**
+     * check defined flags
+     *
+     * @param array $flags
+     * @return void
+     */
+    public function checkFlags($flags, $commandFlags)
+    {
+        if(!empty($flags))
+        {
+            if(!\in_array($this->input->flags(0), $commandFlags)) throw new FlagNotFoundException("Flag $flags[0] not found !"); 
+        }
+    }
 
     /**
      * list all commands with there description

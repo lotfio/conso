@@ -13,6 +13,7 @@
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
+use Conso\Exceptions\FlagNotFoundException;
 
 class App
 {
@@ -56,7 +57,7 @@ class App
         {   
             $class   = 'Conso\\Commands\\' . $class; // command
             $command = new $class($this->input, $this->output);
-            $command->execute($this->input->commands(0), $this->input->options, $this->input->flags); // sub command or null
+            $command->execute($this->input->commands(1) ?? null, $this->input->options, $this->input->flags); // sub command or null
             exit;
 
         }else{
