@@ -91,13 +91,10 @@ class Output implements OutputInterface
         $command = explode('\\', $helpCommand);
         $command = strtolower($command[count($command) - 1]);
 
-        if($command != strtolower(DEFAULT_COMMAND)) // if not default command
-        {
-            $this->writeLn( "\n[ $command ]  ", "yellow");
-            die (
-                $this->writeLn($msg . "\n")
-            );
-        }
+        $this->writeLn( "\n[ $command ]  ", "yellow");
+        die (
+            $this->writeLn($msg . "\n")
+        );
     }
 
     /**

@@ -85,6 +85,18 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
         $this->output->writeLn("       ");
         $this->output->writeLn("$message\n");
     }
+
+    /**
+     * display basic help
+     *
+     * @return void
+     */
+    public function help(){
+
+        $this->output->writeLn("\n[ Info ]\n\n", 'yellow');
+        $this->basicInfo();
+        exit(1);
+    }
     
     /**
      * display command description
