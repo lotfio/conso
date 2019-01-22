@@ -138,7 +138,7 @@ class Output implements OutputInterface
      * @param integer $bold
      * @return void
      */
-    public function outputFormater(string $line, string $color, string $bg, int $bold)
+    private function outputFormater(string $line, string $color, string $bg, int $bold)
     {
         if(!isset($this->colors[$color])) throw new NotFoundException("error color not found");
         if(!isset($this->bgColors[$bg]))  throw new NotFoundException("error background color not found");

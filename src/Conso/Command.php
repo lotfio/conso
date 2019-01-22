@@ -60,9 +60,9 @@ class Command
      */
     public function defaultFlags()
     {
-        if($this->input->flags(0)) // if there is flags
+        if(!empty($this->input->flags())) // if there is flags
         {
-            if(in_array($this->input->flags(0), $this->input->defaultFlags)) // execute default commands here 
+            if(in_array($this->input->flags(0), $this->input->defaultFlags())) // execute default commands here 
             {
                 switch ($this->input->flags(0)) {
                     case "--help":
@@ -91,7 +91,7 @@ class Command
      */
     public function checkFlags()
     {
-        if(!empty($this->input->flags))
+        if(!empty($this->input->flags()))
         {
             if(!\in_array($this->input->flags(0), $this->flags)) 
             throw new FlagNotFoundException("Flag " . $this->input->flags(0) . " not found !"); 

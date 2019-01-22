@@ -15,7 +15,7 @@ interface InputInterface
     /**
      * input commands
      *
-     * @param integer $index
+     * @param  integer $index
      * @return void
      */
     public function commands(int $index);

@@ -20,28 +20,28 @@ class Input implements InputInterface
      *
      * @var string
      */
-    public $commands;
+    private $commands;
 
     /**
      * input options
      *
      * @var array
      */
-    public $options;
+    private $options;
 
     /**
      * input flags
      *
      * @var array
      */
-    public $flags;
+    private $flags;
 
     /**
      * default  flags
      *
      * @var array
      */
-    public $defaultFlags = [
+    private $defaultFlags = [
         "-h","--help",
         "-v","--version",
         "-q","--quiet",
@@ -107,9 +107,9 @@ class Input implements InputInterface
      * @param  int $index
      * @return void
      */
-    public function commands(int $index)
+    public function commands(int $index = 0)
     {
-        return $this->commands[$index] ?? FALSE; 
+        return $this->commands[$index] ?? $this->commands; 
     }
 
     /**
@@ -118,9 +118,9 @@ class Input implements InputInterface
      * @param  int $index
      * @return void
      */
-    public function options(int $index)
+    public function options(int $index = 0)
     {
-        return $this->options[$index] ?? FALSE;
+        return $this->options[$index] ?? $this->options;
     }
 
     /**
@@ -129,9 +129,9 @@ class Input implements InputInterface
      * @param  int $index
      * @return void
      */
-    public function flags(int $index)
+    public function flags(int $index = 0)
     {
-        return $this->flags[$index] ?? FALSE;
+        return $this->flags[$index] ?? $this->flags;
     }
 
     /**
@@ -140,8 +140,8 @@ class Input implements InputInterface
      * @param  int $index
      * @return void
      */
-    public function defaultFlags(int $index)
+    public function defaultFlags()
     {
-        return $this->defaultFlags[$index] ?? FALSE;
+        return $this->defaultFlags;
     }
 }
