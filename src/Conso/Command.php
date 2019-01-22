@@ -49,7 +49,8 @@ class Command
         $this->input  = $input;
 
         $this->listCommands(); // list defined commands 
-        $this->defaultFlags(); // trigger standard commands
+        $this->defaultFlags(); // trigger default commands
+        $this->checkFlags();  // defined command flags
     }
 
     /**
@@ -88,11 +89,12 @@ class Command
      * @param array $flags
      * @return void
      */
-    public function checkFlags($flags, $commandFlags)
+    public function checkFlags()
     {
-        if(!empty($flags))
+        if(!empty($this->input->flags))
         {
-            if(!\in_array($this->input->flags(0), $commandFlags)) throw new FlagNotFoundException("Flag $flags[0] not found !"); 
+            if(!\in_array($this->input->flags(0), $this->flags)) 
+            throw new FlagNotFoundException("Flag " . $this->input->flags(0) . " not found !"); 
         }
     }
 

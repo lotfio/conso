@@ -16,7 +16,7 @@ use Conso\Exceptions\FlagNotFoundException;
 
 class Info extends Command implements CommandInterface
 {
-    private $flags = [];
+    protected $flags = [];
     /**
      * execute command and sub commands
      *
@@ -25,9 +25,6 @@ class Info extends Command implements CommandInterface
      */
     public function execute($sub, $options, $flags) //here rather then found commands we pass the commands in others we pas the sub command
     {   
-        // check available flags
-        $this->checkFlags($flags, $this->flags);
-
         $this->logo();
         $this->basicInfo();
         $this->displayAvailableCommands(); // from parent
