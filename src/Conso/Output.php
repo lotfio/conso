@@ -139,6 +139,12 @@ class Output implements OutputInterface
     {
         if(!isset($this->colors[$color])) throw new NotFoundException("error color not found");
         if(!isset($this->bgColors[$bg]))  throw new NotFoundException("error background color not found");
-        return "\e[". $bold .";" . $this->colors[$color] . ";" . $this->bgColors[$bg] . "m" . $line . "\e[0m";
+        
+        if(PHP_OS != "WINNT") // if not windows -a
+        {
+            return "\e[". $bold .";" . $this->colors[$color] . ";" . $this->bgColors[$bg] . "m" . $line . "\e[0m";
+        }
+
+        return $line;
     }
 }

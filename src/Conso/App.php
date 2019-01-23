@@ -57,7 +57,7 @@ class App
         {   
             $class   = 'Conso\\Commands\\' . $class; // command
             $command = new $class($this->input, $this->output);
-            $command->execute($this->input->commands(1) ?? null, $this->input->options(), $this->input->flags()); // sub command or null
+            $command->execute($this->input->commands(1) ?? null, $this->input->options, $this->input->flags); // sub command or null
             exit;
 
         }else{
@@ -66,7 +66,7 @@ class App
             {
                 $command = 'Conso\\Commands\\' . DEFAULT_COMMAND;
                 $command = new $command($this->input, $this->output);
-                $command->execute($this->input->commands(), $this->input->options() , $this->input->flags()); // sub command or null
+                $command->execute($this->input->commands, $this->input->options , $this->input->flags); // sub command or null
                 exit;
             }
         }

@@ -20,21 +20,21 @@ class Input implements InputInterface
      *
      * @var string
      */
-    private $commands;
+    public $commands;
 
     /**
      * input options
      *
      * @var array
      */
-    private $options;
+    public $options;
 
     /**
      * input flags
      *
      * @var array
      */
-    private $flags;
+    public $flags;
 
     /**
      * default  flags

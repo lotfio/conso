@@ -25,6 +25,7 @@ class Info extends Command implements CommandInterface
      */
     public function execute($sub, $options, $flags) //here rather then found commands we pass the commands in others we pas the sub command
     {   
+        $this->displayCommands($flags); 
         $this->logo();
         $this->basicInfo();
         $this->displayAvailableCommands(); // from parent
@@ -96,6 +97,28 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
         $this->output->writeLn("\n[ Info ]\n\n", 'yellow');
         $this->basicInfo();
         exit(1);
+    }
+
+    /**
+     * dispay help commands
+     *
+     * @param string $flag
+     * @return void
+     */
+    public function displayCommands($flags)
+    {
+        if($this->input->flags(0))
+        {
+            if(in_array($flags[0], $this->flags))
+            {
+                if($flags[0] == "-c" || $flags[0] == "--commands") 
+                {
+                    $this->output->writeLn("\n");
+                    $this->displayAvailableCommands();
+                    die;
+                }
+            }
+        }
     }
     
     /**
