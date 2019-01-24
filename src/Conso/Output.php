@@ -29,7 +29,8 @@ class Output implements OutputInterface
     "yellow"=> 43,
     "green" => 42,
     "blue"  => 44,
-    "black" => 40
+    "black" => 40,
+    "trans" => 48 // transparent
     ];
 
 
@@ -42,7 +43,7 @@ class Output implements OutputInterface
     * @param integer $bold
     * @return void
     */
-    public function writeLn(string $line, string $color = 'white', string $bg = "black", int $bold = 0)
+    public function writeLn(string $line, string $color = 'white', string $bg = 'trans', int $bold = 0)
     {
         return fwrite(STDOUT, $this->outputFormater($line, $color, $bg, $bold)); 
     }

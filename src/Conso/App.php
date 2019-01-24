@@ -75,7 +75,9 @@ class App
     }
 
     /**
+     * run app method
      * 
+     * @return void
      */
     public function run()  // run the application
     {

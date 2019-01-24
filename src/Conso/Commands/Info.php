@@ -16,7 +16,7 @@ use Conso\Exceptions\FlagNotFoundException;
 
 class Info extends Command implements CommandInterface
 {
-    protected $flags = [];
+    protected $flags = ["-c", "--commands"];
     /**
      * execute command and sub commands
      *

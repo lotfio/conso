@@ -73,7 +73,7 @@ class Command
                     case "--version":
                     case "-v":
                          die($this->output->writeLn(self::version()));
-                        break;
+                        break;                    
                     case "--quiet":
                     case "-q":
                          die();
@@ -144,6 +144,7 @@ class Command
             $this->output->writeLn("$description\n");
             $i++;
         }
+        $this->output->writeLn("\n");
     }
 
     /**
