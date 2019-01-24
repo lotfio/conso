@@ -38,17 +38,16 @@ class Info extends Command implements CommandInterface
      */
     public function logo()
     {
-        $this->output->writeLn("     ,gggg,                                                  
-   ,88\"\"\"Y8b,                                                
-  d8\"     `Y8                                                
- d8'   8b  d8                                                
-,8I    \"Y88P'                                                
-I8'            ,ggggg,    ,ggg,,ggg,     ,g,       ,ggggg,   
-d8            dP\"  \"Y8ggg,8\" \"8P\" \"8,   ,8'8,     dP\"  \"Y8ggg
-Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I  
-`Yba,,_____,,d8,   ,d8' ,dP   8I   Yb,,8'_   8) ,d8,   ,d8'  
-  `\"Y8888888P\"Y8888P\"   8P'   8I   `Y8P' \"YY8P8PP\"Y8888P\"    \n 
-");
+        $this->output->writeLn("                                                 
+  .g8\"\"\"bgd                                      
+.dP'     `M                                      
+dM'         ,pW\"Wq.`7MMpMMMb.  ,pP*Ybd  ,pW\"Wq.  
+MM         6W'   `Wb MM    MM  8I   `\" 6W'   `Wb 
+MM.        8M     M8 MM    MM  `YMMMa. 8M     M8 
+`Mb.     ,'YA.   ,A9 MM    MM  L.   I8 YA.   ,A9 
+  `*bmmmd'  `Ybmd9'.JMML  JMML.M9mmmP'  `Ybmd9' \n\n");
+
+
     }
     
     /**
@@ -67,6 +66,7 @@ Y8,          i8'    ,8I  I8   8I   8I  ,8'  Yb   i8'    ,8I
         $this->optionsAndFlags("-h, --help", "           Display this help message");
         $this->optionsAndFlags("-q, --quiet", "          Do not output any message");
         $this->optionsAndFlags("-v, --version", "        Display this application version");
+        $this->optionsAndFlags("-c, --commands", "       Display available application commands");
         $this->optionsAndFlags("    --ansi", "           Enable ANSI output");
         $this->optionsAndFlags("    --no-ansi", "        Disable ANSI output");
         $this->optionsAndFlags("-n, --no-interaction", " Do not ask any interactive question");
