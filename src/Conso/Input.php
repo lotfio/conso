@@ -99,7 +99,7 @@ class Input implements InputInterface
      */
     public function commands(int $index = 0)
     {
-        return $this->commands[$index] ?? $this->commands;
+        return $this->commands[$index] ?? false;
     }
 
     /**
@@ -109,7 +109,7 @@ class Input implements InputInterface
      */
     public function options(int $index = 0)
     {
-        return $this->options[$index] ?? $this->options;
+        return $this->options[$index] ?? false;
     }
 
     /**
@@ -119,7 +119,7 @@ class Input implements InputInterface
      */
     public function flags(int $index = 0)
     {
-        return $this->flags[$index] ?? $this->flags;
+        return $this->flags[$index] ?? false;
     }
 
     /**
