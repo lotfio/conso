@@ -1,7 +1,7 @@
 <?php namespace Conso;
 
 /**
- * 
+ *
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.1.0
@@ -13,82 +13,69 @@
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
-use Conso\Exceptions\FlagNotFoundException;
 
 class App
 {
     /**
-     * input
+     * input.
      *
      * @var object
      */
     private $input;
 
     /**
-     * output
+     * output.
      *
      * @var object
      */
     private $output;
 
     /**
-     * constructor
+     * constructor.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
      */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
-        $this->input   = $input;
-        $this->output  = $output;
+        $this->input = $input;
+        $this->output = $output;
     }
 
     /**
-     * command bind method
-     *
-     * @return void
+     * command bind method.
      */
-    public function bind() // bind the imput with the exact command and pass options and flags 
+    public function bind() // bind the imput with the exact command and pass options and flags
     {
         // bind commands with input  capture input
-        $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : NULL;
+        $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
 
-        if(isset($class) && class_exists('Conso\\Commands\\' . $class))
-        {   
-            $class   = 'Conso\\Commands\\' . $class; // command
+        if (isset($class) && class_exists('Conso\\Commands\\'.$class)) {
+            $class = 'Conso\\Commands\\'.$class; // command
             $command = new $class($this->input, $this->output);
             $command->execute($this->input->commands(1) ?? null, $this->input->options, $this->input->flags); // sub command or null
             exit;
-
-        }else{
-
-            if(empty($class) || \in_array($class, $this->input->defaultFlags()))
-            {
-                $command = 'Conso\\Commands\\' . DEFAULT_COMMAND;
+        } else {
+            if (empty($class) || \in_array($class, $this->input->defaultFlags())) {
+                $command = 'Conso\\Commands\\'.DEFAULT_COMMAND;
                 $command = new $command($this->input, $this->output);
-                $command->execute($this->input->commands, $this->input->options , $this->input->flags); // sub command or null
+                $command->execute($this->input->commands, $this->input->options, $this->input->flags); // sub command or null
                 exit;
             }
         }
 
-        throw new CommandNotFoundException('Command ' . $this->input->commands(0) . ' not Found ');
+        throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
     }
 
     /**
-     * run app method
-     * 
-     * @return void
+     * run app method.
      */
     public function run()  // run the application
     {
-        try{
-            
+        try {
             $this->bind();
-
-        }catch(\Exception $e)
-        {
-            $this->output->error("[".get_class($e) . "] \n " . $e->getMessage());
+        } catch (\Exception $e) {
+            $this->output->error('['.get_class($e)."] \n ".$e->getMessage());
         }
     }
-
 }

@@ -1,149 +1,141 @@
 <?php namespace Conso;
 
-use Conso\Contracts\OutputInterface;
-use Conso\Exceptions\NotFoundException;
 /**
- * 
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
  * @version   0.1.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Contracts\OutputInterface;
+use Conso\Exceptions\NotFoundException;
+
 class Output implements OutputInterface
 {
-    private $colors   = [
-    "white"  => "37",
-    "green"  => "32",
-    "yellow" => "33",
-    "blue"   => "34",
-    "black"  => "30",
-    "red"    => "31"
+    private $colors = [
+    'white' => '37',
+    'green' => '32',
+    'yellow' => '33',
+    'blue' => '34',
+    'black' => '30',
+    'red' => '31',
     ];
 
     private $bgColors = [
-    "white" => 47,
-    "red"   => 41,
-    "yellow"=> 43,
-    "green" => 42,
-    "blue"  => 44,
-    "black" => 40,
-    "trans" => 48 // transparent
+    'white' => 47,
+    'red' => 41,
+    'yellow' => 43,
+    'green' => 42,
+    'blue' => 44,
+    'black' => 40,
+    'trans' => 48, // transparent
     ];
 
-
     /**
-     * Undocumented function
-    *
-    * @param string  $line
-    * @param string  $color
-    * @param string  $bg
-    * @param integer $bold
-    * @return void
-    */
+     * Undocumented function.
+     *
+     * @param string $line
+     * @param string $color
+     * @param string $bg
+     * @param int    $bold
+     */
     public function writeLn(string $line, string $color = 'white', string $bg = 'trans', int $bold = 0)
     {
-        return fwrite(STDOUT, $this->outputFormater($line, $color, $bg, $bold)); 
+        return fwrite(STDOUT, $this->outputFormater($line, $color, $bg, $bold));
     }
 
     /**
-     * output error message
+     * output error message.
      *
-     * @param  string $msg
-     * @return void
+     * @param string $msg
      */
     public function error($msg)
     {
-        die($this->writeLn("\n" . $msg . "\n\n", "white", "red", 1));
+        die($this->writeLn("\n".$msg."\n\n", 'white', 'red', 1));
     }
 
     /**
-     * output warning message
+     * output warning message.
      *
-     * @param  string $msg
-     * @return void
+     * @param string $msg
      */
     public function warning($msg)
     {
-        die($this->writeLn("\n" . $msg . " ", "white", "yellow", 1));
-    }
-    
-    /**
-     * output success message
-     *
-     * @param  string $msg
-     * @return void
-     */
-    public function success($msg)
-    {
-        die($this->writeLn("\n" . $msg . " ", "white", "green", 1));
+        die($this->writeLn("\n".$msg.' ', 'white', 'yellow', 1));
     }
 
     /**
-     * output help message method
+     * output success message.
      *
      * @param string $msg
-     * @return void
+     */
+    public function success($msg)
+    {
+        die($this->writeLn("\n".$msg.' ', 'white', 'green', 1));
+    }
+
+    /**
+     * output help message method.
+     *
+     * @param string $msg
      */
     public function helpMessage($helpCommand, $msg)
     {
         $command = explode('\\', $helpCommand);
         $command = strtolower($command[count($command) - 1]);
 
-        $this->writeLn( "\n[ $command ]  ", "yellow");
-        die (
-            $this->writeLn($msg . "\n")
+        $this->writeLn("\n[ $command ]  ", 'yellow');
+        die(
+            $this->writeLn($msg."\n")
         );
     }
 
     /**
-     * Otput timer
+     * Otput timer.
      *
-     * @param  integer $ms delay in seconds
-     * @return void
+     * @param int $ms delay in seconds
      */
     public function timer($ms = 5000)
     {
-        $this->writeLn("[");
-        for($i = 0; $i <= 20; $i++)
-        {
-            $this->writeLn("#");
+        $this->writeLn('[');
+        for ($i = 0; $i <= 20; ++$i) {
+            $this->writeLn('#');
             usleep($ms);
         }
-        $this->writeLn("]");
+        $this->writeLn(']');
     }
 
     /**
-     * writing white spaces method
+     * writing white spaces method.
      *
-     * @param  int $number
-     * @return void
+     * @param int $number
      */
     public function whiteSpace($number)
     {
-        for ($i=0; $i < $number; $i++) { 
-            $this->writeLn(" ");
+        for ($i = 0; $i < $number; ++$i) {
+            $this->writeLn(' ');
         }
     }
+
     /**
-     * output forrmatter
+     * output forrmatter.
      *
      * @param string $line
      * @param string $color
      * @param string $bg
-     * @param integer $bold
-     * @return void
+     * @param int    $bold
      */
     private function outputFormater(string $line, string $color, string $bg, int $bold)
     {
-        if(!isset($this->colors[$color])) throw new NotFoundException("error color not found");
-        if(!isset($this->bgColors[$bg]))  throw new NotFoundException("error background color not found");
-        
-        if(PHP_OS != "WINNT") // if not windows -a
-        {
-            return "\e[". $bold .";" . $this->colors[$color] . ";" . $this->bgColors[$bg] . "m" . $line . "\e[0m";
+        if (!isset($this->colors[$color])) {
+            throw new NotFoundException('error color not found');
+        }
+        if (!isset($this->bgColors[$bg])) {
+            throw new NotFoundException('error background color not found');
+        }
+        if ((PHP_OS != 'WINNT')) { // if not windows -a
+            return "\e[".$bold.';'.$this->colors[$color].';'.$this->bgColors[$bg].'m'.$line."\e[0m";
         }
 
         return $line;

@@ -1,38 +1,32 @@
 <?php namespace Conso\Contracts;
 
 /**
- * 
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
  * @version   0.1.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
-
 interface InputInterface
 {
     /**
-     * input commands
+     * input commands.
      *
-     * @param  integer $index
-     * @return void
+     * @param int $index
      */
     public function commands(int $index);
 
     /**
-     * input options
+     * input options.
      *
-     * @param integer $index
-     * @return void
+     * @param int $index
      */
     public function options(int $index);
 
     /**
-     * input flags
+     * input flags.
      *
-     * @param integer $index
-     * @return void
+     * @param int $index
      */
     public function flags(int $index);
 }

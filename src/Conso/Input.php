@@ -1,7 +1,6 @@
 <?php namespace Conso;
 
 /**
- * 
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.1.0
@@ -14,109 +13,99 @@ use Conso\Contracts\InputInterface;
 
 class Input implements InputInterface
 {
-
     /**
-     * input command
+     * input command.
      *
      * @var string
      */
     public $commands;
 
     /**
-     * input options
+     * input options.
      *
      * @var array
      */
     public $options;
 
     /**
-     * input flags
+     * input flags.
      *
      * @var array
      */
     public $flags;
 
     /**
-     * default  flags
+     * default  flags.
      *
      * @var array
      */
     private $defaultFlags = [
-        "-h","--help",
-        "-v","--version",
-        "-q","--quiet",
-        "--ansi","--no-ansi",
-        "-n", "--no-interaction",
-        "--profile",
-        "--no-plugins",
+        '-h', '--help',
+        '-v', '--version',
+        '-q', '--quiet',
+        '--ansi', '--no-ansi',
+        '-n', '--no-interaction',
+        '--profile',
+        '--no-plugins',
     ];
 
     /**
-     * trigger capture method
+     * trigger capture method.
      */
     public function __construct()
     {
         $this->capture(); // capture input
     }
 
-
     /**
-     * input capture method
-     *
-     * @return void
+     * input capture method.
      */
     public function capture()
     {
-        // unsetting arg0 
-        $commands = $_SERVER['argv']; unset($commands[0]); // remove file.php
-        
+        // unsetting arg0
+        $commands = $_SERVER['argv'];
+        unset($commands[0]); // remove file.php
+
         // sort commands
         $commands = array_values($commands);
 
-        if(isset($commands[0]) && !preg_match("/^\-{1,2}[a-z]+/", $commands[0])) // if command is set and not flag
-        {
-            if(strstr($commands[0], ":")) // if sub command 
-            {
+        if (isset($commands[0]) && !preg_match("/^\-{1,2}[a-z]+/", $commands[0])) { // if command is set and not flag
+            if (strstr($commands[0], ':')) { // if sub command
                 $this->commands = explode(':', $commands[0]);
                 unset($commands[0]);
-            }else{
-    
+            } else {
                 $this->commands[] = $commands[0];
                 unset($commands[0]);
             }
-        }else{ // if not isset command 0
-
+        } else { // if not isset command 0
             $this->commands = [];
         }
-        
-        // input options 
-        $this->options = array_values(array_filter($commands, function($elem){
+
+        // input options
+        $this->options = array_values(array_filter($commands, function ($elem) {
             return !preg_match("/^\-{1,2}[a-z]+/", $elem);
         }));
-        
 
         // input flags
-        $this->flags = array_values(array_filter($commands, function($elem){
+        $this->flags = array_values(array_filter($commands, function ($elem) {
             return \preg_match("/^\-{1,2}[a-z]+/", $elem);
         }));
     }
 
     /**
-     * input command method
+     * input command method.
      *
-     * @param  int $index
-     * @return void
+     * @param int $index
      */
     public function commands(int $index = 0)
     {
-        return $this->commands[$index] ?? $this->commands; 
+        return $this->commands[$index] ?? $this->commands;
     }
 
     /**
-     * input options method
+     * input options method.
      *
-     * @param  int $index
-     * @return void
+     * @param int $index
      */
     public function options(int $index = 0)
     {
@@ -124,10 +113,9 @@ class Input implements InputInterface
     }
 
     /**
-     * input flags method
+     * input flags method.
      *
-     * @param  int $index
-     * @return void
+     * @param int $index
      */
     public function flags(int $index = 0)
     {
@@ -135,10 +123,9 @@ class Input implements InputInterface
     }
 
     /**
-     * default input flags method
+     * default input flags method.
      *
-     * @param  int $index
-     * @return void
+     * @param int $index
      */
     public function defaultFlags()
     {

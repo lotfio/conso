@@ -1,9 +1,7 @@
 <?php namespace Conso\Contracts;
 
 /**
- * 
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
  * @version   0.1.0
  * @license   MIT
  * @category  CLI
@@ -11,14 +9,13 @@
  */
 
 interface CommandInterface
-{ 
+{
     /**
-     * execute command method
+     * execute command method.
      *
-     * @param  string $subCommand if we have an additional command
-     * @param  array  $options
-     * @param  array  $flags
-     * @return void
+     * @param string $subCommand if we have an additional command
+     * @param array  $options
+     * @param array  $flags
      */
     public function execute($subCommand, $options, $flags);
 }
