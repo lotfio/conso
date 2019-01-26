@@ -98,4 +98,26 @@ class OutputTest extends TestCase
         $this->expectException(NotFoundException::class);
         $this->output->writeLn("10", "white", 'nobgcolor');
     }
+
+    /**
+     * test timer output method
+     *
+     * @return void
+     */
+    public function testOutputTimerMethod()
+    {
+        $this->output->timer();
+        $this->assertEquals("[#####################]", ConsoStreamFilter::$buffer);
+    }
+
+    /**
+     * test white space output method
+     *
+     * @return void
+     */
+    public function testOutputWiteSpaceMethod()
+    {
+        $this->output->whiteSpace(5);
+        $this->assertEquals("     ", ConsoStreamFilter::$buffer);
+    }
 }
