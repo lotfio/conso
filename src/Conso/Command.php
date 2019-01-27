@@ -69,7 +69,7 @@ class Command
 
                     case '--version':
                     case '-v':
-                         die($this->output->writeLn(self::version()));
+                         die(self::version());
                         break;
                     case '--quiet':
                     case '-q':
@@ -85,10 +85,12 @@ class Command
      *
      * @param array $flags
      */
-    public function checkFlags()
+    public function checkFlags($flg = [])
     {
+        $flags = isset($this->flags) ? $this->flags : $flg; // if subclass flags are set otherwise empty for testing
+
         if (!empty($this->input->flags())) {
-            if (!\in_array($this->input->flags(0), $this->flags)) {
+            if (!\in_array($this->input->flags(0), $flags)) {
                 throw new FlagNotFoundException('Flag '.$this->input->flags(0).' not found !');
             }
         }
@@ -147,7 +149,7 @@ class Command
     public function commandWhiteSpaceLength($key)
     {
         $keys = array_map('strlen', array_keys($this->availableCommands));
-        $max = max($keys);
+        $max  = max($keys);
         $keys = array_map(function ($elem) use ($max) {
             return $max - $elem + 5; // + desired number of white spaces
         }, $keys);
@@ -163,6 +165,5 @@ class Command
         $this->output->writeLn("\n".APP_NAME, 'yellow');
         $this->output->writeLn(' version '.APP_VERSION);
         $this->output->writeLn(' '.APP_RELEASE_DATE."\n\n", 'green');
-        exit(1);
     }
 }
