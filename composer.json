@@ -1,0 +1,26 @@
+{
+    "name": "lotfio/conso",
+    "description": "PHP console applications made easy",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "lotfio",
+            "email": "contact@lotfio.net"
+        }
+    ],
+    "require": {},
+    
+    "autoload":{
+        "files": ["src/Conso/config/app.php"],
+        "psr-4":{
+            "Conso\\" : "src/Conso/"
+        }
+    },
+
+    "autoload-dev":{
+        "psr-4":{
+            "Tests\\" : "test/"
+        }
+    }
+}

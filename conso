@@ -1,7 +1,7 @@
 #!/usr/bin/php
 <?php
 
-require 'autoload.php';
+require 'vendor/autoload.php';
 
 use Conso\Input;
 Use Conso\Output;

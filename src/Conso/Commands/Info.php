@@ -14,7 +14,7 @@ use Conso\Contracts\CommandInterface;
 
 class Info extends Command implements CommandInterface
 {
-    protected $flags = ['-c', '--commands', '--no-ansi'];
+    protected $flags = ['-c', '--commands'];
 
     /**
      * execute command and sub commands.
