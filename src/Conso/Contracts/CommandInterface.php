@@ -17,5 +17,5 @@ interface CommandInterface
      * @param array  $options
      * @param array  $flags
      */
-    public function execute($subCommand, $options, $flags);
+    public function execute(string $subCommand, array $options, array $flags);
 }

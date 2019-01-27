@@ -52,7 +52,7 @@ class Output implements OutputInterface
      */
     public function error($msg)
     {
-        die($this->writeLn("\n".$msg."\n\n", 'white', 'red', 1));
+        $this->writeLn("\n".$msg."\n\n", 'white', 'red', 1);
     }
 
     /**
@@ -62,7 +62,7 @@ class Output implements OutputInterface
      */
     public function warning($msg)
     {
-        die($this->writeLn("\n".$msg.' ', 'white', 'yellow', 1));
+        return $this->writeLn("\n".$msg.' ', 'white', 'yellow', 1);
     }
 
     /**
@@ -72,7 +72,7 @@ class Output implements OutputInterface
      */
     public function success($msg)
     {
-        die($this->writeLn("\n".$msg.' ', 'white', 'green', 1));
+        return $this->writeLn("\n".$msg.' ', 'white', 'green', 1);
     }
 
     /**
@@ -86,9 +86,7 @@ class Output implements OutputInterface
         $command = strtolower($command[count($command) - 1]);
 
         $this->writeLn("\n[ $command ]  ", 'yellow');
-        die(
-            $this->writeLn($msg."\n")
-        );
+        $this->writeLn($msg."\n\n");
     }
 
     /**

@@ -63,17 +63,22 @@ class Command
                     case '--help':
                     case '-h':
                         if (method_exists(static::class, 'help')) {
-                            $this->output->helpMessage(static::class, static::help());
+                            die($this->output->helpMessage(static::class, static::help()));
                         }
                         break;
 
                     case '--version':
                     case '-v':
-                         die(self::version());
+                            self::version();
+                            exit(1);
                         break;
                     case '--quiet':
                     case '-q':
                          die;
+                         
+                    case '--no-ansi':
+                    case '--ansi':     
+                            $this->flags[] = $this->input->flags(0);
                         break;
                 }
             }

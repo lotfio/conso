@@ -14,15 +14,20 @@ use Conso\Contracts\CommandInterface;
 
 class Example extends Command implements CommandInterface
 {
-    public $flags = ['-a'];
+    protected $flags = [];
 
     public function execute($sub, $options, $flags)
     {
     }
 
+    
+
+
+
+
     public function help()
     {
-        return 'This is example command that helps you create othe commands';
+        return 'This is example command that helps you create other commands';
     }
 
     public function description()

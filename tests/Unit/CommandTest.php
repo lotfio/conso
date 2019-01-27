@@ -53,8 +53,8 @@ class CommandTest extends TestCase
 	 */
 	public function testcommandWhiteSpaceLengthMethod()
 	{
-		// info --------    => info needs 8 spaces to get correctly aligned 
 		// example -----    => example needs 5 spaces to get correctly aligned
+		// info --------    => info needs 8 spaces to get correctly aligned 
 		$this->assertEquals(5, $this->command->commandWhiteSpaceLength(0));	
 		$this->assertEquals(8, $this->command->commandWhiteSpaceLength(1));	
 	}
