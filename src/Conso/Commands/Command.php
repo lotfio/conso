@@ -9,12 +9,12 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Command;
+use Conso\Command as BaseCommand;
 use Conso\Contracts\CommandInterface;
 use Conso\Exceptions\OptionNotFoundException;
 use Conso\Exceptions\RunTimeException;
 
-class Example extends Command implements CommandInterface
+class Command extends BaseCommand implements CommandInterface
 {
     /**
      * command flags
@@ -59,7 +59,7 @@ class Example extends Command implements CommandInterface
         if(!isset($options[0]) || empty($options[0])) throw new OptionNotFoundException("Command Name is required ! ");
         
     
-        $name =  ucfirst($options[0]);
+        $name =  ucfirst(strtolower($options[0]));
         $stubFile = COMMANDS . "Helpers" . DS . "Stubs" . DS . 'Command.stub';
 
         if(!file_exists($stubFile)) throw new RunTimeException("Error file $stubFile not found");
