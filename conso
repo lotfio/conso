@@ -1,5 +1,15 @@
 #!/usr/bin/php
-<?php
+<?php declare(strict_types=1);
+
+/**
+ *
+ * @author    <contact@lotfio.net>
+ * @package   Conso PHP Console Creator
+ * @version   0.1.0
+ * @license   MIT
+ * @category  CLI
+ * @copyright 2019 Lotfio Lakehal
+ */
 
 require 'vendor/autoload.php';
 
