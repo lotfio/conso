@@ -76,9 +76,7 @@ class Command
                     case '-q':
                          die;
                          
-                    case '--no-ansi':
-                    case '--ansi':     
-                            $this->flags[] = $this->input->flags(0);
+                    default: $this->flags[] = $this->input->flags(0); // default available flags will be added to each class utomatically
                         break;
                 }
             }
