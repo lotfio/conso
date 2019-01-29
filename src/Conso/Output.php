@@ -74,21 +74,7 @@ class Output implements OutputInterface
     {
         return $this->writeLn("\n".$msg.' ', 'white', 'green', 1);
     }
-
-    /**
-     * output help message method.
-     *
-     * @param string $msg
-     */
-    public function helpMessage($helpCommand, $msg)
-    {
-        $command = explode('\\', $helpCommand);
-        $command = strtolower($command[count($command) - 1]);
-
-        $this->writeLn("\n[ $command ]  ", 'yellow');
-        $this->writeLn($msg."\n\n");
-    }
-
+    
     /**
      * Otput timer.
      *

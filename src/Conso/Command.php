@@ -63,7 +63,7 @@ class Command
                     case '--help':
                     case '-h':
                         if (method_exists(static::class, 'help')) {
-                            die($this->output->helpMessage(static::class, static::help()));
+                            die($this->output->writeLn(static::help()));
                         }
                         break;
 
