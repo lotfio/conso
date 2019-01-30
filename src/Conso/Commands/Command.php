@@ -126,13 +126,13 @@ class Command extends BaseCommand implements CommandInterface
      */
     public function help()
     {
-       $this->output->writeLn("\n [ example ] \n\n", "yellow");
+       $this->output->writeLn("\n [ command ] \n\n", "yellow");
        $this->output->writeLn("   example command helps you to create commands for your console application.\n\n");
        $this->output->writeLn("  sub commands : \n\n", "yellow");
-       $this->output->writeLn("      make    : make a new command\n");
-       $this->output->writeLn("      delete  : delete an existing command\n\n");
+       $this->output->writeLn("    make    : make a new command.\n");
+       $this->output->writeLn("    delete  : delete an existing command.\n\n");
        $this->output->writeLn("  options : \n\n", "yellow");
-       $this->output->writeLn("      command name (to be created or deleted)\n\n");
+       $this->output->writeLn("    command name (to be created or deleted).\n\n");
        return "";
     }
 
