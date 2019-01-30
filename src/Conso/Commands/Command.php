@@ -75,7 +75,7 @@ class Command extends BaseCommand implements CommandInterface
 
         if(fwrite($commandHundle, $file))
         {   
-            $this->output->writeLn("\n Generating command file : ", "green");
+            $this->output->writeLn("\nGenerating command file : \n\n", "green");
             $this->output->timer();
             $this->output->writeLn("\n\n");
             exit(1);
@@ -108,8 +108,9 @@ class Command extends BaseCommand implements CommandInterface
         {   
             unlink($command);
       
-            $this->output->writeLn("\n Command $name has been deleted successfully : ", "green");
+            $this->output->writeLn("\n");
             $this->output->timer();
+            $this->output->writeLn("\n\nCommand $name has been deleted successfully.", "green");
             $this->output->writeLn("\n\n");
             exit(1);
 
