@@ -56,7 +56,7 @@ class Command extends BaseCommand implements CommandInterface
      */
     public function makeNewCommand($options)
     {
-        if(!isset($options[0]) || empty($options[0])) throw new OptionNotFoundException("Command Name is required ! ");
+        if(!isset($options[0]) || empty($options[0])) throw new OptionNotFoundException("Command name is required ! ");
         
     
         $name =  ucfirst(strtolower($options[0]));
@@ -92,7 +92,7 @@ class Command extends BaseCommand implements CommandInterface
      */
     public function deleteCommand($options)
     {
-        if(!isset($options[0]) || empty($options[0])) throw new OptionNotFoundException("Command Name is required ! ");
+        if(!isset($options[0]) || empty($options[0])) throw new OptionNotFoundException("Command name is required ! ");
         
         $name =  ucfirst($options[0]);
         $command = COMMANDS . $name . ".php";
@@ -106,14 +106,14 @@ class Command extends BaseCommand implements CommandInterface
         {   
             unlink($command);
       
-            $this->output->writeLn("\n Command $name deleted successfully : ", "green");
+            $this->output->writeLn("\n Command $name has been deleted successfully : ", "green");
             $this->output->timer();
             $this->output->writeLn("\n\n");
             exit(1);
 
         }
         
-        $this->output->writeLn("\n abbroting : command not deleted \n\n", "yellow");
+        $this->output->writeLn("\n Abroting : command $name not deleted \n\n", "yellow");
     }
 
 
@@ -143,6 +143,6 @@ class Command extends BaseCommand implements CommandInterface
      */
     public function description()
     {
-        return 'Example conso command';
+        return 'Example conso command.';
     }
 }

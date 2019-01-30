@@ -55,14 +55,14 @@ MM.        8M     M8 MM    MM  `YMMMa. 8M     M8
         $this->output->writeLn("Usage :\n\n", 'yellow');
         $this->output->writeLn("  command:subcommand [options] [flags] \n\n");
         $this->output->writeLn("Options, flags :\n\n", 'yellow');
-        $this->optionsAndFlags('-h, --help', '           Display this help message');
-        $this->optionsAndFlags('-q, --quiet', '          Do not output any message');
-        $this->optionsAndFlags('-v, --version', '        Display this application version');
-        $this->optionsAndFlags('-c, --commands', '       Display available application commands');
-        $this->optionsAndFlags('    --ansi', '           Enable ANSI output');
-        $this->optionsAndFlags('    --no-ansi', '        Disable ANSI output');
-        $this->optionsAndFlags('-n, --no-interaction', ' Do not ask any interactive question');
-        $this->optionsAndFlags('    --profile', "        Display timing and memory usage information\n");
+        $this->optionsAndFlags('-h, --help', '           Display this help message.');
+        $this->optionsAndFlags('-q, --quiet', '          Do not output any message.');
+        $this->optionsAndFlags('-v, --version', '        Display this application version.');
+        $this->optionsAndFlags('-c, --commands', '       Display available application commands.');
+        $this->optionsAndFlags('    --ansi', '           Enable ANSI output.');
+        $this->optionsAndFlags('    --no-ansi', '        Disable ANSI output.');
+        $this->optionsAndFlags('-n, --no-interaction', ' Do not ask any interactive question.');
+        $this->optionsAndFlags('    --profile', "        Display timing and memory usage information.\n");
     }
 
     /**
@@ -111,6 +111,6 @@ MM.        8M     M8 MM    MM  `YMMMa. 8M     M8
      */
     public function description()
     {
-        return 'Display this help message !';
+        return 'Display this help message.';
     }
 }

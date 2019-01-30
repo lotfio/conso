@@ -35,6 +35,9 @@ class #command# extends Command implements CommandInterface
      */
     public function execute(string $sub, array $options, array $flags)
     {
+
+        // to be replaced with your cod
+        return $this->output->writeLn("\n\n  Welcome to #command# command. \n\n", "yellow");
     }
 
 
@@ -43,14 +46,14 @@ class #command# extends Command implements CommandInterface
      * 	
      * @return string
      */
-    public function description() { return "#command# command description";}
+    public function description() { return "#command# command description.";}
 
     /**
      * command help method
      * 	
      * @return string
      */
-    public function help() { return "#command# command help";}
+    public function help() { return "#command# command help.";}
 
 
 }
