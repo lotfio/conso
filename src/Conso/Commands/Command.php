@@ -99,7 +99,9 @@ class Command extends BaseCommand implements CommandInterface
 
         if(!file_exists($command)) throw new RunTimeException("Error command $name not found !");
 
-        $ask = readline("\n are you sure you want to delete $name command ? [Y/N] : ");
+        $this->output->writeLn("\n");
+        $this->output->writeLn("Are you sure you want to delete $name command ? [Y/N] : ");
+        $ask = readline("");
         
 
         if(strtolower($ask) == "y" OR strtolower($ask) == "yes")
