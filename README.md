@@ -29,7 +29,7 @@ php conso command:make {command name}
 ```
 * This commad wil create a command file located inside `src/Conso/Commands/Yourcommand.php`
 * Now just navigate to your command file and customize it.
-***Your command file will look like this :***
+* ***Your command file will look like this :***
 ```php
 namespace Conso\Commands;
 
@@ -92,7 +92,7 @@ class YourCommand extends Command implements CommandInterface
    $this->output->writeLn($string) // write to STDOUT
    $this->output->error($string): // also warnining() + success() which will output to STDOUT with colors but on windowns no ansi support so will not output colors.
    $this->output->timer(); // output timer [#### .......]
-   this->output->whiteSpace($number); // output white spaces based on the given number
+   $this->output->whiteSpace($number); // output white spaces based on the given number
 ```
 
 #TODO 
