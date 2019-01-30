@@ -19,20 +19,19 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 ### Installation :
 - Via composer :
 
-```js
+```php
 composer require lotfio/conso
 ```
 
 # Create your first command :
-#
-```bash
+```php
 php conso command:make {command name}
 ```
 * This commad wil create a command file located inside `src/Conso/Commands/Yourcommand.php`
 * Now just navigate to your command file and customize it.
 ***Your command file will look like this :***
 ```php
-<?php namespace Conso\Commands;
+namespace Conso\Commands;
 
 use Conso\Command;
 use Conso\Contracts\CommandInterface;
@@ -64,14 +63,14 @@ class YourCommand extends Command implements CommandInterface
 
     /**
      * command description method
-     * 	
+     *  
      * @return string
      */
     public function description() { return "command description.";}
 
     /**
      * command help method
-     * 	
+     *  
      * @return string
      */
     public function help() { return "command help.";}
@@ -90,5 +89,25 @@ class YourCommand extends Command implements CommandInterface
     $this->input->options; // return array of input options 
     $this->input->flags; // return array of input flags 
  Output methods:
-   $this->output->writeLn($string) // write to STDOUT 
+   $this->output->writeLn($string) // write to STDOUT
+   $this->output->error($string): // also warnining() + success() which will output to STDOUT with colors but on windowns no ansi support so will not output colors.
+   $this->output->timer(); // output timer [#### .......]
+   this->output->whiteSpace($number); // output white spaces based on the given number
 ```
+
+#TODO 
+
+Helpers for quick commands development.
+
+
+# Contributing
+
+Thank you for considering to contribute to Aven. All the contribution guidelines are mentioned **[Here](CONTRIBUTE.md)**.
+
+# Support 
+
+If this project helped you reduce time to develop, you can give me a cup of coffee :) : **[Paypal](https://www.paypal.me/lotfio)**.
+
+# License
+
+Aven is an open-source software licensed under the **[MIT license](LICENCE)**.

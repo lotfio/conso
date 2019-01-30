@@ -24,7 +24,6 @@ class #command# extends Command implements CommandInterface
      */
     protected $flags = [];
 
-
     /**
      * command execute method
      * 
@@ -36,10 +35,9 @@ class #command# extends Command implements CommandInterface
     public function execute(string $sub, array $options, array $flags)
     {
 
-        // to be replaced with your cod
+        // to be replaced with your code
         return $this->output->writeLn("\n\n  Welcome to #command# command. \n\n", "yellow");
     }
-
 
     /**
      * command description method
