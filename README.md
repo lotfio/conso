@@ -1,5 +1,5 @@
 # PHP command line made easy.
-#
+
 ![logi](https://user-images.githubusercontent.com/18489496/51750637-f351c280-20b2-11e9-97e3-f1e0232bb04a.png)
 
 ![Licence](https://img.shields.io/badge/Licence-MIT-f1c40f.svg)
@@ -95,7 +95,7 @@ class YourCommand extends Command implements CommandInterface
    $this->output->whiteSpace($number); // output white spaces based on the given number
 ```
 
-#TODO 
+# TODO 
 
 Helpers for quick commands development.
 

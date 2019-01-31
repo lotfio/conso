@@ -52,6 +52,4 @@ class #command# extends Command implements CommandInterface
      * @return string
      */
     public function help() { return "#command# command help.";}
-
-
 }
