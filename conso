@@ -18,5 +18,13 @@ Use Conso\Output;
 
 
 
-$inp = new Conso\App(new Input, new Output);
-$inp->run();
+$app = new Conso\App(new Input, new Output);
+
+// TODO
+// set config dir
+// set commands dir
+//$app->setCommandsPath(__DIR__."/Commands/");
+
+
+// start application
+$app->run();

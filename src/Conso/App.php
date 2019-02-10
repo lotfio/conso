@@ -42,6 +42,17 @@ class App
         $this->output = $output;
     }
 
+
+    /**
+     * set commands path
+     * 
+     * @param string path
+     */
+    public function setCommandsPath($path)
+    {
+        $this->commandsPath = $path;
+    }
+
     /**
      * command bind method.
      */
