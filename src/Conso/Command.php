@@ -109,17 +109,19 @@ class Command
     public function listCommands()
     {
         foreach (glob(COMMANDS.'*.php') as $commandFile) { // get all commands from Commands Dir
-            $class = explode('/', str_replace('.php', null, $commandFile));
+            $class = explode(DIRECTORY_SEPARATOR, str_replace('.php', null, $commandFile));
             $class = $class[count($class) - 1];
 
             $command = 'Conso\\Commands\\'.ucfirst($class);
 
             if (class_exists($command)) {
+
                 $comm = new \ReflectionClass($command);
 
                 $comm->hasMethod('description')  // if has description
-                ? $this->availableCommands[strtolower($class)] = $command::description() // call
+                ? $this->availableCommands[strtolower($class)] = @$command::description() // call
                 : $this->availableCommands[strtolower($class)] = ''; // else
+
             }
         }
 
