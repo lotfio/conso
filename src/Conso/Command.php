@@ -9,6 +9,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Config; 
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\FlagNotFoundException;
@@ -99,7 +100,8 @@ class Command
      */
     public function listCommands()
     {
-        foreach (glob(COMMANDS.'*.php') as $commandFile) { // get all commands from Commands Dir
+        //TODO::load commands both from default which is my commands and added commands COMMANDS
+        foreach (glob(Config::get('DEFAULT_COMMANDS') .'*.php') as $commandFile) { // get all commands from Commands Dir
             $class = explode(DIRECTORY_SEPARATOR, str_replace('.php', null, $commandFile));
             $class = $class[count($class) - 1];
 
@@ -161,8 +163,8 @@ class Command
      */
     public function version()
     {
-        $this->output->writeLn("\n".APP_NAME, 'yellow');
-        $this->output->writeLn(' version '.APP_VERSION);
-        $this->output->writeLn(' '.APP_RELEASE_DATE."\n\n", 'green');
+        $this->output->writeLn("\n".Config::get('APP_NAME'), 'yellow');
+        $this->output->writeLn(' version '.Config::get('APP_VERSION'));
+        $this->output->writeLn(' '.Config::get('APP_RELEASE_DATE')."\n\n", 'green');
     }
 }

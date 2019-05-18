@@ -9,6 +9,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+ use Conso\Config;
 use Conso\Command as BaseCommand;
 use Conso\Contracts\CommandInterface;
 use Conso\Exceptions\OptionNotFoundException;
@@ -67,18 +68,18 @@ class Command extends BaseCommand implements CommandInterface
         
     
         $name =  ucfirst(strtolower($options[0]));
-        $stubFile = COMMANDS . "Helpers" . DS . "Stubs" . DS . 'Command.stub';
+        $stubFile = Config::get('COMMANDS') . "Helpers" . DIRECTORY_SEPARATOR . "Stubs" . DIRECTORY_SEPARATOR . 'Command.stub';
 
         if(!file_exists($stubFile)) throw new RunTimeException("Error file $stubFile not found");
         
-        if(file_exists(COMMANDS . $name . ".php")) throw new RunTimeException("Error command $name already exists !");
+        if(file_exists(Config::get('COMMANDS') . $name . ".php")) throw new RunTimeException("Error command $name already exists !");
 
         $file = file_get_contents($stubFile);
 
         $file = str_replace("#command#", $name, $file);
         $file = str_replace("#time#", date('d-m-Y'), $file);
 
-        $commandHundle  = fopen(COMMANDS . $name . '.php', "w+");
+        $commandHundle  = fopen(Config::get('COMMANDS') . $name . '.php', "w+");
 
         if(fwrite($commandHundle, $file))
         {   
@@ -102,7 +103,7 @@ class Command extends BaseCommand implements CommandInterface
         if(!isset($options[0]) || empty($options[0])) throw new OptionNotFoundException("Command name is required ! ");
         
         $name =  ucfirst($options[0]);
-        $command = COMMANDS . $name . ".php";
+        $command = Config::get('COMMANDS') . $name . ".php";
 
         if(!file_exists($command)) throw new RunTimeException("Error command $name not found !");
 

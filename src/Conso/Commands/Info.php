@@ -9,6 +9,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Config;
 use Conso\Command;
 use Conso\Contracts\CommandInterface;
 
@@ -48,7 +49,7 @@ class Info extends Command implements CommandInterface
     public function logo()
     {
         $this->output->writeLn("                                                 
-  .g8\"\"\"bgd                                      
+  .g8\"\"bgd                                      
 .dP'     `M                                      
 dM'         ,pW\"Wq.`7MMpMMMb.  ,pP\"Ybd  ,pW\"Wq.  
 MM         6W'   `Wb MM    MM  8I   `\" 6W'   `Wb 
@@ -62,9 +63,9 @@ MM.        8M     M8 MM    MM  `YMMMa. 8M     M8
      */
     public function basicInfo()
     {
-        $this->output->writeLn(APP_NAME, 'yellow');
-        $this->output->writeLn(' version '.APP_VERSION);
-        $this->output->writeLn(' '.APP_RELEASE_DATE."\n\n", 'green');
+        $this->output->writeLn(Config::get('APP_NAME'), 'yellow');
+        $this->output->writeLn(' version '.Config::get('APP_VERSION'));
+        $this->output->writeLn(' '.Config::get('APP_RELEASE_DATE')."\n\n", 'green');
         $this->output->writeLn("Usage :\n\n", 'yellow');
         $this->output->writeLn("  command:subcommand [options] [flags] \n\n");
         $this->output->writeLn("Options, flags :\n\n", 'yellow');

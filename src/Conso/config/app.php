@@ -9,7 +9,7 @@
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
-
+/*
 defined('OS')               || define('OS', php_uname("s"));
 defined('DS')               || define('DS', DIRECTORY_SEPARATOR);
 defined('APP_NAME')         || define('APP_NAME', 'Conso');
@@ -20,37 +20,20 @@ defined('DEFAULT_COMMAND')  || define('DEFAULT_COMMAND', 'Info');
 
 // dirs
 defined('COMMANDS')         || define('COMMANDS', dirname(__DIR__).DS.'Commands'.DS);
+*/
+return [
+    
+    "OS"                => php_uname("s"),
+    
+    "APP_NAME"          => "Conso",
+    
+    "APP_VERSION"       => "0.1.0",
+    
+    "APP_RELEASE_DATE"  =>  date('d-m-Y') . " by lotfio lakehal",
 
+    "DEFAULT_COMMAND"   => "Info",
 
-/**
- * write to output function
- */
-if (!function_exists('out')) {
-    function out($output)
-    {
-        return fwrite(STDOUT, $output);
-    }
-}
-
-/**
- * get input function
- */
-if (!function_exists('inp')) {
-    function inp()
-    {
-        return new Conso\Input;
-    }
-}
-
-/**
- * check if testing 
- *
- * @return boolean
- */
-if (!function_exists('isTest')) {
-    function isTest()
-    {
-        $file = explode(DIRECTORY_SEPARATOR, $_SERVER['PHP_SELF']);
-        return (strpos($file[0], 'phpunit') !== FALSE) ? true : false;
-    }
-}
+    "DEFAULT_COMMANDS"  => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Commands' . DIRECTORY_SEPARATOR,
+    
+    "COMMANDS"          => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Commands' . DIRECTORY_SEPARATOR,
+];

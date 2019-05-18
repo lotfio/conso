@@ -14,16 +14,25 @@
 require 'vendor/autoload.php';
 
 use Conso\Input;
-Use Conso\Output;
+use Conso\Output;
+use Conso\Config;
 
+/**
+ * load config
+ */
+Config::load();
 
-
+/**
+ * adding custom config
+ * example:
+ * COMMANDS  => your commands dir
+ * NAMESPACE => your commands namespace
+ */
+//Config::add();
+/**
+ * get instance
+ */
 $app = new Conso\App(new Input, new Output);
-
-// TODO
-// set config dir
-// set commands dir
-//$app->setCommandsPath(__DIR__."/Commands/");
 
 
 // start application

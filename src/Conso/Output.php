@@ -8,6 +8,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Config;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\NotFoundException;
 
@@ -118,7 +119,7 @@ class Output implements OutputInterface
         if (!isset($this->bgColors[$bg])) {
             throw new NotFoundException('error background color not found');
         }
-        if ((OS != 'WINNT') && !isTest() && inp()->flags(0) != "--no-ansi") { // if not windows -a
+        if ((Config::get('OS') != 'WINNT') && !isTest() && inp()->flags(0) != "--no-ansi") { // if not windows -a
             return "\e[".$bold.';'.$this->colors[$color].';'.$this->bgColors[$bg].'m'.$line."\e[0m";
         }
 

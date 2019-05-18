@@ -10,6 +10,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Config;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
@@ -58,6 +59,7 @@ class App
      */
     public function bind() // bind the imput with the exact command and pass options and flags
     {
+        //TODO: adding use command namespace 
         // bind commands with input  capture input
         $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
 
@@ -72,7 +74,7 @@ class App
 
             if (empty($class) || \in_array($class, $this->input->defaultFlags())) {
                 
-                $class = "Conso\\Commands\\" . DEFAULT_COMMAND;
+                $class = "Conso\\Commands\\" . Config::get('DEFAULT_COMMAND');
                 $this->command($class, $this->input->commands);
                 exit;
             }
