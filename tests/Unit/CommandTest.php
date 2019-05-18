@@ -27,7 +27,7 @@ class CommandTest extends TestCase
     private $stream_filter;
 
 
-    public function setUp()
+    public function setUp() : void
     {  	
 		Config::load();
 		
@@ -78,7 +78,7 @@ class CommandTest extends TestCase
 	 */
 	public function testlistCommandsMethod()
 	{
-		$this->assertInternalType("array", $this->command->listCommands());
+		$this->assertIsArray($this->command->listCommands());
 		$this->assertArrayHasKey("info", $this->command->listCommands());
 	}
 

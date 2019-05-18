@@ -16,7 +16,7 @@ use Conso\Input;
 class InputTest extends TestCase
 {
 
-    public function setUp()
+    public function setUp() : void
     {
         $_SERVER['argv'] = array(
             __FILE__,
@@ -36,9 +36,9 @@ class InputTest extends TestCase
      */
     public function testCaptureMethodIsCapturingInput()
     {
-        $this->assertInternalType("array", $this->input->commands);
-        $this->assertInternalType("array", $this->input->options);
-        $this->assertInternalType("array", $this->input->flags);
+        $this->assertIsArray($this->input->commands);
+        $this->assertIsArray($this->input->options);
+        $this->assertIsArray($this->input->flags);
     }
 
     /**

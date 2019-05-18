@@ -45,7 +45,7 @@ class OutputTest extends TestCase
     private $stream_filter;
 
 
-    public function setUp()
+    public function setUp() : void
     {   
         $this->output = new Output;
         
@@ -59,7 +59,7 @@ class OutputTest extends TestCase
      *
      * @return void
      */
-    public function tearDown()
+    public function tearDown() : void
     {
         stream_filter_remove($this->stream_filter);
     }
