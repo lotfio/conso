@@ -31,6 +31,8 @@ return [
     
     "APP_RELEASE_DATE"  => " 5-18-2019 by lotfio lakehal",
 
+    "APP_LOGO_FILE"     => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Commands' . DIRECTORY_SEPARATOR . 'Helpers' . DIRECTORY_SEPARATOR . 'Stubs'.DIRECTORY_SEPARATOR . 'logo.stub',
+
     "DEFAULT_COMMAND"   => "Info",
 
     "DEFAULT_COMMANDS"  => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Commands' . DIRECTORY_SEPARATOR,
@@ -39,5 +41,5 @@ return [
 
     "DEFAULT_COMMANDS_NAMESPACE" => "Conso\\Commands\\", // this sould be moved to project config
 
-    "COMMANDS_NAMESPACE"         => "Builds\\" // this sould be moved to project config
+    "COMMANDS_NAMESPACE"         => "Conso\\Commands\\" // this sould be moved to project config
 ];

@@ -12,6 +12,7 @@
 use Conso\Config;
 use Conso\Command;
 use Conso\Contracts\CommandInterface;
+use Conso\Exceptions\NotFoundException;
 
 class Info extends Command implements CommandInterface
 {
@@ -48,14 +49,13 @@ class Info extends Command implements CommandInterface
      */
     public function logo()
     {
-        $this->output->writeLn("                                                 
-  .g8\"\"bgd                                      
-.dP'     `M                                      
-dM'         ,pW\"Wq.`7MMpMMMb.  ,pP\"Ybd  ,pW\"Wq.  
-MM         6W'   `Wb MM    MM  8I   `\" 6W'   `Wb 
-MM.        8M     M8 MM    MM  `YMMMa. 8M     M8 
-`Mb.     ,'YA.   ,A9 MM    MM  L.   I8 YA.   ,A9 
-  `\"bmmmd'  `Ybmd9'.JMML  JMML.M9mmmP'  `Ybmd9' \n\n");
+        $logo = Config::get('APP_LOGO_FILE');
+
+        if(!file_exists($logo))
+            throw new NotFoundException("Logo file $logo not found !");
+
+        $content = file_get_contents($logo);
+        $this->output->writeLn($content);
     }
 
     /**

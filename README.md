@@ -24,11 +24,56 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 composer require lotfio/conso
 ```
 
+# Configure Conso 
+1- A good directory structor will look something like this:
+```php
+    - app
+      - Commands  // your console commands 
+      - config    // your console config files
+
+    - vendor   // conso package will be installed by composer no action needed here
+
+    - conso  // conso executable file
+```
+- Now create a config file inside config directory { for example app.php}
+- Add the following configuration rules:
+
+```php
+return[
+
+    "APP_NAME"          => "Your app name",
+    "APP_VERSION"       => "Your app version",
+    "APP_RELEASE_DATE"  => "Release date and info",
+
+    "APP_LOGO_FILE"     => "logo file with a stub extention .stub",
+
+    "COMMANDS"          => "Your commands directory name",
+    "COMMANDS_NAMESPACE"=> "Your commands namespace"
+];
+```
+2- Now load your config file with conso { inside you executable file conso}
+
+```
+   Config::add('app/config/app.php');
+```
+
+3- Don't forget to load your commands with composer
+
+```json
+    {
+        "autoload" : {
+            "psr-4" : {
+                "app\\" : "app/"
+            }
+        }
+    }
+```
+
 # Create your first command :
 ```php
 php conso command:make {command name}
 ```
-* This commad wil create a command file located inside `src/Conso/Commands/Yourcommand.php`
+* This commad wil create a command file located inside `app/Commands/Yourcommand.php`
 * Now just navigate to your command file and customize it.
 * ***Your command file will look like this :***
 ```php
