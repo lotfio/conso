@@ -50,7 +50,7 @@ if (!function_exists('inp')) {
 if (!function_exists('isTest')) {
     function isTest()
     {
-        $test = explode(DIRECTORY_SEPARATOR, $_SERVER['SCRIPT_NAME']);
-        return strtolower($test[count($test) -1]) == "phpunit" ? true : false;
+        $file = explode(DIRECTORY_SEPARATOR, $_SERVER['PHP_SELF']);
+        return (strpos($file[0], 'phpunit') !== FALSE) ? true : false;
     }
 }

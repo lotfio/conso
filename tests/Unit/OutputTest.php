@@ -52,7 +52,6 @@ class OutputTest extends TestCase
         ConsoStreamFilter::$buffer = '';
 
         $this->stream_filter = stream_filter_append(STDOUT, 'ConsoStreamFilter');
-
     }
 
     /**

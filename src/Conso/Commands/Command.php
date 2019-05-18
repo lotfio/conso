@@ -24,6 +24,13 @@ class Command extends BaseCommand implements CommandInterface
     protected $flags = [];
 
     /**
+     * Command description
+     *
+     * @var string
+     */
+    protected $description = 'Example conso command.';
+
+    /**
      * command execute method
      * 
      * @param  string $sub
@@ -119,9 +126,6 @@ class Command extends BaseCommand implements CommandInterface
         $this->output->writeLn("\n Abroting : command $name not deleted \n\n", "yellow");
     }
 
-
-
-
     /**
      * command description method
      *  
@@ -137,15 +141,5 @@ class Command extends BaseCommand implements CommandInterface
        $this->output->writeLn("  options : \n\n", "yellow");
        $this->output->writeLn("    command name (to be created or deleted).\n\n");
        return "";
-    }
-
-    /**
-     * command help method
-     *  
-     * @return string
-     */
-    public function description()
-    {
-        return 'Example conso command.';
     }
 }

@@ -29,6 +29,8 @@ class Command
      */
     protected $output;
 
+
+    protected $description;
     /**
      * available commands.
      *
@@ -59,25 +61,14 @@ class Command
     {
         if (!empty($this->input->flags())) { // if there is flags
             if (in_array($this->input->flags(0), $this->input->defaultFlags())) { // execute default commands here
+               
                 switch ($this->input->flags(0)) {
-                    case '--help':
-                    case '-h':
-                        if (method_exists(static::class, 'help')) {
-                            die($this->output->writeLn(static::help()));
-                        }
-                        break;
-
-                    case '--version':
-                    case '-v':
-                            self::version();
-                            exit(1);
-                        break;
-                    case '--quiet':
-                    case '-q':
-                         die;
+                    case '--help'   : case '-h': die($this->help());    break;
+                    case '--version': case '-v': die($this->version()); break;
+                    case '--quiet'  : case '-q': die;
                          
-                    default: $this->flags[] = $this->input->flags(0); // default available flags will be added to each class utomatically
-                        break;
+                    default: $this->flags[] = $this->input->flags(0);   break;
+                    // default available flags will be added to each class automatically
                 }
             }
         }
@@ -116,12 +107,15 @@ class Command
 
             if (class_exists($command)) {
 
-                $comm = new \ReflectionClass($command);
+                $comm = (new \ReflectionClass($command));
 
-                $comm->hasMethod('description')  // if has description
-                ? $this->availableCommands[strtolower($class)] = @$command::description() // call
-                : $this->availableCommands[strtolower($class)] = ''; // else
-
+                if($comm->hasProperty('description'))
+                {
+                    $reflectionProperty = $comm->getProperty('description');
+                    $reflectionProperty->setAccessible(true);
+                    $des = $reflectionProperty->getValue($comm->newInstanceWithoutConstructor());
+                    $this->availableCommands[strtolower($class)] = $des;
+                }
             }
         }
 
@@ -145,7 +139,7 @@ class Command
     }
 
     /**
-     * get command line white space lenghth
+     * get command line white space length
      * this method helps to display commands
      * in a table way like.
      *

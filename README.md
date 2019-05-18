@@ -15,6 +15,7 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 
 ### Requirements :
 - PHP 7.2 or newer versions
+- PHPUnit 7.5 (for testing purpose)
 
 ### Installation :
 - Via composer :
@@ -47,9 +48,16 @@ class YourCommand extends Command implements CommandInterface
     protected $flags = [];
 
     /**
+     * command description
+     * 
+     * @var string
+     */
+    protected $description = 'command description';
+    
+    /**
      * command execute method
      * 
-     * @param  string $sub sub command (command after colone)
+     * @param  string $sub sub command (command after colon)
      * @param  array  $options command options
      * @param  array  $flags  command flags
      * @return void
@@ -60,14 +68,6 @@ class YourCommand extends Command implements CommandInterface
         return $this->output->writeLn("\n\n  Welcome to YourCommand command. \n\n", "yellow");
     }
 
-
-    /**
-     * command description method
-     *  
-     * @return string
-     */
-    public function description() { return "command description.";}
-
     /**
      * command help method
      *  
@@ -75,6 +75,7 @@ class YourCommand extends Command implements CommandInterface
      */
     public function help() { return "command help.";}
 }
+
 ```
 * The execute method is where all your command logic should be executed.
 * You can create helper methods withing the same command class.

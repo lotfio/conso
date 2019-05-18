@@ -14,7 +14,20 @@ use Conso\Contracts\CommandInterface;
 
 class Info extends Command implements CommandInterface
 {
+
+    /**
+     * available command flags
+     *
+     * @var array
+     */
     protected $flags = ['-c', '--commands'];
+
+    /**
+     * Command description
+     *
+     * @var string
+     */
+    protected $description = 'Display console information.';
 
     /**
      * execute command and sub commands.
@@ -104,13 +117,5 @@ MM.        8M     M8 MM    MM  `YMMMa. 8M     M8
                 }
             }
         }
-    }
-
-    /**
-     * display command description.
-     */
-    public function description()
-    {
-        return 'Display this help message.';
     }
 }
