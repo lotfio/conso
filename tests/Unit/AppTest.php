@@ -15,7 +15,7 @@ use Conso\Exceptions\{CommandNotFoundException, FlagNotFoundException};
 use Conso\App;
 use Conso\Input;
 use Conso\Output;
-
+use Conso\Config;
 
 
 class AppTest extends TestCase
@@ -30,6 +30,8 @@ class AppTest extends TestCase
 	
 	public function setUp()
 	{
+		Config::load();
+		
 		$this->input  = new Input();
 		$this->Output = new Output();
 		$this->app    = new App($this->input, $this->Output);

@@ -15,6 +15,7 @@ use Conso\Exceptions\FlagNotFoundException;
 use Conso\Command;
 use Conso\Input;
 use Conso\Output;
+use Conso\Config;
 
 class CommandTest extends TestCase
 {
@@ -28,6 +29,8 @@ class CommandTest extends TestCase
 
     public function setUp()
     {  	
+		Config::load();
+		
     	$this->input   = new Input;
         $this->command = new Command($this->input, new Output);
         
