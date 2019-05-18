@@ -43,7 +43,6 @@ class App
         $this->output = $output;
     }
 
-
     /**
      * set commands path
      * 
@@ -59,18 +58,23 @@ class App
      */
     public function bind() // bind the imput with the exact command and pass options and flags
     {
-        //TODO: adding use command namespace 
+        //TODO: refactor this method for better use
         // bind commands with input  capture input
         $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
 
-        if (isset($class) && class_exists('Conso\\Commands\\'.$class)) {
+        if (isset($class) && class_exists(Config::get('DEFAULT_COMMANDS_NAMESPACE').$class)) { // if default app commands
 
-            $class = 'Conso\\Commands\\'.$class;
-
+            $class = Config::get('DEFAULT_COMMANDS_NAMESPACE') .$class;
             $this->command($class, $this->input->commands(1) ?? null);
             exit;
 
-        } else {
+        }elseif(isset($class) && class_exists(Config::get('COMMANDS_NAMESPACE').$class)){ // if user commands 
+
+            $class = Config::get('COMMANDS_NAMESPACE') .$class;
+            $this->command($class, $this->input->commands(1) ?? null);
+            exit;
+
+        }else {
 
             if (empty($class) || \in_array($class, $this->input->defaultFlags())) {
                 

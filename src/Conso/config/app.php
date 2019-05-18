@@ -29,11 +29,15 @@ return [
     
     "APP_VERSION"       => "0.1.0",
     
-    "APP_RELEASE_DATE"  =>  date('d-m-Y') . " by lotfio lakehal",
+    "APP_RELEASE_DATE"  => " 5-18-2019 by lotfio lakehal",
 
     "DEFAULT_COMMAND"   => "Info",
 
     "DEFAULT_COMMANDS"  => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Commands' . DIRECTORY_SEPARATOR,
     
     "COMMANDS"          => dirname(__DIR__) . DIRECTORY_SEPARATOR . 'Commands' . DIRECTORY_SEPARATOR,
+
+    "DEFAULT_COMMANDS_NAMESPACE" => "Conso\\Commands\\", // this sould be moved to project config
+
+    "COMMANDS_NAMESPACE"         => "Builds\\" // this sould be moved to project config
 ];

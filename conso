@@ -28,7 +28,7 @@ Config::load();
  * COMMANDS  => your commands dir
  * NAMESPACE => your commands namespace
  */
-//Config::add();
+//Config::add('config.php');
 /**
  * get instance
  */

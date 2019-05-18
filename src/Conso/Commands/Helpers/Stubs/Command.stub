@@ -1,4 +1,4 @@
-<?php namespace Conso\Commands;
+<?php namespace #namespace#;
 
 /**
  * @author    <contact@lotfio.net>
@@ -25,6 +25,13 @@ class #command# extends Command implements CommandInterface
     protected $flags = [];
 
     /**
+     * command description method
+     * 	
+     * @return string
+     */
+    protected $description = "#command# command description.";
+
+    /**
      * command execute method
      * 
      * @param  string $sub
@@ -38,13 +45,6 @@ class #command# extends Command implements CommandInterface
         // to be replaced with your code
         return $this->output->writeLn("\n\n  Welcome to #command# command. \n\n", "yellow");
     }
-
-    /**
-     * command description method
-     * 	
-     * @return string
-     */
-    public function description() { return "#command# command description.";}
 
     /**
      * command help method

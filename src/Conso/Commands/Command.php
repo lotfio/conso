@@ -55,7 +55,6 @@ class Command extends BaseCommand implements CommandInterface
        $this->help();
     }
 
-    
     /**
      * make new command method
      * 
@@ -68,7 +67,7 @@ class Command extends BaseCommand implements CommandInterface
         
     
         $name =  ucfirst(strtolower($options[0]));
-        $stubFile = Config::get('COMMANDS') . "Helpers" . DIRECTORY_SEPARATOR . "Stubs" . DIRECTORY_SEPARATOR . 'Command.stub';
+        $stubFile = Config::get('DEFAULT_COMMANDS') . "Helpers" . DIRECTORY_SEPARATOR . "Stubs" . DIRECTORY_SEPARATOR . 'Command.stub';
 
         if(!file_exists($stubFile)) throw new RunTimeException("Error file $stubFile not found");
         
@@ -76,6 +75,7 @@ class Command extends BaseCommand implements CommandInterface
 
         $file = file_get_contents($stubFile);
 
+        $file = str_replace("#namespace#", trim(Config::get('COMMANDS_NAMESPACE'), DIRECTORY_SEPARATOR), $file);
         $file = str_replace("#command#", $name, $file);
         $file = str_replace("#time#", date('d-m-Y'), $file);
 
