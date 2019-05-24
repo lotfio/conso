@@ -9,21 +9,10 @@
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
-/*
-defined('OS')               || define('OS', php_uname("s"));
-defined('DS')               || define('DS', DIRECTORY_SEPARATOR);
-defined('APP_NAME')         || define('APP_NAME', 'Conso');
-defined('APP_VERSION')      || define('APP_VERSION', '0.1.0');
-defined('APP_RELEASE_DATE') || define('APP_RELEASE_DATE', date('d-m-Y') . " by lotfio lakehal");
-
-defined('DEFAULT_COMMAND')  || define('DEFAULT_COMMAND', 'Info');
-
-// dirs
-defined('COMMANDS')         || define('COMMANDS', dirname(__DIR__).DS.'Commands'.DS);
-*/
 return [
-    
-    "OS"                => php_uname("s"),
+
+    //TODO:: sould set CLI version or name to disable ansi to prevent those messy charachters where no ansi support
+    "OS"                => 'cli version or name here',//PHP_OS,
     
     "APP_NAME"          => "Conso",
     
