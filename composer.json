@@ -27,6 +27,8 @@
         }
     },
 
+    "bin": ["bin/conso"],
+
     "scripts" : {
 
         "post-root-package-install": [

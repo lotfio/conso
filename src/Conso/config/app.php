@@ -12,7 +12,7 @@
 return [
 
     //TODO:: sould set CLI version or name to disable ansi to prevent those messy charachters where no ansi support
-    "OS"                => 'cli version or name here',//PHP_OS,
+    "OS"                => PHP_OS,
     
     "APP_NAME"          => "Conso",
     
