@@ -1,17 +1,19 @@
 <?php
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   0.1.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
 /**
- * write to output function
+ * write to output function.
  */
 if (!function_exists('out')) {
     function out($output)
@@ -20,18 +22,18 @@ if (!function_exists('out')) {
     }
 }
 
-/**
+/*
  * get input function
  */
 if (!function_exists('inp')) {
     function inp()
     {
-        return new Conso\Input;
+        return new Conso\Input();
     }
 }
 
-/**
- * check if testing 
+/*
+ * check if testing
  *
  * @return boolean
  */
@@ -39,6 +41,7 @@ if (!function_exists('isTest')) {
     function isTest()
     {
         $file = explode(DIRECTORY_SEPARATOR, $_SERVER['PHP_SELF']);
-        return (strpos($file[count($file) -1], 'phpunit') !== FALSE) ? true : false;
+
+        return (strpos($file[count($file) - 1], 'phpunit') !== false) ? true : false;
     }
 }

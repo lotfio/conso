@@ -1,7 +1,9 @@
-<?php namespace Tests\Unit;
+<?php
 
-/**
- * 
+namespace Tests\Unit;
+
+/*
+ *
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.1.0
@@ -10,27 +12,27 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use PHPUnit\Framework\TestCase;
 use Conso\Input;
+use PHPUnit\Framework\TestCase;
 
 class InputTest extends TestCase
 {
-
     public function setUp() : void
     {
-        $_SERVER['argv'] = array(
+        $_SERVER['argv'] = [
             __FILE__,
-            "command:subCommand",
-            "option1",
-            "option2",
-            "-f",
-            "--flag",
-        );
+            'command:subCommand',
+            'option1',
+            'option2',
+            '-f',
+            '--flag',
+        ];
 
         $this->input = new Input();
     }
+
     /**
-     * test capture method
+     * test capture method.
      *
      * @return void
      */
@@ -42,42 +44,42 @@ class InputTest extends TestCase
     }
 
     /**
-     * test input command and subcommand method
+     * test input command and subcommand method.
      *
      * @return void
      */
     public function testInputCommandAndSubCommand()
     {
-        $this->assertEquals("command", $this->input->commands(0));
-        $this->assertEquals("subCommand", $this->input->commands(1));
+        $this->assertEquals('command', $this->input->commands(0));
+        $this->assertEquals('subCommand', $this->input->commands(1));
     }
 
     /**
-     * test input options method
+     * test input options method.
      *
      * @return void
      */
     public function testInoutOptions()
     {
-        $this->assertEquals("option1", $this->input->options(0));
-        $this->assertEquals("option2", $this->input->options(1));
+        $this->assertEquals('option1', $this->input->options(0));
+        $this->assertEquals('option2', $this->input->options(1));
     }
 
     /**
      * test input flags method
-     * both single and multidahsed words are considered as flags
+     * both single and multidahsed words are considered as flags.
      *
      * @return void
      */
     public function testInputFlags()
     {
-        $this->assertEquals("-f", $this->input->flags(0));
-        $this->assertEquals("--flag", $this->input->flags(1));
+        $this->assertEquals('-f', $this->input->flags(0));
+        $this->assertEquals('--flag', $this->input->flags(1));
     }
 
     /**
      * test not found command
-     * if not found return an array
+     * if not found return an array.
      *
      * @return void
      */

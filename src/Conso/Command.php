@@ -1,6 +1,8 @@
-<?php namespace Conso;
+<?php
 
-/**
+namespace Conso;
+
+/*
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.1.0
@@ -9,7 +11,6 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Config; 
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\FlagNotFoundException;
@@ -29,7 +30,6 @@ class Command
      * @var object
      */
     protected $output;
-
 
     protected $description;
     /**
@@ -62,13 +62,13 @@ class Command
     {
         if (!empty($this->input->flags())) { // if there is flags
             if (in_array($this->input->flags(0), $this->input->defaultFlags())) { // execute default commands here
-               
+
                 switch ($this->input->flags(0)) {
-                    case '--help'   : case '-h': die($this->help());    break;
+                    case '--help': case '-h': die($this->help()); break;
                     case '--version': case '-v': die($this->version()); break;
-                    case '--quiet'  : case '-q': die;
-                         
-                    default: $this->flags[] = $this->input->flags(0);   break;
+                    case '--quiet': case '-q': die;
+
+                    default: $this->flags[] = $this->input->flags(0); break;
                     // default available flags will be added to each class automatically
                 }
             }
@@ -100,48 +100,48 @@ class Command
      */
     public function listCommands()
     {
-        $commands  = preg_grep("/.php$/", scandir(Config::get('DEFAULT_COMMANDS')));
-        $commands2 = preg_grep("/.php$/", scandir(Config::get('COMMANDS')));
+        $commands = preg_grep('/.php$/', scandir(Config::get('DEFAULT_COMMANDS')));
+        $commands2 = preg_grep('/.php$/', scandir(Config::get('COMMANDS')));
 
-        $commands  = array_merge($commands, $commands2);
+        $commands = array_merge($commands, $commands2);
 
         foreach ($commands as $commandFile) { // get all commands from Commands Dir
-           
-           
+
             $class = explode(DIRECTORY_SEPARATOR, str_replace('.php', null, $commandFile));
             $class = $class[count($class) - 1];
 
-            $baseCommands = Config::get('DEFAULT_COMMANDS_NAMESPACE') . ucfirst($class);
-            $commands     = Config::get('COMMANDS_NAMESPACE') . ucfirst($class);
+            $baseCommands = Config::get('DEFAULT_COMMANDS_NAMESPACE').ucfirst($class);
+            $commands = Config::get('COMMANDS_NAMESPACE').ucfirst($class);
 
-            if (class_exists($baseCommands)) // default commands
+            if (class_exists($baseCommands)) { // default commands
                 $this->readCommandDescription($baseCommands, $class);
-            
-            if(class_exists($commands)) // defined commands
+            }
+
+            if (class_exists($commands)) { // defined commands
                 $this->readCommandDescription($commands, $class);
+            }
         }
 
         return $this->availableCommands;
     }
 
-
     /**
-     * readCommandDescription
-     * 
-     * @param  string $command
-     * @return void 
+     * readCommandDescription.
+     *
+     * @param string $command
+     *
+     * @return void
      */
     public function readCommandDescription($command, $class)
     {
-         $comm = (new \ReflectionClass($command));
+        $comm = (new \ReflectionClass($command));
 
-        if($comm->hasProperty('description'))
-        {
+        if ($comm->hasProperty('description')) {
             $reflectionProperty = $comm->getProperty('description');
             $reflectionProperty->setAccessible(true);
             $des = $reflectionProperty->getValue($comm->newInstanceWithoutConstructor());
             $this->availableCommands[strtolower($class)] = $des;
-        } 
+        }
     }
 
     /**
@@ -155,7 +155,7 @@ class Command
             $this->output->writeLn("  $command", 'green');
             $this->output->whiteSpace($this->commandWhiteSpaceLength($i));
             $this->output->writeLn("$description\n");
-            ++$i;
+            $i++;
         }
         $this->output->writeLn("\n");
     }
@@ -170,7 +170,7 @@ class Command
     public function commandWhiteSpaceLength($key)
     {
         $keys = array_map('strlen', array_keys($this->availableCommands));
-        $max  = max($keys);
+        $max = max($keys);
         $keys = array_map(function ($elem) use ($max) {
             return $max - $elem + 5; // + desired number of white spaces
         }, $keys);
