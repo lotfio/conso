@@ -100,8 +100,12 @@ class Command
      */
     public function listCommands()
     {
-        //TODO:: Refactor this make it small
-        foreach (glob("{".Config::get('DEFAULT_COMMANDS')."*.php,".Config::get('COMMANDS')."*.php}",GLOB_BRACE) as $commandFile) { // get all commands from Commands Dir
+        $commands  = preg_grep("/.php$/", scandir(Config::get('DEFAULT_COMMANDS')));
+        $commands2 = preg_grep("/.php$/", scandir(Config::get('COMMANDS')));
+
+        $commands  = array_merge($commands, $commands2);
+
+        foreach ($commands as $commandFile) { // get all commands from Commands Dir
            
            
             $class = explode(DIRECTORY_SEPARATOR, str_replace('.php', null, $commandFile));
@@ -110,32 +114,34 @@ class Command
             $baseCommands = Config::get('DEFAULT_COMMANDS_NAMESPACE') . ucfirst($class);
             $commands     = Config::get('COMMANDS_NAMESPACE') . ucfirst($class);
 
-            if (class_exists($baseCommands)) {
-
-                $comm = (new \ReflectionClass($baseCommands));
-
-                if($comm->hasProperty('description'))
-                {
-                    $reflectionProperty = $comm->getProperty('description');
-                    $reflectionProperty->setAccessible(true);
-                    $des = $reflectionProperty->getValue($comm->newInstanceWithoutConstructor());
-                    $this->availableCommands[strtolower($class)] = $des;
-                }
-            }elseif(class_exists($commands))
-            {
-                $comm = (new \ReflectionClass($commands));
-
-                if($comm->hasProperty('description'))
-                {
-                    $reflectionProperty = $comm->getProperty('description');
-                    $reflectionProperty->setAccessible(true);
-                    $des = $reflectionProperty->getValue($comm->newInstanceWithoutConstructor());
-                    $this->availableCommands[strtolower($class)] = $des;
-                } 
-            }
+            if (class_exists($baseCommands)) // default commands
+                $this->readCommandDescription($baseCommands, $class);
+            
+            if(class_exists($commands)) // defined commands
+                $this->readCommandDescription($commands, $class);
         }
 
         return $this->availableCommands;
+    }
+
+
+    /**
+     * readCommandDescription
+     * 
+     * @param  string $command
+     * @return void 
+     */
+    public function readCommandDescription($command, $class)
+    {
+         $comm = (new \ReflectionClass($command));
+
+        if($comm->hasProperty('description'))
+        {
+            $reflectionProperty = $comm->getProperty('description');
+            $reflectionProperty->setAccessible(true);
+            $des = $reflectionProperty->getValue($comm->newInstanceWithoutConstructor());
+            $this->availableCommands[strtolower($class)] = $des;
+        } 
     }
 
     /**
