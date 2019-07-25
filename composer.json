@@ -27,7 +27,7 @@
         }
     },
 
-    "bin": ["bin/conso"],
+    "bin": ["./conso"],
 
     "scripts" : {
 
