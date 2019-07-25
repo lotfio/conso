@@ -39,6 +39,6 @@ if (!function_exists('isTest')) {
     function isTest()
     {
         $file = explode(DIRECTORY_SEPARATOR, $_SERVER['PHP_SELF']);
-        return (strpos($file[0], 'phpunit') !== FALSE) ? true : false;
+        return (strpos($file[count($file) -1], 'phpunit') !== FALSE) ? true : false;
     }
 }
