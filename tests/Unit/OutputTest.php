@@ -1,7 +1,9 @@
-<?php namespace Tests\Unit;
+<?php
 
-/**
- * 
+namespace Tests\Unit;
+
+/*
+ *
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.1.0
@@ -10,14 +12,14 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use PHPUnit\Framework\TestCase;
 use Conso\Exceptions\NotFoundException;
 use Conso\Output;
+use PHPUnit\Framework\TestCase;
 
 /**
- * definging own stearm filter to capture stdout stream
+ * definging own stearm filter to capture stdout stream.
  */
-class ConsoStreamFilter extends \php_user_filter 
+class ConsoStreamFilter extends \php_user_filter
 {
     public static $buffer = '';
 
@@ -27,35 +29,32 @@ class ConsoStreamFilter extends \php_user_filter
             self::$buffer .= $bucket->data;
             $consumed += $bucket->datalen;
         }
+
         return PSFS_PASS_ON;
     }
 }
 stream_filter_register('ConsoStreamFilter', ConsoStreamFilter::class);
 
-
-
-
 class OutputTest extends TestCase
 {
     /**
-     * stream filter
+     * stream filter.
      *
      * @var resource
      */
     private $stream_filter;
 
-
     public function setUp() : void
-    {   
-        $this->output = new Output;
-        
+    {
+        $this->output = new Output();
+
         ConsoStreamFilter::$buffer = '';
 
         $this->stream_filter = stream_filter_append(STDOUT, 'ConsoStreamFilter');
     }
 
     /**
-     * remove stream filter
+     * remove stream filter.
      *
      * @return void
      */
@@ -65,58 +64,58 @@ class OutputTest extends TestCase
     }
 
     /**
-     * test output to STDOUT
+     * test output to STDOUT.
      *
      * @return void
      */
     public function testOutputWrtiteLineMethod()
-    {   
-        $this->output->writeLn("hello world");
-        $this->assertEquals("hello world", ConsoStreamFilter::$buffer);
+    {
+        $this->output->writeLn('hello world');
+        $this->assertEquals('hello world', ConsoStreamFilter::$buffer);
     }
 
     /**
-     * test output with no color
+     * test output with no color.
      *
      * @return void
      */
     public function testOutputWrongColor()
     {
         $this->expectException(NotFoundException::class);
-        $this->output->writeLn("10", "nocolor");
+        $this->output->writeLn('10', 'nocolor');
     }
 
     /**
      * test output with a background color
-     * that doesn't exists
+     * that doesn't exists.
      *
      * @return void
      */
     public function testOutputWrongBgColor()
     {
         $this->expectException(NotFoundException::class);
-        $this->output->writeLn("10", "white", 'nobgcolor');
+        $this->output->writeLn('10', 'white', 'nobgcolor');
     }
 
     /**
-     * test timer output method
+     * test timer output method.
      *
      * @return void
      */
     public function testOutputTimerMethod()
     {
         $this->output->timer();
-        $this->assertEquals("[#####################]", ConsoStreamFilter::$buffer);
+        $this->assertEquals('[#####################]', ConsoStreamFilter::$buffer);
     }
 
     /**
-     * test white space output method
+     * test white space output method.
      *
      * @return void
      */
     public function testOutputWiteSpaceMethod()
     {
         $this->output->whiteSpace(5);
-        $this->assertEquals("     ", ConsoStreamFilter::$buffer);
+        $this->assertEquals('     ', ConsoStreamFilter::$buffer);
     }
 }

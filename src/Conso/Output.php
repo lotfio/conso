@@ -1,6 +1,8 @@
-<?php namespace Conso;
+<?php
 
-/**
+namespace Conso;
+
+/*
  * @author    <contact@lotfio.net>
  * @version   0.1.0
  * @license   MIT
@@ -8,29 +10,28 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Config;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\NotFoundException;
 
 class Output implements OutputInterface
 {
     private $colors = [
-    'white' => '37',
-    'green' => '32',
+    'white'  => '37',
+    'green'  => '32',
     'yellow' => '33',
-    'blue' => '34',
-    'black' => '30',
-    'red' => '31',
+    'blue'   => '34',
+    'black'  => '30',
+    'red'    => '31',
     ];
 
     private $bgColors = [
-    'white' => 47,
-    'red' => 41,
+    'white'  => 47,
+    'red'    => 41,
     'yellow' => 43,
-    'green' => 42,
-    'blue' => 44,
-    'black' => 40,
-    'trans' => 48, // transparent
+    'green'  => 42,
+    'blue'   => 44,
+    'black'  => 40,
+    'trans'  => 48, // transparent
     ];
 
     /**
@@ -75,7 +76,7 @@ class Output implements OutputInterface
     {
         return $this->writeLn("\n".$msg.' ', 'white', 'green', 1);
     }
-    
+
     /**
      * Otput timer.
      *
@@ -84,7 +85,7 @@ class Output implements OutputInterface
     public function timer($ms = 5000)
     {
         $this->writeLn('[');
-        for ($i = 0; $i <= 20; ++$i) {
+        for ($i = 0; $i <= 20; $i++) {
             $this->writeLn('#');
             usleep($ms);
         }
@@ -98,7 +99,7 @@ class Output implements OutputInterface
      */
     public function whiteSpace($number)
     {
-        for ($i = 0; $i < $number; ++$i) {
+        for ($i = 0; $i < $number; $i++) {
             $this->writeLn(' ');
         }
     }
@@ -119,7 +120,7 @@ class Output implements OutputInterface
         if (!isset($this->bgColors[$bg])) {
             throw new NotFoundException('error background color not found');
         }
-        if ((Config::get('OS') != 'WINNT') && !isTest() && inp()->flags(0) != "--no-ansi") { // if not windows -a
+        if ((Config::get('OS') != 'WINNT') && !isTest() && inp()->flags(0) != '--no-ansi') { // if not windows -a
             return "\e[".$bold.';'.$this->colors[$color].';'.$this->bgColors[$bg].'m'.$line."\e[0m";
         }
 

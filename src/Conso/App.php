@@ -1,6 +1,8 @@
-<?php namespace Conso;
+<?php
 
-/**
+namespace Conso;
+
+/*
  *
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
@@ -10,7 +12,6 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Config;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
@@ -39,13 +40,13 @@ class App
      */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
-        $this->input  = $input;
+        $this->input = $input;
         $this->output = $output;
     }
 
     /**
-     * set commands path
-     * 
+     * set commands path.
+     *
      * @param string path
      */
     public function setCommandsPath($path)
@@ -64,21 +65,17 @@ class App
 
         if (isset($class) && class_exists(Config::get('DEFAULT_COMMANDS_NAMESPACE').$class)) { // if default app commands
 
-            $class = Config::get('DEFAULT_COMMANDS_NAMESPACE') .$class;
+            $class = Config::get('DEFAULT_COMMANDS_NAMESPACE').$class;
             $this->command($class, $this->input->commands(1) ?? null);
             exit;
+        } elseif (isset($class) && class_exists(Config::get('COMMANDS_NAMESPACE').$class)) { // if user commands
 
-        }elseif(isset($class) && class_exists(Config::get('COMMANDS_NAMESPACE').$class)){ // if user commands 
-
-            $class = Config::get('COMMANDS_NAMESPACE') .$class;
+            $class = Config::get('COMMANDS_NAMESPACE').$class;
             $this->command($class, $this->input->commands(1) ?? null);
             exit;
-
-        }else {
-
+        } else {
             if (empty($class) || \in_array($class, $this->input->defaultFlags())) {
-                
-                $class = "Conso\\Commands\\" . Config::get('DEFAULT_COMMAND');
+                $class = 'Conso\\Commands\\'.Config::get('DEFAULT_COMMAND');
                 $this->command($class, $this->input->commands);
                 exit;
             }
@@ -88,15 +85,19 @@ class App
     }
 
     /**
-     * command method 
-     * 
-     * @param  string $command
+     * command method.
+     *
+     * @param string $command
+     *
      * @return void
      */
     public function command($command, $subCommand)
     {
-        if(!class_exists($command)) throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
+        if (!class_exists($command)) {
+            throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
+        }
         $command = new $command($this->input, $this->output);
+
         return $command->execute($subCommand, $this->input->options, $this->input->flags); // sub command or null
     }
 
@@ -106,9 +107,7 @@ class App
     public function run()  // run the application
     {
         try {
-            
             $this->bind();
-        
         } catch (\Exception $e) {
             die($this->output->error('['.get_class($e)."] \n ".$e->getMessage()));
         }

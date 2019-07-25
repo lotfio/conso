@@ -1,6 +1,8 @@
-<?php namespace Conso\Commands;
+<?php
 
-/**
+namespace Conso\Commands;
+
+/*
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.1.0
@@ -9,23 +11,22 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Config;
 use Conso\Command;
+use Conso\Config;
 use Conso\Contracts\CommandInterface;
 use Conso\Exceptions\NotFoundException;
 
 class Info extends Command implements CommandInterface
 {
-
     /**
-     * available command flags
+     * available command flags.
      *
      * @var array
      */
     protected $flags = ['-c', '--commands'];
 
     /**
-     * Command description
+     * Command description.
      *
      * @var string
      */
@@ -51,9 +52,9 @@ class Info extends Command implements CommandInterface
     {
         $logo = Config::get('APP_LOGO_FILE');
 
-        if(!file_exists($logo))
+        if (!file_exists($logo)) {
             throw new NotFoundException("Logo file $logo not found !");
-
+        }
         $content = file_get_contents($logo);
         $this->output->writeLn($content);
     }
