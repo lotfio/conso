@@ -17,6 +17,7 @@ use Conso\Exceptions\FlagNotFoundException;
 
 class Command
 {
+    use CommandTrait;
     /**
      * inout.
      *
@@ -31,7 +32,6 @@ class Command
      */
     protected $output;
 
-    protected $description;
     /**
      * available commands.
      *
@@ -64,9 +64,9 @@ class Command
             if (in_array($this->input->flags(0), $this->input->defaultFlags())) { // execute default commands here
 
                 switch ($this->input->flags(0)) {
-                    case '--help': case '-h': die($this->help()); break;
+                    case '--help'   : case '-h': die($this->help()); break;
                     case '--version': case '-v': die($this->version()); break;
-                    case '--quiet': case '-q': die;
+                    case '--quiet'  : case '-q': die;
 
                     default: $this->flags[] = $this->input->flags(0); break;
                     // default available flags will be added to each class automatically
@@ -92,37 +92,20 @@ class Command
     }
 
     /**
-     * list all commands with there description.
+     * read commands with there description
      *
-     * TODO
-     * This method needs to be checkd since we are directly calling
-     * static in a none static method
+     * @return void
      */
     public function listCommands()
     {
-        $commands = preg_grep('/.php$/', scandir(Config::get('DEFAULT_COMMANDS')));
-        $commands2 = preg_grep('/.php$/', scandir(Config::get('COMMANDS')));
+        foreach ($this->readCommands() as $class => $namespace) { 
 
-        $commands = array_merge($commands, $commands2);
+            $command =  $namespace . ucfirst($class);
 
-        foreach ($commands as $commandFile) { // get all commands from Commands Dir
-
-            $class = explode(DIRECTORY_SEPARATOR, str_replace('.php', null, $commandFile));
-            $class = $class[count($class) - 1];
-
-            $baseCommands = Config::get('DEFAULT_COMMANDS_NAMESPACE').ucfirst($class);
-            $commands = Config::get('COMMANDS_NAMESPACE').ucfirst($class);
-
-            if (class_exists($baseCommands)) { // default commands
-                $this->readCommandDescription($baseCommands, $class);
-            }
-
-            if (class_exists($commands)) { // defined commands
-                $this->readCommandDescription($commands, $class);
+            if (class_exists($command)) {
+                $this->readCommandDescription($command, ucfirst($class));
             }
         }
-
-        return $this->availableCommands;
     }
 
     /**

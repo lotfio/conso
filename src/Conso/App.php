@@ -18,6 +18,7 @@ use Conso\Exceptions\CommandNotFoundException;
 
 class App
 {
+    use CommandTrait;
     /**
      * input.
      *
@@ -40,18 +41,8 @@ class App
      */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
-        $this->output = $output;
-    }
-
-    /**
-     * set commands path.
-     *
-     * @param string path
-     */
-    public function setCommandsPath($path)
-    {
-        $this->commandsPath = $path;
+        $this->input   = $input;
+        $this->output  = $output;
     }
 
     /**
@@ -59,26 +50,21 @@ class App
      */
     public function bind() // bind the imput with the exact command and pass options and flags
     {
-        //TODO: refactor this method for better use
-        // bind commands with input  capture input
+ 
         $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
+        $availCommands = $this->readCommands();
+        
+        if(array_key_exists($class, $availCommands)) // if command exists
+        {
+            $command = $availCommands[$class] . $class;
+            $this->command($command, $this->input->commands(1) ?? null);
+            exit(0);
+        }
 
-        if (isset($class) && class_exists(Config::get('DEFAULT_COMMANDS_NAMESPACE').$class)) { // if default app commands
-
-            $class = Config::get('DEFAULT_COMMANDS_NAMESPACE').$class;
-            $this->command($class, $this->input->commands(1) ?? null);
-            exit;
-        } elseif (isset($class) && class_exists(Config::get('COMMANDS_NAMESPACE').$class)) { // if user commands
-
-            $class = Config::get('COMMANDS_NAMESPACE').$class;
-            $this->command($class, $this->input->commands(1) ?? null);
-            exit;
-        } else {
-            if (empty($class) || \in_array($class, $this->input->defaultFlags())) {
-                $class = 'Conso\\Commands\\'.Config::get('DEFAULT_COMMAND');
-                $this->command($class, $this->input->commands);
-                exit;
-            }
+        if (empty($class) || in_array($class, $this->input->defaultFlags())) {
+            $class = 'Conso\\Commands\\'.Config::get('DEFAULT_COMMAND');
+            $this->command($class, $this->input->commands);
+            exit(0);
         }
 
         throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
@@ -93,11 +79,10 @@ class App
      */
     public function command($command, $subCommand)
     {
-        if (!class_exists($command)) {
+        if (!class_exists($command)) 
             throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
-        }
+        
         $command = new $command($this->input, $this->output);
-
         return $command->execute($subCommand, $this->input->options, $this->input->flags); // sub command or null
     }
 
