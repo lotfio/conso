@@ -14,7 +14,7 @@
 return [
 
     //TODO:: sould set CLI version or name to disable ansi to prevent those messy charachters where no ansi support
-    'OS'                => PHP_OS,
+    'OS'                => "PHP_OS",
 
     'APP_NAME'          => 'Conso',
 
@@ -28,9 +28,8 @@ return [
 
     'DEFAULT_COMMANDS'  => dirname(__DIR__).DIRECTORY_SEPARATOR.'Commands'.DIRECTORY_SEPARATOR,
 
-    'COMMANDS'          => dirname(__DIR__).DIRECTORY_SEPARATOR.'Commands'.DIRECTORY_SEPARATOR,
-
-    'DEFAULT_COMMANDS_NAMESPACE' => 'Conso\\Commands\\', // this sould be moved to project config
-
-    'COMMANDS_NAMESPACE'         => 'Conso\\Commands\\', // this sould be moved to project config
+    'COMMANDS'          => array(
+        dirname(__DIR__).DIRECTORY_SEPARATOR.'Commands'.DIRECTORY_SEPARATOR
+    ),
+    'NAMESPACE' => NULL
 ];

@@ -28,7 +28,7 @@ Config::load();
  * COMMANDS  => your commands dir
  * NAMESPACE => your commands namespace
  */
-//Config::add('config.php');
+ //config::add(__DIR__ . DIRECTORY_SEPARATOR .'comm');
 /**
  * get instance
  */

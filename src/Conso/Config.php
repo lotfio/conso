@@ -36,12 +36,12 @@ class Config
         $arr = str_replace('/', DIRECTORY_SEPARATOR, $arrayFile);
         $arr = str_replace('\\', DIRECTORY_SEPARATOR, $arr);
 
-        if (!file_exists($arr)) {
-            throw new NotFoundException("Config file $arr not found !");
+        if (!is_dir($arr)) {
+            throw new NotFoundException("wrong commands dir !");
         }
-        $arr = (array) require_once $arr; // added config
 
-        self::$configArray = array_merge(self::$configArray, $arr);
+
+        self::$configArray['COMMANDS'][] = $arr;
 
         return self::$configArray;
     }
@@ -64,7 +64,7 @@ class Config
      *
      * @return string
      */
-    public static function get(string $key) : string
+    public static function get(string $key)
     {
         if (!array_key_exists($key, self::$configArray)) {
             throw new NotFoundException("Config key $key not found !");
