@@ -12,10 +12,6 @@
  * @copyright 2019 Lotfio Lakehal
  */
 return [
-
-    //TODO:: sould set CLI version or name to disable ansi to prevent those messy charachters where no ansi support
-    'OS'                => "PHP_OS",
-
     'APP_NAME'          => 'Conso',
 
     'APP_VERSION'       => '0.1.0',
