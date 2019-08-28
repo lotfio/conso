@@ -20,7 +20,6 @@ use Conso\Exceptions\RunTimeException;
 
 class Command extends BaseCommand implements CommandInterface
 {
-    use CommandTrait;
     /**
      * command flags.
     *
@@ -88,7 +87,7 @@ class Command extends BaseCommand implements CommandInterface
         if(!is_string(Config::get('NAMESPACE')))
         {
             $namespace = array_values($this->readCommands());
-            $namespace = trim($namespace[count($namespace) -1], "\\"); 
+            $namespace = trim($namespace[count($namespace) -1], "\\");
         }else{
             $namespace = trim(Config::get('NAMESPACE'), "\\");
         }
@@ -99,7 +98,7 @@ class Command extends BaseCommand implements CommandInterface
 
         $arr  = Config::get('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
-        
+
         $commandHundle = fopen($file, 'w+');
 
         if (fwrite($commandHundle, $stub)) {
