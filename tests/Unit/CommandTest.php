@@ -82,8 +82,8 @@ class CommandTest extends TestCase
      */
     public function testlistCommandsMethod()
     {
-        $this->assertIsArray($this->command->listCommands());
-        $this->assertArrayHasKey('info', $this->command->listCommands());
+        $this->assertIsArray($this->command->readCommands());
+        $this->assertArrayHasKey('Info', $this->command->readCommands());
     }
 
     /**

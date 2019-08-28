@@ -32,6 +32,12 @@ class AppTest extends TestCase
     public function setUp() : void
     {
         Config::load();
+        Config::load(); // load config
+        Config::appName();
+        Config::appVersion();
+        Config::appRelease();
+        Config::appLogo();
+        Config::appDefaultCommand();
 
         $this->input = new Input();
         $this->Output = new Output();
