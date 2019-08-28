@@ -71,12 +71,8 @@ class Command extends BaseCommand implements CommandInterface
             throw new OptionNotFoundException('Command name is required ! ');
         }
 
-        $name = ucfirst(strtolower($options[0]));
-        $stubFile = Config::get('DEFAULT_COMMANDS').'Helpers'.DIRECTORY_SEPARATOR.'Stubs'.DIRECTORY_SEPARATOR.'Command.stub';
-
-        if (!file_exists($stubFile)) {
-            throw new RunTimeException("Error file $stubFile not found");
-        }
+        $name     = ucfirst(strtolower($options[0]));
+        $stubFile = __DIR__ . '/stub/command.stub';
 
         if (array_key_exists($name, $this->readCommands())) {
             throw new RunTimeException("Error command $name already exists !");
@@ -88,9 +84,12 @@ class Command extends BaseCommand implements CommandInterface
         $arr       = Config::get('NAMESPACE');
         $namespace = rtrim($arr[count($arr) - 1], "\\");
 
-        $stub = str_replace('#namespace#', $namespace, $stub);
-        $stub = str_replace('#command#', $name, $stub);
-        $stub = str_replace('#time#', date('d-m-Y'), $stub);
+        $replace = array(
+            "#namespace#" => $namespace,
+            "#command#" => $name,
+            "#time#" => date('d-m-Y'),
+        );
+        $stub = str_replace(array_keys($replace), array_values($replace) , $stub);
 
         // last location
         $arr  = Config::get('COMMANDS');
