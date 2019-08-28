@@ -1,4 +1,4 @@
-#!/usr/bin/php
+#!/usr/bin/env php
 <?php declare(strict_types=1);
 
 /**
@@ -18,17 +18,12 @@ use Conso\Output;
 use Conso\Config;
 
 /**
- * load config
- */
-Config::load();
-
-/**
  * adding custom config
- * example:
- * COMMANDS  => your commands dir
- * NAMESPACE => your commands namespace
+ *
  */
- //config::add(__DIR__ . DIRECTORY_SEPARATOR .'comm');
+
+ Config::addCommands(__DIR__ . DIRECTORY_SEPARATOR .'Console');
+ Config::addNamespace('Console\\');
 /**
  * get instance
  */
