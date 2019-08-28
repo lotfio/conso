@@ -28,8 +28,8 @@ Config::appRelease();
 Config::appLogo();
 Config::appDefaultCommand();
 
-Config::addCommands(__DIR__ . DIRECTORY_SEPARATOR .'Console');
-Config::addNamespace('Console\\');
+//Config::addCommands(__DIR__ . DIRECTORY_SEPARATOR .'Console'); your commands file should be added here
+//Config::addNamespace('Console\\'); // your commands namespace shoud be added here
 /**
  * get instance
  */
