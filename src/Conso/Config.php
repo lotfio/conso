@@ -120,7 +120,7 @@ class Config
      */
     public static function load() : void
     {
-        $appConf = (array) include_once __DIR__.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'app.php'; // app config
+        $appConf = (array) require __DIR__.DIRECTORY_SEPARATOR.'config'.DIRECTORY_SEPARATOR.'app.php'; // app config
         self::$configArray = array_merge(self::$configArray, $appConf);
     }
 

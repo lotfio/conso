@@ -93,13 +93,6 @@ class App
     {
         try {
 
-            Config::load(); // load config
-            Config::appName();
-            Config::appVersion();
-            Config::appRelease();
-            Config::appLogo();
-            Config::appDefaultCommand();
-
             $this->bind(); // bind inputs with command classes
 
         } catch (\Exception $e) {

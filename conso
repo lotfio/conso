@@ -21,9 +21,15 @@ use Conso\Config;
  * adding custom config
  *
  */
+Config::load(); // load config
+Config::appName();
+Config::appVersion();
+Config::appRelease();
+Config::appLogo();
+Config::appDefaultCommand();
 
- Config::addCommands(__DIR__ . DIRECTORY_SEPARATOR .'Console');
- Config::addNamespace('Console\\');
+Config::addCommands(__DIR__ . DIRECTORY_SEPARATOR .'Console');
+Config::addNamespace('Console\\');
 /**
  * get instance
  */

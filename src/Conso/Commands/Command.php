@@ -84,27 +84,22 @@ class Command extends BaseCommand implements CommandInterface
 
         $stub = file_get_contents($stubFile);
 
-        if(!is_string(Config::get('NAMESPACE')))
-        {
-            $namespace = array_values($this->readCommands());
-            $namespace = trim($namespace[count($namespace) -1], "\\");
-        }else{
-            $namespace = trim(Config::get('NAMESPACE'), "\\");
-        }
+        // last namespace
+        $arr       = Config::get('NAMESPACE');
+        $namespace = rtrim($arr[count($arr) - 1], "\\");
 
         $stub = str_replace('#namespace#', $namespace, $stub);
         $stub = str_replace('#command#', $name, $stub);
         $stub = str_replace('#time#', date('d-m-Y'), $stub);
 
+        // last location
         $arr  = Config::get('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
 
         $commandHundle = fopen($file, 'w+');
 
         if (fwrite($commandHundle, $stub)) {
-            $this->output->writeLn("\nGenerating command file : \n\n", 'green');
-            $this->output->timer();
-            $this->output->writeLn("\n\n");
+            $this->output->writeLn("\nGenerating command file : \n", 'green');
             exit(0);
         }
 
@@ -125,6 +120,7 @@ class Command extends BaseCommand implements CommandInterface
         }
 
         $name = ucfirst($options[0]);
+        // last location
         $arr  = Config::get('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
 
@@ -137,12 +133,9 @@ class Command extends BaseCommand implements CommandInterface
         $ask = readline('');
 
         if (strtolower($ask) == 'y' or strtolower($ask) == 'yes') {
-            unlink($file);
 
-            $this->output->writeLn("\n");
-            $this->output->timer();
-            $this->output->writeLn("\n\nCommand $name has been deleted successfully.", 'green');
-            $this->output->writeLn("\n\n");
+            unlink($file);
+            $this->output->writeLn("\nCommand $name has been deleted successfully.\n", 'green');
             exit(1);
         }
 
