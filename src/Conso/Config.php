@@ -30,7 +30,7 @@ class Config
      *
      * @return void
      */
-    public static function add(string $arrayFile) : array
+    public static function addCommands(string $arrayFile) : array
     {
         // avoid directory separator problems in multiple platforms
         $arr = str_replace('/', DIRECTORY_SEPARATOR, $arrayFile);
@@ -40,10 +40,77 @@ class Config
             throw new NotFoundException("wrong commands dir !");
         }
 
-
         self::$configArray['COMMANDS'][] = $arr;
 
         return self::$configArray;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param  string $namespace
+     * @return void
+     */
+    public static function addNamespace(string $namespace) : void
+    {
+        self::$configArray['NAMESPACE'][] = $namespace;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $name
+     * @return string
+     */
+    public static function appName(string $name = "Conso") : string
+    {
+        return self::$configArray['APP_NAME'] = $name;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $version
+     * @return string
+     */
+    public static function appVersion(string $version = "0.1.0") : string
+    {
+        return self::$configArray['APP_VERSION'] = $version;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $release
+     * @return string
+     */
+    public static function appRelease(string $release = "5-18-2019 by lotfio lakehal") : string
+    {
+        return self::$configArray['APP_RELEASE_DATE'] = $release;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $logo
+     * @return string
+     */
+    public static function appLogo(string $logo = NULL) : string
+    {
+        $file = __DIR__ . '/Commands/stub/logo';
+
+        return self::$configArray['APP_LOGO_FILE'] = is_null($logo) ? $file : $logo;
+    }
+
+    /**
+     * Undocumented function
+     *
+     * @param string $command
+     * @return void
+     */
+    public static function appDefaultCommand(string $command = "Info")
+    {
+        return self::$configArray['DEFAULT_COMMAND'] = $command;
     }
 
     /**

@@ -15,6 +15,7 @@ namespace Conso;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
+use Conso\Config;
 
 class App
 {
@@ -50,10 +51,9 @@ class App
      */
     public function bind() // bind the imput with the exact command and pass options and flags
     {
- 
         $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
         $availCommands = $this->readCommands();
-        
+
         if(array_key_exists($class, $availCommands)) // if command exists
         {
             $command = $availCommands[$class] . $class;
@@ -79,9 +79,9 @@ class App
      */
     public function command($command, $subCommand)
     {
-        if (!class_exists($command)) 
+        if (!class_exists($command))
             throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
-        
+
         $command = new $command($this->input, $this->output);
         return $command->execute($subCommand, $this->input->options, $this->input->flags); // sub command or null
     }
@@ -92,7 +92,16 @@ class App
     public function run()  // run the application
     {
         try {
-            $this->bind();
+
+            Config::load(); // load config
+            Config::appName();
+            Config::appVersion();
+            Config::appRelease();
+            Config::appLogo();
+            Config::appDefaultCommand();
+
+            $this->bind(); // bind inputs with command classes
+
         } catch (\Exception $e) {
             die($this->output->error('['.get_class($e)."] \n ".$e->getMessage()));
         }
