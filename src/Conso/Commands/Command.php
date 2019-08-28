@@ -71,8 +71,8 @@ class Command extends BaseCommand implements CommandInterface
             throw new OptionNotFoundException('Command name is required ! ');
         }
 
-        $name     = ucfirst(strtolower($options[0]));
-        $stubFile = __DIR__ . '/stub/command.stub';
+        $name = ucfirst(strtolower($options[0]));
+        $stubFile = Config::get('DEFAULT_COMMANDS').'Helpers'.DIRECTORY_SEPARATOR.'Stubs'.DIRECTORY_SEPARATOR.'Command.stub';
 
         if (!file_exists($stubFile)) {
             throw new RunTimeException("Error file $stubFile not found");
