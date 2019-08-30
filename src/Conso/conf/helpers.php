@@ -2,9 +2,13 @@
 
 /**
  * @author    <contact@lotfio.net>
+ *
  * @version   0.2.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
@@ -42,11 +46,11 @@ if (!function_exists('isTest')) {
     }
 }
 
-if(!function_exists('extractNamespace'))
-{
-    function extractNamespace($file) {
-        $ns = NULL;
-        $handle = fopen($file, "r");
+if (!function_exists('extractNamespace')) {
+    function extractNamespace($file)
+    {
+        $ns = null;
+        $handle = fopen($file, 'r');
         if ($handle) {
             while (($line = fgets($handle)) !== false) {
                 if (strpos($line, 'namespace') === 0) {
@@ -57,6 +61,7 @@ if(!function_exists('extractNamespace'))
             }
             fclose($handle);
         }
+
         return $ns;
     }
 }

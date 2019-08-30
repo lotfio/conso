@@ -2,7 +2,7 @@
 
 namespace Conso;
 
-/**
+/*
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.2.0
