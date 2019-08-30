@@ -13,7 +13,7 @@ namespace Tests\Unit;
  */
 
 use Conso\Command;
-use Conso\Config;
+use OoFile\Conf;
 use Conso\Exceptions\FlagNotFoundException;
 use Conso\Input;
 use Conso\Output;
@@ -30,7 +30,7 @@ class CommandTest extends TestCase
 
     public function setUp() : void
     {
-        Config::load();
+        Conf::add(dirname(__DIR__, 2).'/src/Conso/conf');
 
         $this->input = new Input();
         $this->command = new Command($this->input, new Output());

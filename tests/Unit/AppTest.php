@@ -13,7 +13,7 @@ namespace Tests\Unit;
  */
 
 use Conso\App;
-use Conso\Config;
+use OoFile\Conf;
 use Conso\Exceptions\CommandNotFoundException;
 use Conso\Exceptions\FlagNotFoundException;
 use Conso\Input;
@@ -31,13 +31,7 @@ class AppTest extends TestCase
 
     public function setUp() : void
     {
-        Config::load();
-        Config::load(); // load config
-        Config::appName();
-        Config::appVersion();
-        Config::appRelease();
-        Config::appLogo();
-        Config::appDefaultCommand();
+        Conf::add(dirname(__DIR__, 2).'/src/Conso/conf');
 
         $this->input = new Input();
         $this->Output = new Output();
