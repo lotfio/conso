@@ -15,13 +15,6 @@ require 'vendor/autoload.php';
 
 use Conso\Input;
 use Conso\Output;
-use OoFile\Conf;
-
-/**
- * adding custom config
- *
- */
-Conf::add(__DIR__.'/src/Conso/conf'); // load config
 
 /**
  * get instance
