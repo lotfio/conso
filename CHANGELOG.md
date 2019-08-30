@@ -1,4 +1,5 @@
-# 0.1.10
-  - fix config
+# 0.2.0
+  - fix config adding OoFile package
   - fix windows 7 ansi
   - commands location creation
+  - fix append additional commands 

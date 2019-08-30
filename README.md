@@ -1,6 +1,6 @@
-# PHP command line made easy.
+# CONSO (PHP console applications for cool kids).
 
-![logi](https://user-images.githubusercontent.com/18489496/51750637-f351c280-20b2-11e9-97e3-f1e0232bb04a.png)
+![conso](https://user-images.githubusercontent.com/18489496/51750637-f351c280-20b2-11e9-97e3-f1e0232bb04a.png)
 
 ![Licence](https://img.shields.io/badge/Licence-MIT-f1c40f.svg)
 ![PHP7](https://img.shields.io/badge/PHP-7.2-3498db.svg)
@@ -16,7 +16,7 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 
 ### Requirements :
 - PHP 7.2 or newer versions
-- PHPUnit 7.5 (for testing purpose)
+- PHPUnit >= 8 (for testing purpose)
 
 ### Installation :
 - Via composer :
@@ -26,17 +26,17 @@ composer require lotfio/conso
 ```
 
 # Configure Conso 
-1- A good directory structor will look something like this:
+1- A good directory structure will look something like this:
 ```php
     - app
       - Commands  // your console commands 
-      - config    // your console config files
+      - conf      // your console config files
 
     - vendor   // conso package will be installed by composer no action needed here
 
     - conso  // conso executable file
 ```
-- Now create a config file inside config directory { for example app.php}
+- Now create a config file inside conf directory { for example app.php }
 - Add the following configuration rules:
 
 ```php
@@ -46,16 +46,36 @@ return[
     "APP_VERSION"       => "Your app version",
     "APP_RELEASE_DATE"  => "Release date and info",
 
-    "APP_LOGO_FILE"     => "logo file with a stub extention .stub",
+    "APP_LOGO_FILE"     => "logo file path",
 
     "COMMANDS"          => "Your commands directory name",
     "COMMANDS_NAMESPACE"=> "Your commands namespace"
 ];
 ```
-2- Now load your config file with conso { inside you executable file conso}
+2- Now load your config files with OoFile { inside you executable file conso }
 
+```php
+    use OoFile\Conf;
+
+    Conf::add('app/conf/app.php');
 ```
-   Config::add('app/config/app.php');
+- You can append to the default config file instead of creating your own config dir or file
+
+```php
+    // you can append to the default config array instead of creating new config file
+    // you can append both strings and arrays
+    Conf::append('app','COMMANDS', 'your commands dir path');
+    Conf::append('app','COMMANDS', ["commands path", "commands path"]);
+    Conf::append('app','NAMESPACE', 'your commands namespace');
+```
+- You can access your config file like this: 
+
+```php
+    Conf::app('APP_NAME'); // method name is the same as the file name
+    // for example if you have a hi.php config file you will access it Conf::hi();
+
+    //you can change config values 
+    Conf::app('APP_NAME', 'value to be set here');
 ```
 
 3- Don't forget to load your commands with composer
@@ -74,7 +94,7 @@ return[
 ```php
 php conso command:make {command name}
 ```
-* This commad wil create a command file located inside `app/Commands/Yourcommand.php`
+* This command wil create a command file located inside `app/Commands/YourCommand.php`
 * Now just navigate to your command file and customize it.
 * ***Your command file will look like this :***
 ```php
@@ -125,7 +145,6 @@ class YourCommand extends Command implements CommandInterface
 ```
 * The execute method is where all your command logic should be executed.
 * You can create helper methods withing the same command class.
-* You can create Helper classes inside `Helpres` folder and use them with your commands.
 # Available methods
 ```php
  Input methods:
@@ -137,7 +156,7 @@ class YourCommand extends Command implements CommandInterface
     $this->input->flags; // return array of input flags 
  Output methods:
    $this->output->writeLn($string) // write to STDOUT
-   $this->output->error($string): // also warnining() + success() which will output to STDOUT with colors but on windowns no ansi support so will not output colors.
+   $this->output->error($string): // also warning() + success() which will output to STDOUT with colors but on window's no ansi support so will not output colors.
    $this->output->timer(); // output timer [#### .......]
    $this->output->whiteSpace($number); // output white spaces based on the given number
 ```
