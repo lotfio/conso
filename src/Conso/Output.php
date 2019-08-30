@@ -2,7 +2,7 @@
 
 namespace Conso;
 
-/**
+/*
  * @author    <contact@lotfio.net>
  * @version   0.2.0
  * @license   MIT
@@ -120,7 +120,7 @@ class Output implements OutputInterface
         if (!isset($this->bgColors[$bg])) {
             throw new NotFoundException('error background color not found');
         }
-        if ((strpos(php_uname("v"), "Windows 7") === FALSE) && !isTest() && inp()->flags(0) != '--no-ansi') { // if not windows 7 not test not no-ansi
+        if ((strpos(php_uname('v'), 'Windows 7') === false) && !isTest() && inp()->flags(0) != '--no-ansi') { // if not windows 7 not test not no-ansi
             return "\e[".$bold.';'.$this->colors[$color].';'.$this->bgColors[$bg].'m'.$line."\e[0m";
         }
 

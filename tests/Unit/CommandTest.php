@@ -13,10 +13,10 @@ namespace Tests\Unit;
  */
 
 use Conso\Command;
-use OoFile\Conf;
 use Conso\Exceptions\FlagNotFoundException;
 use Conso\Input;
 use Conso\Output;
+use OoFile\Conf;
 use PHPUnit\Framework\TestCase;
 
 class CommandTest extends TestCase

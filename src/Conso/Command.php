@@ -2,7 +2,7 @@
 
 namespace Conso;
 
-/**
+/*
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.2.0
@@ -11,10 +11,10 @@ namespace Conso;
  * @copyright 2019 Lotfio Lakehal
  */
 
-use OoFile\Conf;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\FlagNotFoundException;
+use OoFile\Conf;
 
 class Command
 {
@@ -65,9 +65,9 @@ class Command
             if (in_array($this->input->flags(0), $this->input->defaultFlags())) { // execute default commands here
 
                 switch ($this->input->flags(0)) {
-                    case '--help'   : case '-h': die($this->help()); break;
+                    case '--help': case '-h': die($this->help()); break;
                     case '--version': case '-v': die($this->version()); break;
-                    case '--quiet'  : case '-q': die;
+                    case '--quiet': case '-q': die;
 
                     default: $this->flags[] = $this->input->flags(0); break;
                     // default available flags will be added to each class automatically
@@ -93,15 +93,14 @@ class Command
     }
 
     /**
-     * read commands with there description
+     * read commands with there description.
      *
      * @return void
      */
     public function listCommands()
     {
-        foreach ($this->readCommands() as $class => $namespace) { 
-
-            $command =  $namespace . ucfirst($class);
+        foreach ($this->readCommands() as $class => $namespace) {
+            $command = $namespace.ucfirst($class);
 
             if (class_exists($command)) {
                 $this->readCommandDescription($command, ucfirst($class));

@@ -2,7 +2,7 @@
 
 namespace Conso\Commands;
 
-/**
+/*
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.2.0
@@ -12,9 +12,9 @@ namespace Conso\Commands;
  */
 
 use Conso\Command;
-use OoFile\Conf;
 use Conso\Contracts\CommandInterface;
 use Conso\Exceptions\NotFoundException;
+use OoFile\Conf;
 
 class Info extends Command implements CommandInterface
 {
