@@ -2,17 +2,16 @@
 
 namespace Conso\Commands;
 
-/*
+/**
 * @author    <contact@lotfio.net>
 * @package   Conso PHP Console Creator
-* @version   0.1.0
+* @version   0.2.0
 * @license   MIT
 * @category  CLI
 * @copyright 2019 Lotfio Lakehal
 */
 
-use Conso\Config;
-use Conso\CommandTrait;
+use OoFile\Conf;
 use Conso\Command as BaseCommand;
 use Conso\Contracts\CommandInterface;
 use Conso\Exceptions\OptionNotFoundException;
@@ -81,7 +80,7 @@ class Command extends BaseCommand implements CommandInterface
         $stub = file_get_contents($stubFile);
 
         // last namespace
-        $arr       = Config::get('NAMESPACE');
+        $arr       = Conf::app('NAMESPACE');
         $namespace = rtrim($arr[count($arr) - 1], "\\");
 
         $replace = array(
@@ -92,7 +91,7 @@ class Command extends BaseCommand implements CommandInterface
         $stub = str_replace(array_keys($replace), array_values($replace) , $stub);
 
         // last location
-        $arr  = Config::get('COMMANDS');
+        $arr  = Conf::app('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
 
         $commandHundle = fopen($file, 'w+');
@@ -120,7 +119,7 @@ class Command extends BaseCommand implements CommandInterface
 
         $name = ucfirst($options[0]);
         // last location
-        $arr  = Config::get('COMMANDS');
+        $arr  = Conf::app('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
 
 

@@ -2,15 +2,16 @@
 
 namespace Conso;
 
-/*
+/**
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
- * @version   0.1.0
+ * @version   0.2.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
 
+use OoFile\Conf;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\FlagNotFoundException;
@@ -166,8 +167,8 @@ class Command
      */
     public function version()
     {
-        $this->output->writeLn("\n".Config::get('APP_NAME'), 'yellow');
-        $this->output->writeLn(' version '.Config::get('APP_VERSION'));
-        $this->output->writeLn(' '.Config::get('APP_RELEASE_DATE')."\n\n", 'green');
+        $this->output->writeLn("\n".Conf::app('APP_NAME'), 'yellow');
+        $this->output->writeLn(' version '.Conf::app('APP_VERSION'));
+        $this->output->writeLn(' '.Conf::app('APP_RELEASE_DATE')."\n\n", 'green');
     }
 }

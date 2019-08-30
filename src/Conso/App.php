@@ -2,20 +2,19 @@
 
 namespace Conso;
 
-/*
- *
+/**
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
- * @version   0.1.0
+ * @version   0.2.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
 
+use OoFile\Conf;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
-use Conso\Config;
 
 class App
 {
@@ -62,7 +61,7 @@ class App
         }
 
         if (empty($class) || in_array($class, $this->input->defaultFlags())) {
-            $class = 'Conso\\Commands\\'.Config::get('DEFAULT_COMMAND');
+            $class = 'Conso\\Commands\\'.Conf::app('DEFAULT_COMMAND');
             $this->command($class, $this->input->commands);
             exit(0);
         }

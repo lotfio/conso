@@ -15,21 +15,14 @@ require 'vendor/autoload.php';
 
 use Conso\Input;
 use Conso\Output;
-use Conso\Config;
+use OoFile\Conf;
 
 /**
  * adding custom config
  *
  */
-Config::load(); // load config
-Config::appName();
-Config::appVersion();
-Config::appRelease();
-Config::appLogo();
-Config::appDefaultCommand();
+Conf::add(__DIR__.'/src/Conso/conf'); // load config
 
-//Config::addCommands(__DIR__ . DIRECTORY_SEPARATOR .'Console'); your commands file should be added here
-//Config::addNamespace('Console\\'); // your commands namespace shoud be added here
 /**
  * get instance
  */

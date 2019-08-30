@@ -2,17 +2,17 @@
 
 namespace Conso\Commands;
 
-/*
+/**
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
- * @version   0.1.0
+ * @version   0.2.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
 
 use Conso\Command;
-use Conso\Config;
+use OoFile\Conf;
 use Conso\Contracts\CommandInterface;
 use Conso\Exceptions\NotFoundException;
 
@@ -50,7 +50,7 @@ class Info extends Command implements CommandInterface
      */
     public function logo()
     {
-        $logo = Config::get('APP_LOGO_FILE');
+        $logo = Conf::app('APP_LOGO_FILE');
 
         if (!file_exists($logo)) {
             throw new NotFoundException("Logo file $logo not found !");
@@ -64,9 +64,9 @@ class Info extends Command implements CommandInterface
      */
     public function basicInfo()
     {
-        $this->output->writeLn(Config::get('APP_NAME'), 'yellow');
-        $this->output->writeLn(' version '.Config::get('APP_VERSION'));
-        $this->output->writeLn(' '.Config::get('APP_RELEASE_DATE')."\n\n", 'green');
+        $this->output->writeLn(Conf::app('APP_NAME'), 'yellow');
+        $this->output->writeLn(' version '.Conf::app('APP_VERSION'));
+        $this->output->writeLn(' '.Conf::app('APP_RELEASE_DATE')."\n\n", 'green');
         $this->output->writeLn("Usage :\n\n", 'yellow');
         $this->output->writeLn("  command:subcommand [options] [flags] \n\n");
         $this->output->writeLn("Options, flags :\n\n", 'yellow');

@@ -2,15 +2,16 @@
 
 namespace Conso;
 
-/*
+/**
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
- * @version   0.1.0
+ * @version   0.2.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
 
+use OoFile\Conf;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\FlagNotFoundException;
@@ -30,7 +31,7 @@ trait CommandTrait
     {
         $commands = array();
 
-        foreach(Config::get('COMMANDS') as $dir)
+        foreach(Conf::app('COMMANDS') as $dir)
         {
             $files = preg_grep('/.php$/', scandir($dir));
 

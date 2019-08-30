@@ -4,11 +4,11 @@
 
 ![Licence](https://img.shields.io/badge/Licence-MIT-f1c40f.svg)
 ![PHP7](https://img.shields.io/badge/PHP-7.2-3498db.svg)
-![version](https://img.shields.io/badge/version-0.1.0-27ae60.svg)
+![version](https://img.shields.io/badge/version-0.2.0-27ae60.svg)
 ![coverage](https://img.shields.io/badge/coverage-40%25-27ae60.svg)
 ![build](https://travis-ci.org/lotfio/conso.svg?branch=master)
 [![StyleCI](https://github.styleci.io/repos/165832668/shield?branch=master)](https://github.styleci.io/repos/165832668)
-![downloads](https://img.shields.io/badge/downloads-10k-c0392b.svg)
+![downloads](https://img.shields.io/badge/downloads-1k-c0392b.svg)
 ### Introduction :
 Conso is a simple, lightweight PHP package that helps you create command line applications easily.
 
