@@ -17,7 +17,7 @@ use Conso\Output;
 use PHPUnit\Framework\TestCase;
 
 /**
- * definging own stearm filter to capture stdout stream.
+ * defining own stream filter to capture stdout stream.
  */
 class ConsoStreamFilter extends \php_user_filter
 {
@@ -68,7 +68,7 @@ class OutputTest extends TestCase
      *
      * @return void
      */
-    public function testOutputWrtiteLineMethod()
+    public function testOutputWriteLineMethod()
     {
         $this->output->writeLn('hello world');
         $this->assertEquals('hello world', ConsoStreamFilter::$buffer);
@@ -82,7 +82,7 @@ class OutputTest extends TestCase
     public function testOutputWrongColor()
     {
         $this->expectException(NotFoundException::class);
-        $this->output->writeLn('10', 'nocolor');
+        $this->output->writeLn('10', 'no color');
     }
 
     /**
@@ -94,7 +94,7 @@ class OutputTest extends TestCase
     public function testOutputWrongBgColor()
     {
         $this->expectException(NotFoundException::class);
-        $this->output->writeLn('10', 'white', 'nobgcolor');
+        $this->output->writeLn('10', 'white', 'no bg color');
     }
 
     /**

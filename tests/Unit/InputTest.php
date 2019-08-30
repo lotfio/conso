@@ -59,7 +59,7 @@ class InputTest extends TestCase
      *
      * @return void
      */
-    public function testInoutOptions()
+    public function testInputOptions()
     {
         $this->assertEquals('option1', $this->input->options(0));
         $this->assertEquals('option2', $this->input->options(1));
@@ -67,7 +67,7 @@ class InputTest extends TestCase
 
     /**
      * test input flags method
-     * both single and multidahsed words are considered as flags.
+     * both single and multi dashed words are considered as flags.
      *
      * @return void
      */

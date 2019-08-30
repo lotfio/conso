@@ -39,7 +39,7 @@ class AppTest extends TestCase
     }
 
     /**
-     * wrong commad.
+     * wrong command.
      *
      * @return void
      */
@@ -51,11 +51,11 @@ class AppTest extends TestCase
     }
 
     /**
-     * wrong commad.
+     * wrong command.
      *
      * @return void
      */
-    public function testBindMethidWrongflags()
+    public function testBindMethodWrongFlags()
     {
         $this->input->flags[0] = '--flag0';
         $this->expectException(FlagNotFoundException::class);

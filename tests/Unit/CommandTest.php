@@ -56,7 +56,7 @@ class CommandTest extends TestCase
      *
      * @return array
      */
-    public function testcommandWhiteSpaceLengthMethod()
+    public function testCommandWhiteSpaceLengthMethod()
     {
         // example -----    => example needs 5 spaces to get correctly aligned
         // info --------    => info needs 8 spaces to get correctly aligned
@@ -69,10 +69,10 @@ class CommandTest extends TestCase
      *
      * @return
      */
-    public function testdisplayAvailableCommandsMethod()
+    public function testDisplayAvailableCommandsMethod()
     {
         $this->command->displayAvailableCommands();
-        $this->assertRegexp('/vailable commands :/', ConsoStreamFilter::$buffer);
+        $this->assertRegexp('/Available commands :/', ConsoStreamFilter::$buffer);
     }
 
     /**
@@ -80,7 +80,7 @@ class CommandTest extends TestCase
      *
      * @return array
      */
-    public function testlistCommandsMethod()
+    public function testListCommandsMethod()
     {
         $this->assertIsArray($this->command->readCommands());
         $this->assertArrayHasKey('Info', $this->command->readCommands());
@@ -91,7 +91,7 @@ class CommandTest extends TestCase
      *
      * @return void | throw exception
      */
-    public function testcheckFlagsMethodNoFlagsFound()
+    public function testCheckFlagsMethodNoFlagsFound()
     {
         $this->input->flags[0] = '--test';
 
@@ -104,7 +104,7 @@ class CommandTest extends TestCase
      *
      * @return void
      */
-    public function testcheckFlagsMethodFlagIsDefined()
+    public function testCheckFlagsMethodFlagIsDefined()
     {
         $this->input->flags[0] = '--test';
         $this->assertNull($this->command->checkFlags(['--test']));

@@ -20,7 +20,7 @@ class Command
 {
     use CommandTrait;
     /**
-     * inout.
+     * input.
      *
      * @var object
      */
@@ -41,7 +41,7 @@ class Command
     public $availableCommands = [];
 
     /**
-     * inject the nedded objects to this base command class
+     * inject the needed objects to this base command class
      * so we can use them later on the commands.
      *
      * @param OutputInterface $output
@@ -57,7 +57,7 @@ class Command
     }
 
     /**
-     * bstandard commands method.
+     * standard commands method.
      */
     public function defaultFlags()
     {
