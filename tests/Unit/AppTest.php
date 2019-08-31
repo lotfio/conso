@@ -16,7 +16,6 @@ use Conso\App;
 use OoFile\Conf;
 use Conso\Input;
 use Conso\Output;
-use OoFile\Conf;
 use PHPUnit\Framework\TestCase;
 use Conso\Exceptions\CommandNotFoundException;
 use Conso\Exceptions\FlagNotFoundException;
