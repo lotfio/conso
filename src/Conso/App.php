@@ -2,7 +2,7 @@
 
 namespace Conso;
 
-/**
+/*
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   0.2.0
@@ -11,10 +11,10 @@ namespace Conso;
  * @copyright 2019 Lotfio Lakehal
  */
 
-use OoFile\Conf;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\CommandNotFoundException;
+use OoFile\Conf;
 
 class App
 {
@@ -53,9 +53,8 @@ class App
         $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
         $availCommands = $this->readCommands();
 
-        if(array_key_exists($class, $availCommands)) // if command exists
-        {
-            $command = $availCommands[$class] . $class;
+        if (array_key_exists($class, $availCommands)) { // if command exists
+            $command = $availCommands[$class].$class;
             $this->command($command, $this->input->commands(1) ?? null);
             exit(0);
         }
@@ -78,10 +77,11 @@ class App
      */
     public function command($command, $subCommand)
     {
-        if (!class_exists($command))
+        if (!class_exists($command)) {
             throw new CommandNotFoundException('Command '.$this->input->commands(0).' not Found ');
-
+        }
         $command = new $command($this->input, $this->output);
+
         return $command->execute($subCommand, $this->input->options, $this->input->flags); // sub command or null
     }
 
@@ -91,9 +91,7 @@ class App
     public function run()  // run the application
     {
         try {
-
             $this->bind(); // bind inputs with command classes
-
         } catch (\Exception $e) {
             die($this->output->error('['.get_class($e)."] \n ".$e->getMessage()));
         }
