@@ -167,8 +167,8 @@ class Command
      */
     public function version()
     {
-        $this->output->writeLn("\n".Conf::app('APP_NAME'), 'yellow');
-        $this->output->writeLn(' version '.Conf::app('APP_VERSION'));
-        $this->output->writeLn(' '.Conf::app('APP_RELEASE_DATE')."\n\n", 'green');
+        $this->output->writeLn("\n".Conf::conso('APP_NAME'), 'yellow');
+        $this->output->writeLn(' version '.Conf::conso('APP_VERSION'));
+        $this->output->writeLn(' '.Conf::conso('APP_RELEASE_DATE')."\n\n", 'green');
     }
 }

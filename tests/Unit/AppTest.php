@@ -14,11 +14,11 @@ namespace Tests\Unit;
 
 use Conso\App;
 use OoFile\Conf;
-use Conso\Exceptions\CommandNotFoundException;
-use Conso\Exceptions\FlagNotFoundException;
 use Conso\Input;
 use Conso\Output;
 use PHPUnit\Framework\TestCase;
+use Conso\Exceptions\CommandNotFoundException;
+use Conso\Exceptions\FlagNotFoundException;
 
 class AppTest extends TestCase
 {
@@ -33,9 +33,9 @@ class AppTest extends TestCase
     {
         Conf::add(dirname(__DIR__, 2).'/src/Conso/conf');
 
-        $this->input = new Input();
+        $this->input  = new Input();
         $this->Output = new Output();
-        $this->app = new App($this->input, $this->Output);
+        $this->app    = new App($this->input, $this->Output);
     }
 
     /**

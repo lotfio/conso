@@ -50,7 +50,7 @@ class Info extends Command implements CommandInterface
      */
     public function logo()
     {
-        $logo = Conf::app('APP_LOGO_FILE');
+        $logo = Conf::conso('APP_LOGO_FILE');
 
         if (!file_exists($logo)) {
             throw new NotFoundException("Logo file $logo not found !");
@@ -64,9 +64,9 @@ class Info extends Command implements CommandInterface
      */
     public function basicInfo()
     {
-        $this->output->writeLn(Conf::app('APP_NAME'), 'yellow');
-        $this->output->writeLn(' version '.Conf::app('APP_VERSION'));
-        $this->output->writeLn(' '.Conf::app('APP_RELEASE_DATE')."\n\n", 'green');
+        $this->output->writeLn(Conf::conso('APP_NAME'), 'yellow');
+        $this->output->writeLn(' version '.Conf::conso('APP_VERSION'));
+        $this->output->writeLn(' '.Conf::conso('APP_RELEASE_DATE')."\n\n", 'green');
         $this->output->writeLn("Usage :\n\n", 'yellow');
         $this->output->writeLn("  command:subcommand [options] [flags] \n\n");
         $this->output->writeLn("Options, flags :\n\n", 'yellow');

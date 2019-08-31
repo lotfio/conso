@@ -31,7 +31,7 @@ trait CommandTrait
     {
         $commands = array();
 
-        foreach(Conf::app('COMMANDS') as $dir)
+        foreach(Conf::conso('COMMANDS') as $dir)
         {
             $files = preg_grep('/.php$/', scandir($dir));
 

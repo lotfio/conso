@@ -61,7 +61,7 @@ class App
         }
 
         if (empty($class) || in_array($class, $this->input->defaultFlags())) {
-            $class = 'Conso\\Commands\\'.Conf::app('DEFAULT_COMMAND');
+            $class = 'Conso\\Commands\\'.Conf::conso('DEFAULT_COMMAND');
             $this->command($class, $this->input->commands);
             exit(0);
         }

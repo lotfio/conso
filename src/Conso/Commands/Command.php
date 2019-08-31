@@ -80,7 +80,7 @@ class Command extends BaseCommand implements CommandInterface
         $stub = file_get_contents($stubFile);
 
         // last namespace
-        $arr       = Conf::app('NAMESPACE');
+        $arr       = Conf::conso('NAMESPACE');
         $namespace = rtrim($arr[count($arr) - 1], "\\");
 
         $replace = array(
@@ -91,7 +91,7 @@ class Command extends BaseCommand implements CommandInterface
         $stub = str_replace(array_keys($replace), array_values($replace) , $stub);
 
         // last location
-        $arr  = Conf::app('COMMANDS');
+        $arr  = Conf::conso('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
 
         $commandHundle = fopen($file, 'w+');
@@ -119,7 +119,7 @@ class Command extends BaseCommand implements CommandInterface
 
         $name = ucfirst($options[0]);
         // last location
-        $arr  = Conf::app('COMMANDS');
+        $arr  = Conf::conso('COMMANDS');
         $file = trim($arr[count($arr) - 1], DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $name . '.php';
 
 

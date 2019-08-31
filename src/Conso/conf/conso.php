@@ -13,7 +13,7 @@ return array(
     'APP_VERSION'       => '0.2.0',
     'APP_RELEASE_DATE'  => '30/08/2019 20:00 by lotfio lakehal',
 
-    'DEFAULT_COMMAND' => 'info',
+    'DEFAULT_COMMAND' => 'Info',
 
     'APP_LOGO_FILE'   => dirname(__DIR__). '/Commands/stub/logo',
     
