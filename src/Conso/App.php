@@ -41,11 +41,6 @@ class App
      */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
-        /**
-         * load config
-         */
-        Conf::add(__DIR__ . '/conf');
-
         $this->input   = $input;
         $this->output  = $output;
     }

@@ -154,7 +154,7 @@ class Command
     public function commandWhiteSpaceLength($key)
     {
         $keys = array_map('strlen', array_keys($this->availableCommands));
-        $max = max($keys);
+        $max  = max($keys);
         $keys = array_map(function ($elem) use ($max) {
             return $max - $elem + 5; // + desired number of white spaces
         }, $keys);

@@ -37,7 +37,7 @@ trait CommandTrait
 
             foreach($files as $commandFile)
             {
-                $file = trim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $commandFile;
+                $file = rtrim($dir, DIRECTORY_SEPARATOR) . DIRECTORY_SEPARATOR . $commandFile;
 
                 if(file_exists($file))
                 {
