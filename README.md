@@ -1,14 +1,14 @@
 <p align="center">
   <img src="https://user-images.githubusercontent.com/18489496/51750637-f351c280-20b2-11e9-97e3-f1e0232bb04a.png"  alt="Conso Preview">
-
-<a href="#"><img src="https://img.shields.io/badge/License-MIT-9cf" alt="License"></a>
-<a href="#"><img src="https://img.shields.io/badge/PHP-7.2-3498db.svg" alt="PHP version"></a>
-<a href="#"><img src="https://img.shields.io/badge/version-0.2.0-27ae60.svg" alt="Version"></a>
-<a href="#"><img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg" alt="Coverage"></a>
-<a href="#"><img src="https://travis-ci.org/lotfio/conso.svg?branch=master" alt="Build Status"></a>
-<a href="#"><img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi"></a>
-<a href="#"><img src="https://img.shields.io/badge/downloads-1k-c0392b.svg" alt="Downloads"></a>
-
+  <p align="center">
+    <img src="https://img.shields.io/badge/License-MIT-f1c40f" alt="License">
+    <img src="https://img.shields.io/badge/PHP-7.2-3498db.svg" alt="PHP version">
+    <img src="https://img.shields.io/badge/version-0.2.0-2c3e50.svg" alt="Version">
+    <img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg" alt="Coverage">
+    <img src="https://travis-ci.org/lotfio/conso.svg?branch=master" alt="Build Status">
+    <img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi">
+    <img src="https://img.shields.io/badge/downloads-1k-e74c3c.svg" alt="Downloads">
+    </p>
   <p align="center">
     <strong>Conso (PHP console applications for geeks).</strong>
   </p>
