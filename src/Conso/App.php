@@ -48,7 +48,7 @@ class App
     /**
      * command bind method.
      */
-    public function bind() // bind the imput with the exact command and pass options and flags
+    public function bind() // bind the input with the exact command and pass options and flags
     {
         $class = $this->input->commands(0) ? ucfirst($this->input->commands(0)) : null;
         $availCommands = $this->readCommands();

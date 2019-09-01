@@ -2,13 +2,9 @@
 
 /**
  * @author    Lotfio Lakehal <contact@lotfio.net>
- *
- * @version   0.1.0
- *
+ * @version   0.2.0
  * @license   MIT
- *
  * @category  CLI
- *
  * @copyright 2019 Lotfio Lakehal
  */
 class Autoloader
