@@ -17,7 +17,7 @@
 ## 🔥 Introduction :
 Conso is a simple, lightweight PHP package that helps you create command line applications easily.
 
-![conso-php](https://user-images.githubusercontent.com/18489496/51997787-b4a77800-24b7-11e9-9016-daff3f7216fc.gif)
+![conso-php](https://user-images.githubusercontent.com/18489496/87257339-7b3fae00-c49a-11ea-9246-74368e320385.gif)
 
 ## 📌 Requirements :
 - PHP 7.2 or newer versions
