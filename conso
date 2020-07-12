@@ -5,8 +5,28 @@
  *
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
- * @version   0.2.0
+ * @version   1.0.0
  * @license   MIT
  * @category  CLI
  * @copyright 2019 Lotfio Lakehal
  */
+
+use Conso\{
+    Conso,Input,Output
+};
+
+require 'vendor/autoload.php';
+
+$conso = new Conso(new Input, new Output);
+
+$conso->setSignature("_________
+\_   ___ \  ____   ____   __________
+/    \  \/ /  _ \ /    \ /  ___/  _ \
+\     \___(  <_> )   |  \\___ (  <_> )
+\______  /\____/|___|  /____  >____/
+      \/            \/     \/
+");
+
+require_once 'commands.php';
+
+$conso->run(0);

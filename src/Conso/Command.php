@@ -1,5 +1,15 @@
 <?php  namespace Conso;
 
+/**
+ *
+ * @author    <contact@lotfio.net>
+ * @package   Conso PHP Console Creator
+ * @version   1.0.0
+ * @license   MIT
+ * @category  CLI
+ * @copyright 2019 Lotfio Lakehal
+ */
+
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 
@@ -20,7 +30,7 @@ class Command
         if($input->flag(0) == '-h' || $input->flag(0) == '--help')
             $this->displayCommandHelp($input, $output, $app);
 
-        if($input->flag(0) == '-q' || $input->flag(0) == '--quiet');
+        if($input->flag(0) == '-q' || $input->flag(0) == '--quiet'); // on quiet
     }
 
     /**
