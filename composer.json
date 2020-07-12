@@ -1,0 +1,19 @@
+{
+    "name": "lotfio/conso",
+    "description": "console applications made easy",
+    "authors": [
+        {
+            "name": "lotfio",
+            "email": "contact@lotfio.net"
+        }
+    ],
+    "autoload": {
+        "files": ["src/Conso/hlprs.php"],
+        "psr-4": {
+            "Conso\\"    : "src/Conso"
+        }
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "^8"
+    }
+}
