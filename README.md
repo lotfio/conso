@@ -3,7 +3,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/License-MIT-f1c40f"          alt="License">
     <img src="https://img.shields.io/badge/PHP-7.2-3498db.svg"          alt="PHP version">
-    <img src="https://img.shields.io/badge/version-0.2.0-2c3e50.svg"    alt="Version">
+    <img src="https://img.shields.io/badge/version-1.0.0-2c3e50.svg"    alt="Version">
     <img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg"   alt="Coverage">
     <img src="https://travis-ci.org/lotfio/conso.svg?branch=master"     alt="Build Status">
     <img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi">
@@ -35,24 +35,53 @@ composer require lotfio/conso
 - it should look something like this
 
 ```php
-    #!/usr/bin/env php
-    <?php declare(strict_types=1);
+#!/usr/bin/env php
+<?php declare(strict_types=1);
 
-    use Conso\{
-        Conso,Input,Output
-    };
+use Conso\{
+    Conso,Input,Output
+};
 
-    require 'vendor/autoload.php';
+require 'vendor/autoload.php';
 
-    $conso = new Conso(new Input, new Output);
+$conso = new Conso(new Input, new Output);
 
-    // you commands should be registered here before you run the app
+// you commands should be registered here before you run the app
 
-    $conso->command("test", function($input, $output){
-        $output->writeLn("hello from test ", 'red');
-    });
+$conso->command("test", function($input, $output){
+    $output->writeLn("hello from test ", 'red');
+});
 
-    $conso->run(0);
+$conso->run(0); // 0 for production & 1 for development
+```
+### separate commands from your executable
+it is cleaner to separate your commands into a separate `commands.php` file and include it into your executable conso file
+like so :
+- `commands.php` file
+```php
+
+$conso->command("test", function($input, $output){
+    $output->writeLn("hello from test ", 'red');
+});
+
+```
+- your `conso` executable file like this :
+```php
+#!/usr/bin/env php
+<?php declare(strict_types=1);
+
+use Conso\{
+    Conso,Input,Output
+};
+
+require 'vendor/autoload.php';
+
+$conso = new Conso(new Input, new Output);
+
+// include your commands
+require_once 'commands.php';
+
+$conso->run(0); // 0 for production & 1 for development
 ```
 
 
