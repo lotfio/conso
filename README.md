@@ -31,41 +31,11 @@ composer require lotfio/conso
 ```
 
 ## 🚀 write your first command
-- create a conso file
-- it should look something like this
+- create a `commands.php` file.
+- create a `conso` file (you can change the name as you like).
+- include your `commands.php` file into `conso` executable file.
+- it should look something like this.
 
-```php
-#!/usr/bin/env php
-<?php declare(strict_types=1);
-
-use Conso\{
-    Conso,Input,Output
-};
-
-require 'vendor/autoload.php';
-
-$conso = new Conso(new Input, new Output);
-
-// you commands should be registered here before you run the app
-
-$conso->command("test", function($input, $output){
-    $output->writeLn("hello from test ", 'red');
-});
-
-$conso->run(0); // 0 for production & 1 for development
-```
-### separate commands from your executable
-it is cleaner to separate your commands into a separate `commands.php` file and include it into your executable conso file
-like so :
-- `commands.php` file
-```php
-
-$conso->command("test", function($input, $output){
-    $output->writeLn("hello from test ", 'red');
-});
-
-```
-- your `conso` executable file like this :
 ```php
 #!/usr/bin/env php
 <?php declare(strict_types=1);
@@ -83,6 +53,30 @@ require_once 'commands.php';
 
 $conso->run(0); // 0 for production & 1 for development
 ```
+- define a new `test` command in your `commands.php` :
+
+```php
+<?php
+// this is your commands file
+
+ // test command
+$conso->command("test", function($input, $output){
+    $output->writeLn("hello from test ", 'red');
+});
+
+
+```
+
+- now your command has been registered.
+- run `php conso --commands` or `./conso --commands` in your terminal and you should see your command.
+
+![commands](https://user-images.githubusercontent.com/18489496/87434186-6f630180-c5ea-11ea-894a-7efaaad6301f.png)
+
+- command test is registered now ***(no description is shown you can add this later on)***.
+- run your command `php conso test` or `./conso test`.
+
+![image](https://user-images.githubusercontent.com/18489496/87434691-12b41680-c5eb-11ea-9d36-656c33fd18b7.png)
+
 
 
 ## 🔧 Configure Conso
