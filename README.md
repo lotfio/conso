@@ -30,7 +30,7 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 composer require lotfio/conso
 ```
 
-## 🚀 write your first command
+## 🎉 write your first command
 - create a `commands.php` file.
 - create a `conso` file (you can change the name as you like).
 - include your `commands.php` file into `conso` executable file.
@@ -64,7 +64,6 @@ $conso->command("test", function($input, $output){
     $output->writeLn("hello from test ", 'red');
 });
 
-
 ```
 
 - now your command has been registered.
@@ -76,6 +75,44 @@ $conso->command("test", function($input, $output){
 - run your command `php conso test` or `./conso test`.
 
 ![image](https://user-images.githubusercontent.com/18489496/87434691-12b41680-c5eb-11ea-9d36-656c33fd18b7.png)
+
+
+### add description
+- `->description(string $description)`;
+
+```php
+<?php
+// test command
+$conso->command("test", function($input, $output){
+    $output->writeLn("hello from test ", 'red');
+
+})->description("This is test command description :) ^^");
+```
+![named](https://user-images.githubusercontent.com/18489496/87438178-80624180-c5ef-11ea-802e-db500ebb8329.png)
+
+
+### define sub commands
+- `->sub(string|array $subCommand)`;
+
+```php
+<?php
+// test command
+$conso->command("test", function($input, $output){
+
+    if($input->subCommand() == 'one')
+        exit($output->writeLn(' hello from one', 'yellow'));
+
+    if($input->subCommand() == 'two')
+        $output->writeLn(' hello from two', 'green');
+
+})->description("This is test command description :) ^^")->sub('one', 'two');
+```
+![image](https://user-images.githubusercontent.com/18489496/87439833-8527f500-c5f1-11ea-9b55-56746b0a66cc.png)
+
+![image](https://user-images.githubusercontent.com/18489496/87439882-96710180-c5f1-11ea-8da2-188afd6294c0.png)
+
+
+
 
 
 
