@@ -67,5 +67,11 @@ $conso->command('--commands',  function($inp, $out, $app){
 
 })->alias(['-c']);
 
+$conso->command('--no-ansi', function($inp, $out, $app){
+    $out->disableAnsi(); // disable ansi
+    $cm  = explode(DIRECTORY_SEPARATOR, getcwd());
+    $cmd = ' php ' . $cm[count($cm) - 1];
+    passthru($cmd);
+});
 
 $conso->command('command', 'Conso\\Commands\\command');

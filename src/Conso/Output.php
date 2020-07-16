@@ -20,6 +20,13 @@ use Conso\Exceptions\OutputException;
 class Output implements OutputInterface
 {
     /**
+     * disable ansi
+     *
+     * @var boolean
+     */
+    public $noAnsi = false;
+
+    /**
      * colors
      *
      * @var array
@@ -76,7 +83,7 @@ class Output implements OutputInterface
         if(!array_key_exists($bg, $this->bg))
             throw new OutputException("$color background color is not a defined color");
 
-        if(!$this->is256())
+        if(!$this->is256() || $this->noAnsi == true)
             return $line;
 
         return "\e[".$bold.';'.$this->colors[$color].';'.$this->bg[$bg].'m'.$line."\e[0m";
@@ -149,6 +156,16 @@ class Output implements OutputInterface
     {
         $cls   =  "\r";//"\033[5D\r";  or "\033[2K\r";
         return fwrite(STDOUT, $cls, strlen($cls));
+    }
+
+    /**
+     * disable ansi method
+     *
+     * @return void
+     */
+    public function disableAnsi() : void
+    {
+        $this->noAnsi = true;
     }
 
     /**

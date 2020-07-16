@@ -27,10 +27,13 @@ class Command
      */
     public function __construct(InputInterface $input, OutputInterface $output, Conso $app)
     {
+        if($input->flag(0) == '--no-ansi')
+            $output->disableAnsi();
+
+        //if($input->flag(0) == '-q' || $input->flag(0) == '--quiet'); // if quiet flag
+
         if($input->flag(0) == '-h' || $input->flag(0) == '--help')
             $this->displayCommandHelp($input, $output, $app);
-
-        if($input->flag(0) == '-q' || $input->flag(0) == '--quiet'); // on quiet
     }
 
     /**
