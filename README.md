@@ -61,7 +61,7 @@ $conso->run(0); // 0 for production & 1 for development
 
  // test command
 $conso->command("test", function($input, $output){
-    $output->writeLn("hello from test ", 'red');
+    $output->writeLn("\n hello from test \n", 'red');
 });
 
 ```
@@ -84,7 +84,7 @@ $conso->command("test", function($input, $output){
 <?php
 // test command
 $conso->command("test", function($input, $output){
-    $output->writeLn("hello from test ", 'red');
+    $output->writeLn("\n hello from test \n", 'red');
 
 })->description("This is test command description :) ^^");
 ```
@@ -100,10 +100,10 @@ $conso->command("test", function($input, $output){
 $conso->command("test", function($input, $output){
 
     if($input->subCommand() == 'one')
-        exit($output->writeLn(' hello from one', 'yellow'));
+        exit($output->writeLn("\n hello from one \n", 'yellow'));
 
     if($input->subCommand() == 'two')
-        $output->writeLn(' hello from two', 'green');
+        $output->writeLn("\n hello from two \n", 'green');
 
 })->description("This is test command description :) ^^")->sub('one', 'two');
 ```
@@ -113,7 +113,7 @@ $conso->command("test", function($input, $output){
 
 
 ### define command flags
-- you can define flags using the flag method `->flags(string|array $flag)`;
+- you can define flags using the flag method `->flags(string|array $flag)`
 - this is a list of reserved flags `['-h', '--help', '-v', '--version', '-c', '--commands', '-q', '--quiet', '--ansi', '--no-ansi']`
 
 ```php
@@ -122,7 +122,7 @@ $conso->command("test", function($input, $output){
 $conso->command("test", function($input, $output){
 
     if($input->flag(0) == '-t')
-        $output->writeLn("flag -t is defined for this command.", 'red');
+        $output->writeLn("\n flag -t is defined for this command.\n", 'red');
 
 })->description("This is test command description :) ^^")->flags('-t');
 ```
@@ -130,9 +130,47 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87725819-498e5600-c7be-11ea-94a8-dfb566218129.png)
 
 
+### add command alias
+- you can add an alias to a command with the alias method  `->aliad(string $alias)`
+
+```php
+<?php
+// test command
+$conso->command("test", function($input, $output){
+
+    $output->writeLn("\n test called by alias \n", 'red');
+
+})->description("This is test command description :) ^^")->alias('alias');
+```
+
+![image](https://user-images.githubusercontent.com/18489496/87726841-1d73d480-c7c0-11ea-912d-df22f7c9723f.png)
 
 
-## 🔧 Configure Conso
+### define command help
+- you can add help instruction to a command using the help method `->help(array $help)`
+- command help can be displayed using the `-h` or `--help` flags
+- help array must be an array of sub commands and options with their descriptions
+- help method is not is predefined for `class commands` but not for `closure commands` so you need to implement it your self
+
+```php
+<?php
+// test command
+$conso->command("test", function($input, $output){
+
+    $output->writeLn("\n test called by alias \n", 'red');
+
+})->description("This is test command description :) ^^")->sub('one')->flags('-t')
+  ->help(array(
+      "sub commands" => array(
+          "one" => " help text for sub command goes here"
+      ),
+      "flags" => array(
+          "-t" => "help text for flag goes here"
+      )
+  ));
+```
+
+
 
 
 ## ✨ TODO

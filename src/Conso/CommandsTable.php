@@ -112,7 +112,7 @@ class CommandsTable
      *
      * @return void
      */
-    public function help(string $help) : self
+    public function help(array $help) : self
     {
         $this->assign('help', $help);
         return $this;
