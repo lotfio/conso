@@ -48,9 +48,9 @@ class Command
 
         $output->writeLn("\n help for [" . $name . "] command:\n\n", "yellow");
 
-        $output->writeLn("    php conso $name:{". implode(",", $app->activeCommand['sub']) ."} {options}\n\n");
+        $output->writeLn("    php conso $name:{sub command} {options}\n\n");
 
-        if(count($help) > 0)
+        if(is_array($help) && count($help) > 0)
         {
             foreach($help as $key => $value)
             {
