@@ -112,6 +112,22 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87439882-96710180-c5f1-11ea-8da2-188afd6294c0.png)
 
 
+### define command flags
+- you can define flags using the flag method `->flags(string|array $flag)`;
+- this is a list of reserved flags `['-h', '--help', '-v', '--version', '-c', '--commands', '-q', '--quiet', '--ansi', '--no-ansi']`
+
+```php
+<?php
+// test command
+$conso->command("test", function($input, $output){
+
+    if($input->flag(0) == '-t')
+        $output->writeLn("flag -t is defined for this command.", 'red');
+
+})->description("This is test command description :) ^^")->flags('-t');
+```
+
+![image](https://user-images.githubusercontent.com/18489496/87725819-498e5600-c7be-11ea-94a8-dfb566218129.png)
 
 
 
