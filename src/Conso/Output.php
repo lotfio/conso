@@ -24,7 +24,14 @@ class Output implements OutputInterface
      *
      * @var boolean
      */
-    public $noAnsi = false;
+    private $noAnsi  = false;
+
+    /**
+     * test mode
+     *
+     * @var boolean
+     */
+    private $testMode = false;
 
     /**
      * colors
@@ -66,7 +73,7 @@ class Output implements OutputInterface
     public function writeLn(string $line, string $color = 'white', string $bg = 'trans', int $bold = 0)
     {
         $str   = $this->lineFormatter($line, $color, $bg, $bold);
-        return fwrite(STDOUT, $str, strlen($str));
+        return ($this->testMode) ? $str : fwrite(STDOUT, $str, strlen($str));
     }
 
     /**
@@ -166,6 +173,18 @@ class Output implements OutputInterface
     public function disableAnsi() : void
     {
         $this->noAnsi = true;
+    }
+
+    /**
+     * enable testing mode
+     * useful method for testing to avoid creating
+     * custom messy stream filters
+     *
+     * @return void
+     */
+    public function enableTestMode() : void
+    {
+        $this->testMode = true;
     }
 
     /**
