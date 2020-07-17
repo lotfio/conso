@@ -13,6 +13,11 @@
             "Conso\\"    : "src/Conso"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\" : "tests"
+        }
+    },
     "require-dev": {
         "phpunit/phpunit" : "^8"
     }
