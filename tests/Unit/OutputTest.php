@@ -15,8 +15,18 @@ use PHPUnit\Framework\TestCase;
 
 class OutputTest extends TestCase
 {
+    /**
+     * output
+     *
+     * @var object
+     */
     private $output;
 
+    /**
+     * set up
+     *
+     * @return void
+     */
     public function setUp() : void
     {
         $this->output = new Output;
@@ -32,8 +42,8 @@ class OutputTest extends TestCase
     public function testOutputWriteLn()
     {
         $this->assertEquals(
-            $this->output->writeLn("hello"),
-            'hello'
+            'hello',
+            $this->output->writeLn("hello")
         );
     }
 }

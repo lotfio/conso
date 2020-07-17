@@ -18,9 +18,25 @@ use Conso\Exceptions\InputException;
 
 class CommandLinkerTest extends TestCase
 {
+    /**
+     * output
+     *
+     * @var object
+     */
     private $output;
+
+    /**
+     * commands
+     *
+     * @var array
+     */
     private $commands;
 
+    /**
+     * set up
+     *
+     * @return void
+     */
     public function setUp() : void
     {
         $this->output = new Output;
@@ -97,7 +113,6 @@ class CommandLinkerTest extends TestCase
     {
         $linker = new CommandLinker(new Input('make'), $this->output);
         $res    = $linker->link($this->commands);
-
         $this->assertSame($res, $this->commands[0]);
     }
 }

@@ -39,7 +39,10 @@ class InputTest extends TestCase
      */
     public function testInputCommand()
     {
-        $this->assertEquals($this->input->command(), "make");
+        $this->assertEquals(
+            "make",
+            $this->input->command()
+        );
     }
 
     /**
@@ -49,7 +52,10 @@ class InputTest extends TestCase
      */
     public function testInputSubCommand()
     {
-        $this->assertEquals($this->input->subCommand(), "controller");
+        $this->assertEquals(
+            "controller",
+            $this->input->subCommand()
+        );
     }
 
     /**
@@ -60,7 +66,10 @@ class InputTest extends TestCase
     public function testInputOptions()
     {
         $this->assertContains('user', $this->input->options());
-        $this->assertEquals($this->input->option(0), "user");
+        $this->assertEquals(
+            "user",
+            $this->input->option(0)
+        );
     }
 
     /**
@@ -71,6 +80,9 @@ class InputTest extends TestCase
     public function testInputFlags()
     {
         $this->assertContains('--crud', $this->input->flags());
-        $this->assertEquals($this->input->flag(0), "--crud");
+        $this->assertEquals(
+            "--crud",
+            $this->input->flag(0)
+        );
     }
 }
