@@ -139,7 +139,7 @@ class Input implements InputInterface
      * @param  integer $index
      * @return string|null
      */
-    function option(int $index) : ?string
+    public function option(int $index) : ?string
     {
         return isset($this->options[$index]) ? $this->options[$index] : NULL;
     }
@@ -149,7 +149,7 @@ class Input implements InputInterface
      *
      * @return array
      */
-    function options() : array
+    public function options() : array
     {
         return $this->options;
     }

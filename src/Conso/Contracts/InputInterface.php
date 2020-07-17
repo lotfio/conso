@@ -12,4 +12,31 @@
 
 interface InputInterface
 {
+    /**
+     * input command
+     *
+     * @return string|null
+     */
+    public function command() : ?string;
+
+    /**
+     * input sub command
+     *
+     * @return string|null
+     */
+    public function subCommand() : ?string;
+
+    /**
+     * input options
+     *
+     * @return array
+     */
+    public function options() : array;
+
+    /**
+     * input flags
+     *
+     * @return array
+     */
+    public function flags() : array;
 }

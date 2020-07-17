@@ -10,13 +10,13 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-$conso->command('--version',  function($inp, $out, $app){
+$conso->command('version',  function($inp, $out, $app){
 
     $out->writeLn("\n " . $app->getName() . " version " . $app->getVersion() . "\n", "yellow");
 
-})->alias(['-v']);
+})->alias(['-v', '--version']);
 
-$conso->command('--help',  function($inp, $out, $app){
+$conso->command('help',  function($inp, $out, $app){
 
         $out->writeLn("\nUsage: \n\n", 'yellow');
         $out->writeLn("    command:subcommand [options] [-flags]\n\n");
@@ -44,7 +44,7 @@ $conso->command('--help',  function($inp, $out, $app){
         $out->writeLn(" To silent warning, please use the -q or --quiet special flags.\n");
         $out->writeLn(" To disable ansi, please use the --no-ansi special flag.\n");
 
-})->alias(['-h']);
+})->alias(['-h', '--help']);
 
 $conso->command('--commands',  function($inp, $out, $app){
     // remove special commands

@@ -12,5 +12,13 @@
 
 interface OutputInterface
 {
-
+    /**
+     * write line method.
+     *
+     * @param string $line
+     * @param string $color
+     * @param string $bg
+     * @param int    $bold
+     */
+    public function writeLn(string $line, string $color = 'white', string $bg = 'trans', int $bold = 0);
 }
