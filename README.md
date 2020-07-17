@@ -214,18 +214,19 @@ class Test extends BaseCommand implements CommandInterface
     );
 
     /**
+     * command help
+     *
+     * @var string
+     */
+    protected $help        = array(
+    );
+
+    /**
      * command description
      *
      * @var string
      */
     protected $description = 'This is Test command description.';
-
-    /**
-     * command help
-     *
-     * @var string
-     */
-    protected $help        = 'This is Test command help message.';
 
     /**
      * execute method
@@ -247,6 +248,7 @@ class Test extends BaseCommand implements CommandInterface
 
 ```
 - by default `test` command will run the `execute` method if no sub command is provided
+- each sub command is a separate method
 
 
 
