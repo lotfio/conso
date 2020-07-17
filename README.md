@@ -20,7 +20,7 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 ![conso-php](https://user-images.githubusercontent.com/18489496/87257339-7b3fae00-c49a-11ea-9246-74368e320385.gif)
 
 ## 📌 Requirements :
-- PHP 7.2 or newer versions
+- PHP     >= 7.2 or newer versions
 - PHPUnit >= 8 (for testing purpose)
 
 ## 🚀 Installation :
@@ -160,6 +160,7 @@ $conso->command("test", function($input, $output){
     $output->writeLn("\n test called by alias \n", 'red');
 
 })->description("This is test command description :) ^^")->sub('one')->flags('-t')
+
   ->help(array(
       "sub commands" => array(
           "one" => " help text for sub command goes here"
@@ -169,11 +170,89 @@ $conso->command("test", function($input, $output){
       )
   ));
 ```
+![image](https://user-images.githubusercontent.com/18489496/87726841-1d73d480-c7c0-11ea-912d-df22f7c9723f.png)
 
+### class commands
+- class commands are very helpful for big commands
+- configure class commands (path & namespace)
+```php
+    // add this to your conso file before run method
+    $conso->setCommandsPath('path');
+    $conso->setCommandsNamespace('namespace');
+```
+
+- to create a class command run `php conso command:make {command name}`
+- for example lest create a test class command `php conso command:make test`
+- this will generate a `Test` command class like this:
+
+```php
+<?php
+
+namespace Conso\Commands;
+
+use Conso\Conso;
+use Conso\Command as BaseCommand;
+use Conso\Exceptions\InputException;
+use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
+
+class Test extends BaseCommand implements CommandInterface
+{
+    /**
+     * sub commands
+     *
+     * @var array
+     */
+    protected $sub = array(
+    );
+
+    /**
+     * flags
+     *
+     * @var array
+     */
+    protected $flags = array(
+    );
+
+    /**
+     * command description
+     *
+     * @var string
+     */
+    protected $description = 'This is Test command description.';
+
+    /**
+     * command help
+     *
+     * @var string
+     */
+    protected $help        = 'This is Test command help message.';
+
+    /**
+     * execute method
+     *
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
+     * @return void
+     */
+    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    {
+        $this->displayCommandHelp($input, $output, $app);
+    }
+}
+```
+- now you need to register this command in your `commands.php` file:
+```php
+
+    $conso->command('test', 'Your\\Name\\Space\\Test');
+
+```
+- by default `test` command will run the `execute` method if no sub command is provided
 
 
 
 ## ✨ TODO
+- implement help in closure commands
+- call command from another command method
 
 Helpers for quick commands development.
 
