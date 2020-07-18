@@ -1,43 +1,47 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Conso;
 use Conso\Input;
 use Conso\Output;
-use Conso\Conso;
 use PHPUnit\Framework\TestCase;
 
 class ConsoTest extends TestCase
 {
     /**
-     * output
+     * output.
      *
      * @var object
      */
     private $output;
 
     /**
-     * set up
+     * set up.
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->output = new Output;
+        $this->output = new Output();
         $this->output->disableAnsi();
         $this->output->enableTestMode();
     }
 
     /**
-     * test not found command
+     * test not found command.
      *
      * @return void
      */
@@ -49,7 +53,7 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test not found command
+     * test not found command.
      *
      * @return void
      */
@@ -57,12 +61,12 @@ class ConsoTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $app = new Conso(new Input('test:hello'), $this->output);
-        $app->command('test', function(){});
+        $app->command('test', function () {});
         $app->run();
     }
 
     /**
-     * test flag not found
+     * test flag not found.
      *
      * @return void
      */
@@ -70,18 +74,18 @@ class ConsoTest extends TestCase
     {
         $this->expectException(\Exception::class);
         $app = new Conso(new Input('test:hello --crud'), $this->output);
-        $app->command('test', function(){})->sub('hello');
+        $app->command('test', function () {})->sub('hello');
         $app->run();
     }
 
     /**
-     * test set signature
+     * test set signature.
      *
      * @return void
      */
     public function testSetSignature()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->setSignature('conso');
 
         $this->assertEquals(
@@ -91,13 +95,13 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test set name
+     * test set name.
      *
      * @return void
      */
     public function testSetName()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->setName('console app');
 
         $this->assertEquals(
@@ -107,13 +111,13 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test set version
+     * test set version.
      *
      * @return void
      */
     public function testSetVersion()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->setVersion('1.0.0');
 
         $this->assertEquals(
@@ -123,13 +127,13 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test set author
+     * test set author.
      *
      * @return void
      */
     public function testSetAuthor()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->setAuthor('lotfio lakehal');
 
         $this->assertEquals(
@@ -139,13 +143,13 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test set commands path
+     * test set commands path.
      *
      * @return void
      */
     public function testSetCommandsPath()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->setCommandsPath('/commands');
 
         $this->assertEquals(
@@ -155,13 +159,13 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test set commands namespace
+     * test set commands namespace.
      *
      * @return void
      */
     public function testSetCommandsNamespace()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->setCommandsNamespace('Conso\\');
 
         $this->assertEquals(
@@ -171,13 +175,13 @@ class ConsoTest extends TestCase
     }
 
     /**
-     * test get commands
+     * test get commands.
      *
      * @return void
      */
     public function testSetGetCommands()
     {
-        $app = new Conso(new Input, $this->output);
+        $app = new Conso(new Input(), $this->output);
         $app->command('test', 'testCommandClass');
 
         $this->assertContains(

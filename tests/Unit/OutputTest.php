@@ -1,12 +1,16 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
@@ -16,26 +20,26 @@ use PHPUnit\Framework\TestCase;
 class OutputTest extends TestCase
 {
     /**
-     * output
+     * output.
      *
      * @var object
      */
     private $output;
 
     /**
-     * set up
+     * set up.
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->output = new Output;
+        $this->output = new Output();
         $this->output->enableTestMode(); // disable write to STDOUT useful for testing
         $this->output->disableAnsi();   // disable ansi no colors needed
     }
 
     /**
-     * test output write ln
+     * test output write ln.
      *
      * @return void
      */
@@ -43,7 +47,7 @@ class OutputTest extends TestCase
     {
         $this->assertEquals(
             'hello',
-            $this->output->writeLn("hello")
+            $this->output->writeLn('hello')
         );
     }
 }

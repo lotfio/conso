@@ -1,12 +1,16 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
@@ -16,30 +20,30 @@ use PHPUnit\Framework\TestCase;
 class CommandsTableTest extends TestCase
 {
     /**
-     * commands table
+     * commands table.
      *
      * @var object
      */
     private $table;
 
     /**
-     * set up command
+     * set up command.
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->table = new CommandsTable;
+        $this->table = new CommandsTable();
     }
 
     /**
-     * test command name
+     * test command name.
      *
      * @return void
      */
     public function testCommandName()
     {
-        $this->table->add('test', NULL);
+        $this->table->add('test', null);
         $this->assertEquals(
             'test',
             $this->table->getCommands()[0]['name']
@@ -47,7 +51,7 @@ class CommandsTableTest extends TestCase
     }
 
     /**
-     * test command action
+     * test command action.
      *
      * @return void
      */
@@ -61,7 +65,7 @@ class CommandsTableTest extends TestCase
     }
 
     /**
-     * test sub command
+     * test sub command.
      *
      * @return void
      */
@@ -75,7 +79,7 @@ class CommandsTableTest extends TestCase
     }
 
     /**
-     * test command flags
+     * test command flags.
      *
      * @return void
      */
@@ -89,7 +93,7 @@ class CommandsTableTest extends TestCase
     }
 
     /**
-     * test command aliases
+     * test command aliases.
      *
      * @return void
      */
@@ -103,7 +107,7 @@ class CommandsTableTest extends TestCase
     }
 
     /**
-     * test command aliases
+     * test command aliases.
      *
      * @return void
      **/
@@ -115,6 +119,7 @@ class CommandsTableTest extends TestCase
             $this->table->getCommands()[0]['description']
         );
     }
+
     /*
      * test command aliases
      *
