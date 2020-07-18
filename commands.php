@@ -63,6 +63,8 @@ $conso->command('--commands',  function($inp, $out, $app){
             $out->writeLn("  ". $command['name'] .  str_repeat(' ', ($max - strlen($command['name'])) + 4 ), 'green');
             $out->writeLn($command['description'] .  "\n");
         }
+
+        $out->writeLn("\n");
     }
 
 })->alias(['-c']);

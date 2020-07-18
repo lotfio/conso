@@ -160,7 +160,7 @@ class Input implements InputInterface
      * @param  integer $index
      * @return string|null
      */
-    public function flag(string $index) : ?string
+    public function flag(int $index) : ?string
     {
         return isset($this->flags[$index]) ? $this->flags[$index] : NULL;
     }
