@@ -77,7 +77,7 @@ $conso->command("test", function($input, $output){
 ![run-test](https://user-images.githubusercontent.com/18489496/87862317-ec75da00-c94e-11ea-9690-894c35911d81.png)
 
 
-### add description
+### :star: add description
 - `->description(string $description)`;
 
 ```php
@@ -91,7 +91,7 @@ $conso->command("test", function($input, $output){
 ![description](https://user-images.githubusercontent.com/18489496/87862367-89387780-c94f-11ea-8166-6fc9bc598fdd.png)
 
 
-### define sub commands
+### :star: define sub commands
 - `->sub(string|array $subCommand)`;
 
 ```php
@@ -112,7 +112,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87862391-bedd6080-c94f-11ea-808e-bba3738b0a4b.png)
 
 
-### define command flags
+### :star: define command flags
 - you can define flags using the flag method `->flags(string|array $flag)`
 - this is a list of reserved flags `['-h', '--help', '-v', '--version', '-c', '--commands', '-q', '--quiet', '--ansi', '--no-ansi']`
 
@@ -130,7 +130,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87862405-095edd00-c950-11ea-9cd7-f26b2823981f.png)
 
 
-### add command alias
+### :star: add command alias
 - you can add an alias to a command with the alias method  `->aliad(string $alias)`
 
 ```php
@@ -146,7 +146,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87862421-21cef780-c950-11ea-8a08-adf0efcab72e.png)
 
 
-### define command help
+### :star: define command help
 - you can add help instruction to a command using the help method `->help(array $help)`
 - command help can be displayed using the `-h` or `--help` flags
 - help array must be an array of sub commands and options with their descriptions
