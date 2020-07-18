@@ -1,75 +1,79 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\CommandLinker;
+use Conso\Exceptions\InputException;
 use Conso\Input;
 use Conso\Output;
-use Conso\CommandLinker;
 use PHPUnit\Framework\TestCase;
-use Conso\Exceptions\InputException;
 
 class CommandLinkerTest extends TestCase
 {
     /**
-     * output
+     * output.
      *
      * @var object
      */
     private $output;
 
     /**
-     * commands
+     * commands.
      *
      * @var array
      */
     private $commands;
 
     /**
-     * set up
+     * set up.
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->output = new Output;
+        $this->output = new Output();
         $this->output->disableAnsi();
         $this->output->enableTestMode();
 
-        $this->commands = array(
-            array(
+        $this->commands = [
+            [
                 'name'          => 'make',
                 'aliases'       => [],
                 'sub'           => ['controller'],
-                'action'        => "MakeClass",
+                'action'        => 'MakeClass',
                 'flags'         => ['--form'],
                 'description'   => 'This is make command',
-                'help'          => []
-            )
-        );
+                'help'          => [],
+            ],
+        ];
     }
 
     /**
-     * test link method
+     * test link method.
      *
      * @return void
      */
     public function testLinkMethodNoCommand()
     {
-        $linker = new CommandLinker(new Input, $this->output);
-        $link   = $linker->link($this->commands);
-        $this->assertEquals(NULL, $link);
+        $linker = new CommandLinker(new Input(), $this->output);
+        $link = $linker->link($this->commands);
+        $this->assertEquals(null, $link);
     }
 
     /**
-     * test wrong method
+     * test wrong method.
      *
      * @return void
      */
@@ -81,7 +85,7 @@ class CommandLinkerTest extends TestCase
     }
 
     /**
-     * test wrong sub command
+     * test wrong sub command.
      *
      * @return void
      */
@@ -93,7 +97,7 @@ class CommandLinkerTest extends TestCase
     }
 
     /**
-     * test wrong flag
+     * test wrong flag.
      *
      * @return void
      */
@@ -105,14 +109,14 @@ class CommandLinkerTest extends TestCase
     }
 
     /**
-     * test linked match
+     * test linked match.
      *
      * @return void
      */
     public function testLinkMethodCommandMatch()
     {
         $linker = new CommandLinker(new Input('make'), $this->output);
-        $res    = $linker->link($this->commands);
+        $res = $linker->link($this->commands);
         $this->assertSame($res, $this->commands[0]);
     }
 }

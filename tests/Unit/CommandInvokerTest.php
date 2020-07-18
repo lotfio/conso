@@ -1,72 +1,75 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\CommandInvoker;
+use Conso\Conso;
 use Conso\Input;
 use Conso\Output;
-use Conso\Conso;
-use Conso\CommandInvoker;
 use PHPUnit\Framework\TestCase;
-use Conso\Exceptions\InputException;
 
 class CommandInvokerTest extends TestCase
 {
     /**
-     * output
+     * output.
      *
      * @var object
      */
     private $output;
 
     /**
-     * commands
+     * commands.
      *
      * @var array
      */
     private $commands;
 
     /**
-     * set up
+     * set up.
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->output = new Output;
+        $this->output = new Output();
         $this->output->disableAnsi();
         $this->output->enableTestMode();
 
-        $this->commands = array(
-            array(
+        $this->commands = [
+            [
                 'name'          => 'make',
                 'aliases'       => [],
                 'sub'           => ['controller'],
-                'action'        => "Tests\\Unit\\Mocks\\Make",
+                'action'        => 'Tests\\Unit\\Mocks\\Make',
                 'flags'         => ['--form'],
                 'description'   => 'This is make command',
-                'help'          => []
-            )
-        );
+                'help'          => [],
+            ],
+        ];
     }
 
     /**
-     * test invoke callback
+     * test invoke callback.
      *
      * @return void
      */
     public function testInvokeCallback()
     {
-        $this->commands[0]['action'] = function(){ return 'from make callback'; };
+        $this->commands[0]['action'] = function () { return 'from make callback'; };
 
-        $inp     = new Input('make');
+        $inp = new Input('make');
         $invoker = new CommandInvoker($inp, $this->output, new Conso($inp, $this->output));
 
         $this->assertEquals(
@@ -76,13 +79,13 @@ class CommandInvokerTest extends TestCase
     }
 
     /**
-     * test invoke class method
+     * test invoke class method.
      *
      * @return void
      */
     public function testInvokeClassMethod()
     {
-        $inp     = new Input('make');
+        $inp = new Input('make');
         $invoker = new CommandInvoker($inp, $this->output, new Conso($inp, $this->output));
 
         ob_start();
