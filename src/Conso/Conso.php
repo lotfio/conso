@@ -83,7 +83,7 @@ class Conso
      * run application method
      *
      * @param  integer $env
-     * @return void
+     * @return mixed
      */
     public function run(int $env = 0)
     {
@@ -101,6 +101,9 @@ class Conso
 
         }catch(\Exception $e)
         {
+            if($this->output->isTestMode()) // is test mode
+                throw new \Exception($e);
+
             $this->output->exception($e, $env);
         }
     }

@@ -188,6 +188,16 @@ class Output implements OutputInterface
     }
 
     /**
+     * is test mode method
+     *
+     * @return boolean
+     */
+    public function isTestMode() : bool
+    {
+        return $this->testMode;
+    }
+
+    /**
      * timer method
      *
      * TODO :: need more work to make percentage works correctly
