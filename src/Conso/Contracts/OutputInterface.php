@@ -20,5 +20,5 @@ interface OutputInterface
      * @param string $bg
      * @param int    $bold
      */
-    public function writeLn(string $line, string $color = 'white', string $bg = 'trans', int $bold = 0);
+    public function writeLn(string $line, string $color, string $bg, int $bold);
 }

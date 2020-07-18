@@ -52,7 +52,7 @@ function readProtectedProperty(string $class,string $property)
         return $property->getValue($cmd->newInstanceWithoutConstructor());
     }
 
-    return []; // todo fix this
+    return [];
 }
 
 /**
