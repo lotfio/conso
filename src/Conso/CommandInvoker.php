@@ -103,6 +103,7 @@ class CommandInvoker
                 $this->output->writeLn("  ". $command['name'] .  str_repeat(' ', ($max - strlen($command['name'])) + 4 ), 'green');
                 $this->output->writeLn($command['description'] .  "\n");
             }
+            $this->output->writeLn("\n");
         }
     }
 

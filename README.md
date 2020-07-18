@@ -17,7 +17,7 @@
 ## 🔥 Introduction :
 Conso is a simple, lightweight PHP package that helps you create command line applications easily.
 
-![conso-php](https://user-images.githubusercontent.com/18489496/87257339-7b3fae00-c49a-11ea-9246-74368e320385.gif)
+![conso](https://user-images.githubusercontent.com/18489496/87862253-622d7600-c94e-11ea-8aef-1a79a70e8ff6.gif)
 
 ## 📌 Requirements :
 - PHP     >= 7.2 or newer versions
@@ -59,7 +59,7 @@ $conso->run(0); // 0 for production & 1 for development
 <?php
 // this is your commands file
 
- // test command
+// test command
 $conso->command("test", function($input, $output){
     $output->writeLn("\n hello from test \n", 'red');
 });
@@ -69,12 +69,12 @@ $conso->command("test", function($input, $output){
 - now your command has been registered.
 - run `php conso --commands` or `./conso --commands` in your terminal and you should see your command.
 
-![commands](https://user-images.githubusercontent.com/18489496/87434186-6f630180-c5ea-11ea-894a-7efaaad6301f.png)
+![test-command](https://user-images.githubusercontent.com/18489496/87862304-c18b8600-c94e-11ea-9237-56895f15245a.png)
 
 - command test is registered now ***(no description is shown you can add this later on)***.
 - run your command `php conso test` or `./conso test`.
 
-![image](https://user-images.githubusercontent.com/18489496/87434691-12b41680-c5eb-11ea-9d36-656c33fd18b7.png)
+![run-test](https://user-images.githubusercontent.com/18489496/87862317-ec75da00-c94e-11ea-9690-894c35911d81.png)
 
 
 ### add description
@@ -88,7 +88,7 @@ $conso->command("test", function($input, $output){
 
 })->description("This is test command description :) ^^");
 ```
-![named](https://user-images.githubusercontent.com/18489496/87438178-80624180-c5ef-11ea-802e-db500ebb8329.png)
+![description](https://user-images.githubusercontent.com/18489496/87862367-89387780-c94f-11ea-8166-6fc9bc598fdd.png)
 
 
 ### define sub commands
@@ -107,9 +107,9 @@ $conso->command("test", function($input, $output){
 
 })->description("This is test command description :) ^^")->sub('one', 'two');
 ```
-![image](https://user-images.githubusercontent.com/18489496/87439833-8527f500-c5f1-11ea-9b55-56746b0a66cc.png)
+![image](https://user-images.githubusercontent.com/18489496/87862387-abca9080-c94f-11ea-90da-cf65a0a5fbba.png)
 
-![image](https://user-images.githubusercontent.com/18489496/87439882-96710180-c5f1-11ea-8da2-188afd6294c0.png)
+![image](https://user-images.githubusercontent.com/18489496/87862391-bedd6080-c94f-11ea-808e-bba3738b0a4b.png)
 
 
 ### define command flags
@@ -127,7 +127,7 @@ $conso->command("test", function($input, $output){
 })->description("This is test command description :) ^^")->flags('-t');
 ```
 
-![image](https://user-images.githubusercontent.com/18489496/87725819-498e5600-c7be-11ea-94a8-dfb566218129.png)
+![image](https://user-images.githubusercontent.com/18489496/87862405-095edd00-c950-11ea-9cd7-f26b2823981f.png)
 
 
 ### add command alias
@@ -143,7 +143,7 @@ $conso->command("test", function($input, $output){
 })->description("This is test command description :) ^^")->alias('alias');
 ```
 
-![image](https://user-images.githubusercontent.com/18489496/87726841-1d73d480-c7c0-11ea-912d-df22f7c9723f.png)
+![image](https://user-images.githubusercontent.com/18489496/87862421-21cef780-c950-11ea-8a08-adf0efcab72e.png)
 
 
 ### define command help
@@ -170,11 +170,12 @@ $conso->command("test", function($input, $output){
       )
   ));
 ```
-![image](https://user-images.githubusercontent.com/18489496/87726841-1d73d480-c7c0-11ea-912d-df22f7c9723f.png)
+![image](https://user-images.githubusercontent.com/18489496/87862665-e71a8e80-c952-11ea-8393-3d8815a2cc85.png)
 
-### class commands
+### :star: class commands
 - class commands are very helpful for big commands
-- configure class commands (path & namespace)
+
+- first you need configure (path & namespace)
 ```php
     // add this to your conso file before run method
     $conso->setCommandsPath('path');
@@ -244,19 +245,17 @@ class Test extends BaseCommand implements CommandInterface
 - now you need to register this command in your `commands.php` file:
 ```php
 
-    $conso->command('test', 'Your\\Name\\Space\\Test');
+$conso->command('test', 'Your\\Name\\Space\\Test');
 
 ```
 - by default `test` command will run the `execute` method if no sub command is provided
 - each sub command is a separate method
 
 
-
 ## ✨ TODO
-- implement help in closure commands
-- call command from another command method
+- implement help in closure commands.
+- call command from another command method.
 
-Helpers for quick commands development.
 
 ## ✨ Contributing
 
