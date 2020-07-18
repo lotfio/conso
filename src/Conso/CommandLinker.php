@@ -18,7 +18,6 @@ use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\InputException;
 
-
 /**
  * This class is responsible of linking input command with
  * defined commands in commands table.
