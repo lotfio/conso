@@ -202,7 +202,7 @@ class Test extends BaseCommand implements CommandInterface
      *
      * @var array
      */
-    protected $sub = array(
+    protected $sub  = array(
     );
 
     /**
@@ -218,7 +218,7 @@ class Test extends BaseCommand implements CommandInterface
      *
      * @var string
      */
-    protected $help        = array(
+    protected $help  = array(
     );
 
     /**
