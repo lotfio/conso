@@ -1,62 +1,68 @@
-<?php namespace Tests\Unit\Mocks;
+<?php
+
+namespace Tests\Unit\Mocks;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Conso;
 use Conso\Command as BaseCommand;
-use Conso\Exceptions\InputException;
-use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
+use Conso\Conso;
+use Conso\Contracts\CommandInterface;
+use Conso\Contracts\InputInterface;
+use Conso\Contracts\OutputInterface;
 
 class Make extends BaseCommand implements CommandInterface
 {
     /**
-     * sub commands
+     * sub commands.
      *
      * @var array
      */
-    protected $sub = array(
-    );
+    protected $sub = [
+    ];
 
     /**
-     * flags
+     * flags.
      *
      * @var array
      */
-    protected $flags = array(
-    );
+    protected $flags = [
+    ];
 
     /**
-     * command help
+     * command help.
      *
      * @var string
      */
-    protected $help  = array(
-    );
+    protected $help = [
+    ];
 
     /**
-     * command description
+     * command description.
      *
      * @var string
      */
     protected $description = 'This is Make command description.';
 
     /**
-     * execute method
+     * execute method.
      *
-     * @param  InputInterface  $input
-     * @param  OutputInterface $output
+     * @param InputInterface  $input
+     * @param OutputInterface $output
+     *
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function execute(InputInterface $input, OutputInterface $output, Conso $app): void
     {
-        echo "from make class command";
+        echo 'from make class command';
     }
 }
