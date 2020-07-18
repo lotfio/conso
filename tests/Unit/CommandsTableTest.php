@@ -41,8 +41,8 @@ class CommandsTableTest extends TestCase
     {
         $this->table->add('test', NULL);
         $this->assertEquals(
-            $this->table->getCommands()[0]['name'],
-            'test'
+            'test',
+            $this->table->getCommands()[0]['name']
         );
     }
 
@@ -55,8 +55,8 @@ class CommandsTableTest extends TestCase
     {
         $this->table->add('test', 'command');
         $this->assertEquals(
-            $this->table->getCommands()[0]['action'],
-            'command'
+            'command',
+            $this->table->getCommands()[0]['action']
         );
     }
 
@@ -111,8 +111,8 @@ class CommandsTableTest extends TestCase
     {
         $this->table->add('test', 'command')->description('This is a command');
         $this->assertSame(
-            $this->table->getCommands()[0]['description'],
             'This is a command',
+            $this->table->getCommands()[0]['description']
         );
     }
     /*
