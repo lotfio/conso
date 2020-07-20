@@ -1,191 +1,192 @@
-<?php  namespace Conso;
+<?php
+
+namespace Conso;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Contracts\InputInterface;
-use Conso\Contracts\OutputInterface;
-
 /**
- * This trait holds conso information
+ * This trait holds conso information.
  */
 trait ConsoTrait
 {
     /**
-     * signature
+     * signature.
      *
      * @var string
      */
     protected $signature = '';
 
     /**
-     * name
+     * name.
      *
      * @var string
      */
     protected $name = 'Conso';
 
     /**
-     * version
+     * version.
      *
      * @var string
      */
     protected $version = '1.0.0';
 
     /**
-     * author
+     * author.
      *
      * @var string
      */
-    protected $author  = 'Lotfio Lakehal';
+    protected $author = 'Lotfio Lakehal';
 
     /**
-     * commands path
+     * commands path.
      *
      * @var string
      */
-    protected $commandsPath = __DIR__ . '/Commands';
+    protected $commandsPath = __DIR__.'/Commands';
 
     /**
-     * commands namespace
+     * commands namespace.
      *
      * @var string
      */
     protected $commandsNamespace = 'Conso\\Commands';
 
     /**
-     * set signature method
+     * set signature method.
      *
      * @return void
      */
-    public function setSignature(string $signature) : void
+    public function setSignature(string $signature): void
     {
         $this->signature = $signature;
     }
 
     /**
-     * set version method
+     * set version method.
      *
      * @return void
      */
-    public function setVersion(string $version) : void
+    public function setVersion(string $version): void
     {
         $this->version = $version;
     }
 
     /**
-     * set author
+     * set author.
      *
      * @return void
      */
-    public function setAuthor(string $author) : void
+    public function setAuthor(string $author): void
     {
         $this->author = $author;
     }
 
     /**
-     * set app name
+     * set app name.
      *
      * @return void
      */
-    public function setName(string $name) : void
+    public function setName(string $name): void
     {
         $this->name = $name;
     }
 
     /**
-     * set commands path
+     * set commands path.
      *
      * @return void
      */
-    public function setCommandsPath(string $path) : void
+    public function setCommandsPath(string $path): void
     {
         $this->commandsPath = $path;
     }
 
     /**
-     * set commands namespace
+     * set commands namespace.
      *
      * @return void
      */
-    public function setCommandsNamespace(string $namespace) : void
+    public function setCommandsNamespace(string $namespace): void
     {
         $this->commandsNamespace = $namespace;
     }
 
     /**
-     * set signature method
+     * set signature method.
      *
      * @return string
      */
-    public function getSignature() : string
+    public function getSignature(): string
     {
         return $this->signature;
     }
 
     /**
-     * set app name
+     * set app name.
      *
      * @return string
      */
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
     /**
-     * get version method
+     * get version method.
      *
      * @return string
      */
-    public function getVersion() : string
+    public function getVersion(): string
     {
         return $this->version;
     }
 
     /**
-     * get version method
+     * get version method.
      *
      * @return string
      */
-    public function getAuthor() : string
+    public function getAuthor(): string
     {
         return $this->author;
     }
 
     /**
-     * get commands path
+     * get commands path.
      *
      * @return void
      */
-    public function getCommandsPath() : string
+    public function getCommandsPath(): string
     {
         return $this->commandsPath;
     }
 
     /**
-     * get commands namespace
+     * get commands namespace.
      *
      * @return void
      */
-    public function getCommandsNamespace() : string
+    public function getCommandsNamespace(): string
     {
         return $this->commandsNamespace;
     }
 
     /**
-     * get available commands method
+     * get available commands method.
      *
      * @return array
      */
-    public function &getCommands() : array
+    public function &getCommands(): array
     {
         return $this->table->getCommands();
     }

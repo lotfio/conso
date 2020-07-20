@@ -1,12 +1,16 @@
-<?php namespace Tests\Unit;
+<?php
+
+namespace Tests\Unit;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
@@ -16,50 +20,50 @@ use PHPUnit\Framework\TestCase;
 class InputTest extends TestCase
 {
     /**
-     * input
+     * input.
      *
      * @var object
      */
     private $input;
 
     /**
-     * setting up input
+     * setting up input.
      *
      * @return void
      */
-    public function setUp() : void
+    public function setUp(): void
     {
-        $this->input = new Input("make:controller user --crud");
+        $this->input = new Input('make:controller user --crud');
     }
 
     /**
-     * test input command
+     * test input command.
      *
      * @return void
      */
     public function testInputCommand()
     {
         $this->assertEquals(
-            "make",
+            'make',
             $this->input->command()
         );
     }
 
     /**
-     * test input command
+     * test input command.
      *
      * @return void
      */
     public function testInputSubCommand()
     {
         $this->assertEquals(
-            "controller",
+            'controller',
             $this->input->subCommand()
         );
     }
 
     /**
-     * test input options
+     * test input options.
      *
      * @return void
      */
@@ -67,13 +71,13 @@ class InputTest extends TestCase
     {
         $this->assertContains('user', $this->input->options());
         $this->assertEquals(
-            "user",
+            'user',
             $this->input->option(0)
         );
     }
 
     /**
-     * test input options
+     * test input options.
      *
      * @return void
      */
@@ -81,7 +85,7 @@ class InputTest extends TestCase
     {
         $this->assertContains('--crud', $this->input->flags());
         $this->assertEquals(
-            "--crud",
+            '--crud',
             $this->input->flag(0)
         );
     }

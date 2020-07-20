@@ -1,30 +1,33 @@
-<?php namespace Conso;
+<?php
+
+namespace Conso;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
 /**
- * flatten array method (multi-dimensional to single)
+ * flatten array method (multi-dimensional to single).
  *
- * @param  array $arr
+ * @param array $arr
+ *
  * @return void
  */
-function flatten(array $arr) : array
+function flatten(array $arr): array
 {
     $singleDimArray = [];
 
     foreach ($arr as $item) {
-
         if (is_array($item)) {
             $singleDimArray = array_merge($singleDimArray, flatten($item));
-
         } else {
             $singleDimArray[] = $item;
         }
@@ -34,18 +37,18 @@ function flatten(array $arr) : array
 }
 
 /**
- * get private and protected properties
+ * get private and protected properties.
  *
- * @param  string $class
- * @param  string $pr
+ * @param string $class
+ * @param string $pr
+ *
  * @return ?array
  */
-function readProtectedProperty(string $class,string $property)
+function readProtectedProperty(string $class, string $property)
 {
-    $cmd  = new \ReflectionClass($class);
+    $cmd = new \ReflectionClass($class);
 
-    if($cmd->hasProperty($property)) // return property if exists
-    {
+    if ($cmd->hasProperty($property)) { // return property if exists
         $property = $cmd->getProperty($property);
         $property->setAccessible(true);
 
@@ -56,17 +59,21 @@ function readProtectedProperty(string $class,string $property)
 }
 
 /**
- * read command properties from class
+ * read command properties from class.
  *
- * @param  array $command
+ * @param array $command
+ *
  * @return void
  */
-function readCommandPropertiesFromClass(array &$command) : void
+function readCommandPropertiesFromClass(array &$command): void
 {
     $list = ['sub', 'flags', 'description', 'help', 'aliases'];
 
-    if(is_string($command['action']) && class_exists($command['action'])) // if is controller
-        foreach($list as $lst)
-            if(empty($command[$lst]))
-                $command[$lst] = readProtectedProperty($command['action'], $lst); // fill from command class if not defined by method
+    if (is_string($command['action']) && class_exists($command['action'])) { // if is controller
+        foreach ($list as $lst) {
+            if (empty($command[$lst])) {
+                $command[$lst] = readProtectedProperty($command['action'], $lst);
+            }
+        }
+    } // fill from command class if not defined by method
 }

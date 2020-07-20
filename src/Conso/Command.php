@@ -1,12 +1,16 @@
-<?php  namespace Conso;
+<?php
+
+namespace Conso;
 
 /**
- *
  * @author    <contact@lotfio.net>
- * @package   Conso PHP Console Creator
+ *
  * @version   1.0.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
@@ -14,7 +18,7 @@ use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 
 /**
- * This class is base command class
+ * This class is base command class.
  */
 class Command
 {
@@ -28,30 +32,29 @@ class Command
     /**
      * base constructor
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * @param Conso $app
+     * @param Conso           $app
      */
     public function __construct(InputInterface $input, OutputInterface $output, Conso $app)
     {
         // set up app
         $this->app = $app;
 
-        if($input->flag(0) == '--no-ansi')
-            $output->disableAnsi();
+        if($input->flag(0) == '--no-ansi') $output->disableAnsi();
 
         //if($input->flag(0) == '-q' || $input->flag(0) == '--quiet'); // if quiet flag
-
         if($input->flag(0) == '-h' || $input->flag(0) == '--help')
             $this->displayCommandHelp($input, $output);
     }
 
     /**
-     * display help for a given command
+     * display help for a given command.
      *
-     * @param InputInterface $input
+     * @param InputInterface  $input
      * @param OutputInterface $output
-     * @param Conso $app
+     * @param Conso           $app
+     *
      * @return void
      */
     protected function displayCommandHelp($input, $output)
@@ -59,18 +62,17 @@ class Command
         $name = $this->app->activeCommand['name'];
         $help = $this->app->activeCommand['help'];
 
-        $output->writeLn("\n help for [" . $name . "] command:\n\n", "yellow");
+        $output->writeLn("\n help for [".$name."] command:\n\n", 'yellow');
 
         $output->writeLn("    php conso $name:{sub command} {options}\n\n");
 
-        if(is_array($help) && count($help) > 0)
-        {
-            foreach($help as $key => $value)
-            {
-                $output->writeLn("      [". $key ."]\n\n", 'yellow');
+        if (is_array($help) && count($help) > 0) {
+            foreach ($help as $key => $value) {
+                $output->writeLn('      ['.$key."]\n\n", 'yellow');
 
-                foreach($value as $a => $b)
-                    $output->writeLn("          " . $a . " : " . $b . "\n\n");
+                foreach ($value as $a => $b) {
+                    $output->writeLn('          '.$a.' : '.$b."\n\n");
+                }
             }
         }
         exit;
