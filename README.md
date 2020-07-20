@@ -191,19 +191,16 @@ $conso->command("test", function($input, $output){
 
 namespace Conso\Commands;
 
-use Conso\Conso;
-use Conso\Command as BaseCommand;
-use Conso\Exceptions\InputException;
-use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
+use Conso\{Conso,Command};
 
-class Test extends BaseCommand implements CommandInterface
+class Test extends Command implements CommandInterface
 {
     /**
      * sub commands
      *
      * @var array
      */
-    protected $sub  = array(
+    protected $sub   = array(
     );
 
     /**
@@ -236,9 +233,9 @@ class Test extends BaseCommand implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function execute(InputInterface $input, OutputInterface $output) : void
     {
-        $this->displayCommandHelp($input, $output, $app);
+        $this->displayCommandHelp($input, $output);
     }
 }
 ```
