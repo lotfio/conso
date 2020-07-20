@@ -10,12 +10,10 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Conso;
-use Conso\Command as BaseCommand;
-use Conso\Exceptions\InputException;
+use Conso\{Conso, Command};
 use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
 
-class #command# extends BaseCommand implements CommandInterface
+class #command# extends Command implements CommandInterface
 {
     /**
      * sub commands
@@ -55,8 +53,8 @@ class #command# extends BaseCommand implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function execute(InputInterface $input, OutputInterface $output) : void
     {
-        $this->displayCommandHelp($input, $output, $app);
+        $this->displayCommandHelp($input, $output);
     }
 }

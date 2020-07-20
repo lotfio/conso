@@ -19,6 +19,13 @@ use Conso\Contracts\OutputInterface;
 class Command
 {
     /**
+     * app instance
+     *
+     * @var obj
+     */
+    protected $app;
+
+    /**
      * base constructor
      *
      * @param InputInterface $input
@@ -27,13 +34,16 @@ class Command
      */
     public function __construct(InputInterface $input, OutputInterface $output, Conso $app)
     {
+        // set up app
+        $this->app = $app;
+
         if($input->flag(0) == '--no-ansi')
             $output->disableAnsi();
 
         //if($input->flag(0) == '-q' || $input->flag(0) == '--quiet'); // if quiet flag
 
         if($input->flag(0) == '-h' || $input->flag(0) == '--help')
-            $this->displayCommandHelp($input, $output, $app);
+            $this->displayCommandHelp($input, $output);
     }
 
     /**
@@ -44,10 +54,10 @@ class Command
      * @param Conso $app
      * @return void
      */
-    protected function displayCommandHelp($input, $output, $app)
+    protected function displayCommandHelp($input, $output)
     {
-        $name = $app->activeCommand['name'];
-        $help = $app->activeCommand['help'];
+        $name = $this->app->activeCommand['name'];
+        $help = $this->app->activeCommand['help'];
 
         $output->writeLn("\n help for [" . $name . "] command:\n\n", "yellow");
 

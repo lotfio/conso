@@ -55,7 +55,7 @@ class Make extends BaseCommand implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function execute(InputInterface $input, OutputInterface $output) : void
     {
         echo "from make class command";
     }

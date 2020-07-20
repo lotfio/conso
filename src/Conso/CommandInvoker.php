@@ -155,6 +155,6 @@ class CommandInvoker
         if(!method_exists($obj, $method))
             throw new InvokerException("command method ($method) is not defined.");
 
-        return call_user_func_array(array($obj, $method), array($this->input, $this->output, $this->app));
+        return call_user_func_array(array($obj, $method), array($this->input, $this->output));
     }
 }

@@ -20,8 +20,7 @@ interface CommandInterface
      *
      * @param  InputInterface  $input
      * @param  OutputInterface $output
-     * @param  Conso           $app
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void;
+    public function execute(InputInterface $input, OutputInterface $output) : void;
 }

@@ -55,9 +55,9 @@ class Command extends BaseCommand implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function execute(InputInterface $input, OutputInterface $output) : void
     {
-        $this->displayCommandHelp($input, $output, $app);
+        $this->displayCommandHelp($input, $output);
     }
 
     /**
@@ -67,7 +67,7 @@ class Command extends BaseCommand implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function make(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function make(InputInterface $input, OutputInterface $output) : void
     {
         $name = $input->option(0);
 
@@ -100,7 +100,7 @@ class Command extends BaseCommand implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function delete(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function delete(InputInterface $input, OutputInterface $output) : void
     {
         $name = $input->option(0);
 
