@@ -5,3 +5,7 @@
   - fix append additional commands
 
 # 1.0.0
+  - new implementation
+
+# 1.0.1
+  - fix app dependency

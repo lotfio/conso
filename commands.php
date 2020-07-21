@@ -2,15 +2,12 @@
 
 /**
  * @author    <contact@lotfio.net>
- *
- * @version   1.0.0
- *
+ * @version   1.0.1
  * @license   MIT
- *
  * @category  CLI
- *
  * @copyright 2019 Lotfio Lakehal
  */
+
 $conso->command('--version', function ($inp, $out, $app) {
     $out->writeLn("\n ".$app->getName().' version '.$app->getVersion()."\n", 'yellow');
 })->alias(['-v']);
