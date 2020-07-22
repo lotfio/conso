@@ -16,6 +16,7 @@ use Conso\Contracts\CommandInterface;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\InputException;
+use function Conso\commandHelp;
 
 class Command extends BaseCommand implements CommandInterface
 {
@@ -60,7 +61,7 @@ class Command extends BaseCommand implements CommandInterface
      */
     public function execute(InputInterface $input, OutputInterface $output) : void
     {
-        $this->displayCommandHelp($input, $output);
+        commandHelp($this->app->invokedCommand, $output);
     }
 
     /**
