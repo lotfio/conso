@@ -3,7 +3,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/License-MIT-f1c40f"          alt="License">
     <img src="https://img.shields.io/badge/PHP-7.2-3498db.svg"          alt="PHP version">
-    <img src="https://img.shields.io/badge/version-1.0.0-2c3e50.svg"    alt="Version">
+    <img src="https://img.shields.io/badge/version-1.5.0-2c3e50.svg"    alt="Version">
     <img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg"   alt="Coverage">
     <img src="https://travis-ci.org/lotfio/conso.svg?branch=master"     alt="Build Status">
     <img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi">
