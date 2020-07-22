@@ -10,6 +10,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
+use function Conso\commandHelp;
 use Conso\{Conso, Command};
 use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
 
@@ -58,6 +59,6 @@ class #command# extends Command implements CommandInterface
      */
     public function execute(InputInterface $input, OutputInterface $output) : void
     {
-        $this->displayCommandHelp($input, $output);
+        commandHelp($this->app->invokedCommand, $output);
     }
 }
