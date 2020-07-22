@@ -53,9 +53,9 @@ class CommandInvoker
      */
     public function __construct(InputInterface $input, OutputInterface $output, Conso $app)
     {
-        $this->input = $input;
+        $this->input  = $input;
         $this->output = $output;
-        $this->app = $app;
+        $this->app    = $app;
     }
 
     /**
@@ -65,7 +65,7 @@ class CommandInvoker
      *
      * @return void
      */
-    public function invokeInformation(array $commands)
+    public function showConsoleInformation(array $commands)
     {
         $this->output->writeLn($this->app->getSignature()."\n");
         $this->output->writeLn($this->app->getName().' ', 'yellow');
@@ -74,7 +74,7 @@ class CommandInvoker
         $this->output->writeLn(' by '.$this->app->getAuthor());
 
         $this->output->writeLn("\n\nUsage: \n\n", 'yellow');
-        $this->output->writeLn("    command:subcommand [options] [-flags]\n\n");
+        $this->output->writeLn("    command:subcommand [options] [flags]\n\n");
 
         $this->output->writeLn("Special flags: \n\n", 'yellow');
 
@@ -91,14 +91,16 @@ class CommandInvoker
         $this->output->writeLn($flags[9]."   \n", 'green');
         $this->output->writeLn('    '.$flags[10].'   ', 'green');
         $this->output->writeLn('    '.$flags[11]."   \n", 'green');
+    }
 
-        // remove special commands
-        $commands = array_filter($commands, function ($elem) {
-            if (strpos($elem['name'], '--') === false) {
-                return $elem;
-            }
-        });
-
+    /**
+     * show console commands
+     *
+     * @param array $commands
+     * @return void
+     */
+    public function showConsoleCommands(array $commands)
+    {
         if (count($commands) > 0) {
             $this->output->writeLn("\nAvailable Commands: \n\n", 'yellow');
 
@@ -119,8 +121,32 @@ class CommandInvoker
      *
      * @return void
      */
-    public function invoke(array $command)
+    public function invoke()
     {
+        $commands = $this->app->getCommands(); // defined commands
+        $command  = $this->app->invokedCommand; //  invoked command
+
+        // disable ansi
+        if($this->input->flag(0) == '--no-ansi') $this->output->disableAnsi();
+
+        // command help
+        if($this->input->command() && ($this->input->flag(0) == '-h' || $this->input->flag(0) == '--help'))
+           return commandHelp($command, $this->output);
+
+        // version
+        if(($this->input->flag(0) == '-v' || $this->input->flag(0) == '--version'))
+            return $this->output->writeLn("\n ".$this->app->getName().' version '.$this->app->getVersion()."\n", 'yellow');
+
+        if(($this->input->flag(0) == '-c' || $this->input->flag(0) == '--commands'))
+            return $this->showConsoleCommands($commands);
+
+        if(is_null($this->input->command())) // no command
+        {
+            $this->showConsoleInformation($commands);
+            $this->showConsoleCommands($commands);
+            return;
+        }
+
         // invoke callback
         if (is_callable($command['action'])) {
             return $this->invokeCallback($command);
@@ -139,11 +165,12 @@ class CommandInvoker
      */
     protected function invokeCallback(array $command)
     {
-        return call_user_func_array($command['action'], [$this->input, $this->output, $this->app]);
+        $closure = \Closure::bind($command['action'], $this->app);
+        return call_user_func_array($closure, [$this->input, $this->output]);
     }
 
     /**
-     * Undocumented function.
+     * invoke class method
      *
      * @param array $command
      *
@@ -157,9 +184,10 @@ class CommandInvoker
         if (!class_exists($class)) {
             throw new InvokerException("command class ($class) is not defined.");
         }
+
         $method = ($subCommand !== null) ? $subCommand : 'execute';
 
-        $obj = new $class($this->input, $this->output, $this->app);
+        $obj    = new $class($this->app);
 
         if (!method_exists($obj, $method)) {
             throw new InvokerException("command method ($method) is not defined.");
