@@ -72,19 +72,15 @@ class CommandLinker
 
         if ($command) { // if command
             for ($i = 0; $i < count($commands); $i++) {
-                if ($command == $commands[$i]['name'] || in_array($command, $commands[$i]['aliases'])) {
-                    if ($subCommand && !in_array($subCommand, $commands[$i]['sub'])) { // match  sub commands
-
+                if ($command == $commands[$i]['name'] || in_array($command, $commands[$i]['aliases']))
+                {
+                    if ($subCommand && !in_array($subCommand, $commands[$i]['sub']))// match  sub commands
                         throw new InputException("sub command ({$subCommand}) is not defined.");
-                    }
-                    if (count($flags)) { // match flags
-                        foreach ($flags as $flag) {
-                            if (!in_array($flag, array_merge($commands[$i]['flags'], $this->input->reservedFlags()))) { // allow only defined and reserved flags
 
+                    if (count($flags)) // match flags
+                        foreach ($flags as $flag)
+                            if (!in_array($flag, array_merge($commands[$i]['flags'], $this->input->reservedFlags()))) // allow only defined and reserved flags
                                 throw new InputException("flag ({$flag}) is not defined.");
-                            }
-                        }
-                    }
 
                     return $commands[$i];
                 }
@@ -95,12 +91,10 @@ class CommandLinker
 
         if(!$command)
         {
-            if (count($flags)) { // no command link flags
-                foreach ($flags as $flag) {
+            if (count($flags)) // no command link flags
+                foreach ($flags as $flag)
                     if(!in_array($flag, $this->input->reservedFlags()))
                         throw new InputException("flag ({$flag}) is not defined.");
-                }
-            }
         }
 
         return null;
