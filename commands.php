@@ -72,4 +72,4 @@ $conso->command('--no-ansi', function ($inp, $out, $app) {
     passthru($cmd);
 });
 
-$conso->command('command', 'Conso\\Commands\\Command');
+$conso->command('command', Conso\Commands\Command::class);

@@ -30,7 +30,7 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 composer require lotfio/conso
 ```
 
-*** for testing ***
+* ***for testing***
 ```php
 composer test
 ```
@@ -253,12 +253,23 @@ class Test extends BaseCommand implements CommandInterface
 - now you need to register this command in your `commands.php` file:
 ```php
 
-$conso->command('test', 'Your\\Name\\Space\\Test');
+$conso->command('test', Your\NameSpace\Test::class);
 
 ```
 - by default `test` command will run the `execute` method if no sub command is provided
 - each sub command is a separate method
 
+## :star: Available config methods :
+
+```php
+<?php
+
+$conso->setSignature(); // set application signature (top logo)
+$conso->setName();     // set application name
+$conso->setVersion(); // set application version
+$conso->setAuthor(); // set application author
+
+```
 
 ## ✨ TODO
 - implement help in closure commands.
