@@ -53,9 +53,9 @@ class CommandInvoker
      */
     public function __construct(InputInterface $input, OutputInterface $output, Conso $app)
     {
-        $this->input  = $input;
+        $this->input = $input;
         $this->output = $output;
-        $this->app    = $app;
+        $this->app = $app;
     }
 
     /**
@@ -94,9 +94,10 @@ class CommandInvoker
     }
 
     /**
-     * show console commands
+     * show console commands.
      *
      * @param array $commands
+     *
      * @return void
      */
     public function showConsoleCommands(array $commands)
@@ -126,23 +127,28 @@ class CommandInvoker
         $commands = $this->app->getCommands(); // defined commands
 
         // disable ansi
-        if($this->input->flag(0) == '--no-ansi') $this->output->disableAnsi();
+        if ($this->input->flag(0) == '--no-ansi') {
+            $this->output->disableAnsi();
+        }
 
         // command help
-        if($this->input->command() && ($this->input->flag(0) == '-h' || $this->input->flag(0) == '--help'))
-           return commandHelp($command, $this->output);
+        if ($this->input->command() && ($this->input->flag(0) == '-h' || $this->input->flag(0) == '--help')) {
+            return commandHelp($command, $this->output);
+        }
 
         // version
-        if(($this->input->flag(0) == '-v' || $this->input->flag(0) == '--version'))
+        if (($this->input->flag(0) == '-v' || $this->input->flag(0) == '--version')) {
             return $this->output->writeLn("\n ".$this->app->getName().' version '.$this->app->getVersion()."\n", 'yellow');
+        }
 
-        if(($this->input->flag(0) == '-c' || $this->input->flag(0) == '--commands'))
+        if (($this->input->flag(0) == '-c' || $this->input->flag(0) == '--commands')) {
             return $this->showConsoleCommands($commands);
+        }
 
-        if(is_null($this->input->command())) // no command
-        {
+        if (is_null($this->input->command())) { // no command
             $this->showConsoleInformation($commands);
             $this->showConsoleCommands($commands);
+
             return;
         }
 
@@ -165,11 +171,12 @@ class CommandInvoker
     protected function invokeCallback(array $command)
     {
         $closure = \Closure::bind($command['action'], $this->app);
+
         return call_user_func_array($closure, [$this->input, $this->output]);
     }
 
     /**
-     * invoke class method
+     * invoke class method.
      *
      * @param array $command
      *
@@ -186,7 +193,7 @@ class CommandInvoker
 
         $method = ($subCommand !== null) ? $subCommand : 'execute';
 
-        $obj    = new $class($this->app);
+        $obj = new $class($this->app);
 
         if (!method_exists($obj, $method)) {
             throw new InvokerException("command method ($method) is not defined.");

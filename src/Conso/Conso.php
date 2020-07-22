@@ -98,12 +98,11 @@ class Conso
             $this->invokedCommand = $this->linker->link($this->getCommands());
 
             return $this->invoker->invoke($this->invokedCommand);
-
         } catch (\Exception $e) {
+            if ($this->output->isTestMode()) {  // is test mode
 
-            if ($this->output->isTestMode())  // is test mode
                 throw new \Exception($e);
-
+            }
             $this->output->exception($e, $env);
         }
     }

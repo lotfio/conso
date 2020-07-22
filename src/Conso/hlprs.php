@@ -79,26 +79,27 @@ function readCommandPropertiesFromClass(array &$command): void
 }
 
 /**
-* display command help helper function
-*
-* @param  array $command
-* @return void
-*/
+ * display command help helper function.
+ *
+ * @param array $command
+ *
+ * @return void
+ */
 function commandHelp(array $command, $output) // create a better method to display help
 {
-   $name = $command['name'];
-   $help = $command['help'];
+    $name = $command['name'];
+    $help = $command['help'];
 
-   $output->writeLn("\n help for [".$name."] command:\n\n", 'yellow');
-   $output->writeLn("    php conso $name:{sub command} {options}\n\n");
+    $output->writeLn("\n help for [".$name."] command:\n\n", 'yellow');
+    $output->writeLn("    php conso $name:{sub command} {options}\n\n");
 
-   if (is_array($help) && count($help) > 0) {
-       foreach ($help as $key => $value) {
-           $output->writeLn('      ['.$key."]\n\n", 'yellow');
+    if (is_array($help) && count($help) > 0) {
+        foreach ($help as $key => $value) {
+            $output->writeLn('      ['.$key."]\n\n", 'yellow');
 
-           foreach ($value as $a => $b) {
-               $output->writeLn('          '.$a.' : '.$b."\n\n");
-           }
-       }
-   }
+            foreach ($value as $a => $b) {
+                $output->writeLn('          '.$a.' : '.$b."\n\n");
+            }
+        }
+    }
 }

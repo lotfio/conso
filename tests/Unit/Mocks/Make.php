@@ -15,7 +15,6 @@ namespace Tests\Unit\Mocks;
  */
 
 use Conso\Command as BaseCommand;
-use Conso\Conso;
 use Conso\Contracts\CommandInterface;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
@@ -61,7 +60,7 @@ class Make extends BaseCommand implements CommandInterface
      *
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output) : void
+    public function execute(InputInterface $input, OutputInterface $output): void
     {
         echo 'from make class command';
     }

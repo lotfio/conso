@@ -4,19 +4,22 @@ namespace Conso\Commands;
 
 /**
  * @author    <contact@lotfio.net>
+ *
  * @version   1.5.0
+ *
  * @license   MIT
+ *
  * @category  CLI
+ *
  * @copyright 2019 Lotfio Lakehal
  */
 
 use Conso\Command as BaseCommand;
-use Conso\Conso;
+use function Conso\commandHelp;
 use Conso\Contracts\CommandInterface;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;
 use Conso\Exceptions\InputException;
-use function Conso\commandHelp;
 
 class Command extends BaseCommand implements CommandInterface
 {
@@ -59,7 +62,7 @@ class Command extends BaseCommand implements CommandInterface
      *
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output) : void
+    public function execute(InputInterface $input, OutputInterface $output): void
     {
         commandHelp($this->app->invokedCommand, $output);
     }
@@ -72,7 +75,7 @@ class Command extends BaseCommand implements CommandInterface
      *
      * @return void
      */
-    public function make(InputInterface $input, OutputInterface $output) : void
+    public function make(InputInterface $input, OutputInterface $output): void
     {
         $name = $input->option(0);
 
@@ -107,7 +110,7 @@ class Command extends BaseCommand implements CommandInterface
      *
      * @return void
      */
-    public function delete(InputInterface $input, OutputInterface $output) : void
+    public function delete(InputInterface $input, OutputInterface $output): void
     {
         $name = $input->option(0);
 
