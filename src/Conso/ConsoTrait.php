@@ -182,6 +182,18 @@ trait ConsoTrait
     }
 
     /**
+     * call additional command method
+     *
+     * @param string $command
+     * @return void
+     */
+    public function call(string $command) : void
+    {
+        $command = 'php ' . $command;
+        passthru($command);
+    }
+
+    /**
      * get available commands method.
      *
      * @return array

@@ -160,7 +160,7 @@ class Output implements OutputInterface
     {
         if (DIRECTORY_SEPARATOR == '\\') { // windows
 
-            return function_exists('sapi_windows_vt100_support') && @sapi_windows_vt100_support(STDOUT);
+            return function_exists('sapi_windows_vt100_support'); //&& @sapi_windows_vt100_support(STDOUT);
         }
 
         return strpos(getenv('TERM'), '256color') !== false;
