@@ -95,23 +95,25 @@ class Input implements InputInterface
      */
     private function extract(array $argv): void
     {
+
         // set command if no sub command
-        if (isset($argv[0])) {
+        if (isset($argv[0]) && !preg_match('/^[\-]{1,2}[A-z]+(\-[A-z]+)?$/', $argv[0])) {
+
             $this->command = $argv[0] ?? null;
-        }
 
-        // if command & sub command
-        if (isset($argv[0]) && preg_match('/^([A-z]+)(\:)([A-z]+)$/', $argv[0])) {
-            $command = explode(':', $argv[0]);
-            $this->command = $command[0] ?? null;
-            $this->subCommand = $command[1] ?? null;
-        }
+            // if command & sub command
+            if (preg_match('/^([A-z]+)(\:)([A-z]+)$/', $argv[0])) {
+                $command          = explode(':', $argv[0]);
+                $this->command    = $command[0] ?? null;
+                $this->subCommand = $command[1] ?? null;
+            }
 
-        // reset argv array
-        unset($argv[0]);
+            // reset argv array
+            unset($argv[0]);
+        }
 
         $this->flags = array_values(array_filter($argv, function ($elem) {
-            return preg_match('/^[\-]{1,2}[A-z]+$/', $elem);
+            return preg_match('/^[\-]{1,2}[A-z]+(\-[A-z]+)?$/', $elem);
         }));
 
         $this->options = array_values(array_diff($argv, $this->flags));
