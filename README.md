@@ -136,7 +136,7 @@ $conso->command("test", function($input, $output){
 
 
 ### :star: add command alias
-- you can add an alias to a command with the alias method  `->aliad(string $alias)`
+- you can add an alias to a command with the alias method  `->alias(string $alias)`
 
 ```php
 <?php
@@ -155,8 +155,6 @@ $conso->command("test", function($input, $output){
 - you can add help instruction to a command using the help method `->help(array $help)`
 - command help can be displayed using the `-h` or `--help` flags
 - help array must be an array of sub commands and options with their descriptions
-- help method is not is predefined for `class commands` but not for `closure commands` so you need to implement it your self
-
 ```php
 <?php
 // test command
@@ -196,12 +194,11 @@ $conso->command("test", function($input, $output){
 
 namespace Conso\Commands;
 
-use Conso\Conso;
-use Conso\Command as BaseCommand;
-use Conso\Exceptions\InputException;
+use function Conso\commandHelp;
+use Conso\{Conso, Command};
 use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
 
-class Test extends BaseCommand implements CommandInterface
+class Test extends Command implements CommandInterface
 {
     /**
      * sub commands
@@ -246,7 +243,7 @@ class Test extends BaseCommand implements CommandInterface
      */
     public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
     {
-        $this->displayCommandHelp($input, $output, $app);
+        commandHelp($this->app->invokedCommand, $output);
     }
 }
 ```
@@ -272,9 +269,7 @@ $conso->setAuthor(); // set application author
 ```
 
 ## ✨ TODO
-- implement help in closure commands.
-- call command from another command method.
-
+- more improvements
 
 ## ✨ Contributing
 
