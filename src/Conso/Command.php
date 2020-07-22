@@ -14,25 +14,22 @@ namespace Conso;
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Contracts\InputInterface;
-use Conso\Contracts\OutputInterface;
-
 /**
  * This class is base command class.
  */
 class Command
 {
     /**
-     * app instance
+     * app instance.
      *
      * @var obj
      */
     protected $app;
 
     /**
-     * base constructor
+     * base constructor.
      *
-     * @param Conso  $app
+     * @param Conso $app
      */
     public function __construct(Conso $app)
     {

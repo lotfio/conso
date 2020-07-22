@@ -98,13 +98,12 @@ class Input implements InputInterface
 
         // set command if no sub command
         if (isset($argv[0]) && !preg_match('/^[\-]{1,2}[A-z]+(\-[A-z]+)?$/', $argv[0])) {
-
             $this->command = $argv[0] ?? null;
 
             // if command & sub command
             if (preg_match('/^([A-z]+)(\:)([A-z]+)$/', $argv[0])) {
-                $command          = explode(':', $argv[0]);
-                $this->command    = $command[0] ?? null;
+                $command = explode(':', $argv[0]);
+                $this->command = $command[0] ?? null;
                 $this->subCommand = $command[1] ?? null;
             }
 

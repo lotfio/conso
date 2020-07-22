@@ -11,5 +11,4 @@
  *
  * @copyright 2019 Lotfio Lakehal
  */
-
 $conso->command('command', Conso\Commands\Command::class);
