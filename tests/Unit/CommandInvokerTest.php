@@ -67,10 +67,11 @@ class CommandInvokerTest extends TestCase
      */
     public function testInvokeCallback()
     {
-        $this->commands[0]['action'] = function () { return 'from make callback'; };
+        $this->commands[0]['action'] = function(){ return 'from make callback';};
 
-        $inp = new Input('make');
-        $invoker = new CommandInvoker($inp, $this->output, new Conso($inp, $this->output));
+        $inp     = new Input('make');
+        $app     = new Conso($inp, $this->output);
+        $invoker = new CommandInvoker($inp, $this->output, $app);
 
         $this->assertEquals(
             'from make callback',
@@ -85,7 +86,7 @@ class CommandInvokerTest extends TestCase
      */
     public function testInvokeClassMethod()
     {
-        $inp = new Input('make');
+        $inp     = new Input('make');
         $invoker = new CommandInvoker($inp, $this->output, new Conso($inp, $this->output));
 
         ob_start();

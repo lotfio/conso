@@ -117,14 +117,13 @@ class CommandInvoker
     /**
      * invoke method.
      *
-     * @param array $command
+     * @param ?array $command
      *
      * @return void
      */
-    public function invoke()
+    public function invoke(?array $command)
     {
         $commands = $this->app->getCommands(); // defined commands
-        $command  = $this->app->invokedCommand; //  invoked command
 
         // disable ansi
         if($this->input->flag(0) == '--no-ansi') $this->output->disableAnsi();

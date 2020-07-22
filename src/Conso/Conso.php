@@ -97,7 +97,7 @@ class Conso
             // pass table defined commands & match
             $this->invokedCommand = $this->linker->link($this->getCommands());
 
-            return $this->invoker->invoke();
+            return $this->invoker->invoke($this->invokedCommand);
 
         } catch (\Exception $e) {
 
