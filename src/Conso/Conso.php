@@ -54,7 +54,7 @@ class Conso
      *
      * @var ?array
      */
-    public $activeCommand = null;
+    public $invokedCommand = null;
 
     /**
      * constructor.
@@ -93,21 +93,17 @@ class Conso
     public function run(int $env = 0)
     {
         try {
-            $commands = &$this->table->getCommands();
 
             // pass table defined commands & match
-            $this->activeCommand = $this->linker->link($commands);
+            $this->invokedCommand = $this->linker->link($this->getCommands());
 
-            if (!$this->activeCommand) {
-                return $this->invoker->invokeInformation($commands);
-            }
+            return $this->invoker->invoke();
 
-            return $this->invoker->invoke($this->activeCommand);
         } catch (\Exception $e) {
-            if ($this->output->isTestMode()) { // is test mode
 
+            if ($this->output->isTestMode())  // is test mode
                 throw new \Exception($e);
-            }
+
             $this->output->exception($e, $env);
         }
     }
