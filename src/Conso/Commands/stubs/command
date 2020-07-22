@@ -20,24 +20,27 @@ class #command# extends Command implements CommandInterface
      *
      * @var array
      */
-    protected $sub = array(
-    );
+    protected $sub = [
+
+    ];
 
     /**
      * flags
      *
      * @var array
      */
-    protected $flags = array(
-    );
+    protected $flags = [
+
+    ];
 
     /**
      * command help
      *
      * @var string
      */
-    protected $help  = array(
-    );
+    protected $help  = [
+
+    ];
 
     /**
      * command description

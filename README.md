@@ -30,6 +30,11 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 composer require lotfio/conso
 ```
 
+*** for testing ***
+```php
+composer test
+```
+
 ## 🎉 write your first command
 - create a `commands.php` file.
 - create a `conso` file (you can change the name as you like).
@@ -161,14 +166,14 @@ $conso->command("test", function($input, $output){
 
 })->description("This is test command description :) ^^")->sub('one')->flags('-t')
 
-  ->help(array(
-      "sub commands" => array(
+  ->help([
+      "sub commands" => [
           "one" => " help text for sub command goes here"
-      ),
-      "flags" => array(
+        ],
+      "flags" => [
           "-t" => "help text for flag goes here"
-      )
-  ));
+        ]
+  ]);
 ```
 ![image](https://user-images.githubusercontent.com/18489496/87862665-e71a8e80-c952-11ea-8393-3d8815a2cc85.png)
 
@@ -203,24 +208,27 @@ class Test extends BaseCommand implements CommandInterface
      *
      * @var array
      */
-    protected $sub  = array(
-    );
+    protected $sub  = [
+
+    ];
 
     /**
      * flags
      *
      * @var array
      */
-    protected $flags = array(
-    );
+    protected $flags = [
+
+    ];
 
     /**
      * command help
      *
      * @var string
      */
-    protected $help  = array(
-    );
+    protected $help  = [
+
+    ];
 
     /**
      * command description

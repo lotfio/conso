@@ -22,10 +22,6 @@ interface CommandInterface
      * execute command method
      * this is main command method.
      *
-     * @param InputInterface  $input
-     * @param OutputInterface $output
-     * @param Conso           $app
-     *
      * @param  InputInterface  $input
      * @param  OutputInterface $output
      * @return void
