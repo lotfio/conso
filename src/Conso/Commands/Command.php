@@ -47,11 +47,11 @@ class Command extends BaseCommand implements CommandInterface
     protected $help = [
         'sub commands' => [
             'make'     => 'make a new conso command.',
-            'delete'   => 'delete conso command.',
+            'delete'   => 'delete an existing conso command.',
         ],
         'options'      => [
-            'name'     => 'command name',
-        ],
+            'name'     => 'command name to be created or deleted.',
+        ]
     ];
 
     /**

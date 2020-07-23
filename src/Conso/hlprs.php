@@ -85,20 +85,28 @@ function readCommandPropertiesFromClass(array &$command): void
  *
  * @return void
  */
-function commandHelp(array $command, $output) // create a better method to display help
+function commandHelp(array $command, $output)
 {
     $name = $command['name'];
     $help = $command['help'];
 
     $output->writeLn("\n help for [".$name."] command:\n\n", 'yellow');
-    $output->writeLn("    php conso $name:{sub command} {options}\n\n");
+    $output->writeLn("    php conso $name:[sub command] [options] [flags]\n");
 
     if (is_array($help) && count($help) > 0) {
+
         foreach ($help as $key => $value) {
-            $output->writeLn('      ['.$key."]\n\n", 'yellow');
+
+            $output->writeLn("\n ".$key.":\n\n", 'yellow');
+
+            // get longest
+            $max = array_map(function($elem){ return strlen($elem);}, array_keys($value));
+            $max = max($max);
 
             foreach ($value as $a => $b) {
-                $output->writeLn('          '.$a.' : '.$b."\n\n");
+
+                $key = !is_numeric($a) ? $a  . str_repeat(' ', ($max - (strlen($a))))  .'  : ' : null;
+                $output->writeLn('   '. $key . $b . "\n");
             }
         }
     }
