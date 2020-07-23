@@ -46,7 +46,7 @@ class CommandLinker
      */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
-        $this->input = $input;
+        $this->input  = $input;
         $this->output = $output;
     }
 
@@ -59,48 +59,63 @@ class CommandLinker
      */
     public function link(array &$commands): ?array
     {
-        $command = $this->input->command();
+        $command    = $this->input->command();
         $subCommand = $this->input->subCommand();
-        $flags = $this->input->flags();
+        $flags      = $this->input->flags();
 
         // if command is a class
         for ($i = 0; $i < count($commands); $i++) {
             readCommandPropertiesFromClass($commands[$i]);
         } // fill array info
 
-        if ($command) { // if command
-            for ($i = 0; $i < count($commands); $i++) {
-                if ($command == $commands[$i]['name'] || in_array($command, $commands[$i]['aliases'])) {
-                    if ($subCommand && !in_array($subCommand, $commands[$i]['sub'])) {// match  sub commands
 
-                        throw new InputException("sub command ({$subCommand}) is not defined.");
-                    }
-                    if (count($flags)) { // match flags
-                        foreach ($flags as $flag) {
-                            if (!in_array($flag, array_merge($commands[$i]['flags'], $this->input->reservedFlags()))) { // allow only defined and reserved flags
-
-                                throw new InputException("flag ({$flag}) is not defined.");
-                            }
-                        }
-                    }
-
-                    return $commands[$i];
-                }
-            }
-
-            throw new InputException("command ({$command}) is not defined.");
+        if (!$command) // if no command only flags
+        {
+            $this->linkFlags($flags);
+            return null;
         }
 
-        if (!$command) {
-            if (count($flags)) { // no command link flags
-                foreach ($flags as $flag) {
-                    if (!in_array($flag, $this->input->reservedFlags())) {
-                        throw new InputException("flag ({$flag}) is not defined.");
-                    }
-                }
+        for ($i = 0; $i < count($commands); $i++) {
+
+            if ($command == $commands[$i]['name'] || in_array($command, $commands[$i]['aliases'])) {
+
+                $this->linkSubCommand($subCommand, $commands[$i]['sub']);
+
+                $this->linkFlags($flags, $commands[$i]['flags']);
+
+                return $commands[$i];
             }
         }
 
-        return null;
+        throw new InputException("command ({$command}) is not defined.");
+    }
+
+
+    /**
+     * link sub command method
+     *
+     * @param string|null $subCommand
+     * @param array $sub
+     * @return void
+     */
+    private function linkSubCommand(?string $subCommand, array $sub) : void
+    {
+        if ($subCommand && !in_array($subCommand, $sub))// match  sub commands
+            throw new InputException("sub command ({$subCommand}) is not defined.");
+    }
+
+    /**
+     * link flags method
+     *
+     * @param array $flags
+     * @param array $reserved
+     * @return void
+     */
+    private function linkFlags(array $flags, array $reserved = []) : void
+    {
+        if (count($flags))
+            foreach ($flags as $flag)
+                if (!in_array($flag, array_merge($reserved, $this->input->reservedFlags())  ))
+                    throw new InputException("flag ({$flag}) is not defined.");
     }
 }
