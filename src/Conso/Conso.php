@@ -64,10 +64,11 @@ class Conso
      */
     public function __construct(InputInterface $input, OutputInterface $output)
     {
-        $this->output = $output;
-        $this->table = new CommandsTable();
-        $this->linker = new CommandLinker($input, $output);
-        $this->invoker = new CommandInvoker($input, $output, $this);
+        $this->input     = $input;
+        $this->output    = $output;
+        $this->table     = new CommandsTable();
+        $this->linker    = new CommandLinker($input, $output);
+        $this->invoker   = new CommandInvoker($input, $output, $this);
     }
 
     /**
