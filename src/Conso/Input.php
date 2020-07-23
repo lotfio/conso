@@ -85,7 +85,7 @@ class Input implements InputInterface
     {
         // get argv and remove file name
         global $argv;
-        $this->executable = $argv[0];
+        $this->executable = $argv[0] ?? NULL;
         unset($argv[0]);
 
         // get argv or user argv
