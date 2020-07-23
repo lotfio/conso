@@ -14,6 +14,8 @@ namespace Conso;
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\Exceptions\InputException;
+
 /**
  * This trait holds conso information.
  */
@@ -190,8 +192,14 @@ trait ConsoTrait
      */
     public function call(string $command): void
     {
-        $command = 'php '.$command;
-        passthru($command);
+        $inp = new Input($command);
+
+        if($inp->command() == $this->invokedCommand['name'])
+            throw new InputException("cannot call same command [$command] recursively");
+
+        $cmd = 'php '. $this->input->getExecutable() . ' ' . $command;
+
+        passthru($cmd);
     }
 
     /**
