@@ -154,7 +154,7 @@ $conso->command("test", function($input, $output){
 ### :star: define command help
 - you can add help instruction to a command using the help method `->help(array $help)`
 - command help can be displayed using the `-h` or `--help` flags
-- help array must be an array of sub commands and options with their descriptions
+- help array must be an array of sub commands, options and flags with their descriptions
 ```php
 <?php
 // test command
@@ -173,7 +173,7 @@ $conso->command("test", function($input, $output){
         ]
   ]);
 ```
-![image](https://user-images.githubusercontent.com/18489496/87862665-e71a8e80-c952-11ea-8393-3d8815a2cc85.png)
+![image](https://user-images.githubusercontent.com/18489496/88348026-9d63e680-cd4c-11ea-8efc-60ac5376064e.png)
 
 ### :star: class commands
 - class commands are very helpful for big commands
@@ -186,7 +186,7 @@ $conso->command("test", function($input, $output){
 ```
 
 - to create a class command run `php conso command:make {command name}`
-- for example lest create a test class command `php conso command:make test`
+- for example lets create a test class command `php conso command:make test`
 - this will generate a `Test` command class like this:
 
 ```php
