@@ -69,7 +69,7 @@ class Input implements InputInterface
     ];
 
     /**
-     * executable file
+     * executable file.
      *
      * @var string
      */
@@ -85,7 +85,7 @@ class Input implements InputInterface
     {
         // get argv and remove file name
         global $argv;
-        $this->executable = $argv[0] ?? NULL;
+        $this->executable = $argv[0] ?? null;
         unset($argv[0]);
 
         // get argv or user argv
@@ -191,14 +191,15 @@ class Input implements InputInterface
     }
 
     /**
-     * get executable file
+     * get executable file.
      *
      * @return void
      */
-    public function getExecutable() : string
+    public function getExecutable(): string
     {
         return $this->executable;
     }
+
     /**
      * reserved flags.
      *
