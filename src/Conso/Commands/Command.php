@@ -51,7 +51,7 @@ class Command extends BaseCommand implements CommandInterface
         ],
         'options'      => [
             'name'     => 'command name to be created or deleted.',
-        ]
+        ],
     ];
 
     /**
