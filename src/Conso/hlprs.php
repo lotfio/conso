@@ -91,7 +91,7 @@ function commandHelp(array $command, $output)
     $help = $command['help'];
 
     $output->writeLn("\n help for [".$name."] command:\n\n", 'yellow');
-    $output->writeLn("    php conso $name:[sub command] [options] [flags]\n");
+    $output->writeLn("   php conso $name:[sub command] [options] [flags]\n");
 
     if (is_array($help) && count($help) > 0) {
 
@@ -100,8 +100,12 @@ function commandHelp(array $command, $output)
             $output->writeLn("\n ".$key.":\n\n", 'yellow');
 
             // get longest
-            $max = array_map(function($elem){ return strlen($elem);}, array_keys($value));
-            $max = max($max);
+            $max = 0;
+            if(count($value) > 0)
+            {
+                $max = array_map(function($elem){ return strlen($elem);}, array_keys($value));
+                $max = max($max);
+            }
 
             foreach ($value as $a => $b) {
 
