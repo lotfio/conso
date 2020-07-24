@@ -194,10 +194,10 @@ trait ConsoTrait
     {
         $inp = new Input($command);
 
-        if($inp->command() == $this->invokedCommand['name'])
+        if ($inp->command() == $this->invokedCommand['name']) {
             throw new InputException("cannot call same command [$command] recursively");
-
-        $cmd = 'php '. $this->input->getExecutable() . ' ' . $command;
+        }
+        $cmd = 'php '.$this->input->getExecutable().' '.$command;
 
         passthru($cmd);
     }

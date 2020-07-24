@@ -94,23 +94,19 @@ function commandHelp(array $command, $output)
     $output->writeLn("   php conso $name:[sub command] [options] [flags]\n");
 
     if (is_array($help) && count($help) > 0) {
-
         foreach ($help as $key => $value) {
-
             $output->writeLn("\n ".$key.":\n\n", 'yellow');
 
             // get longest
             $max = 0;
-            if(count($value) > 0)
-            {
-                $max = array_map(function($elem){ return strlen($elem);}, array_keys($value));
+            if (count($value) > 0) {
+                $max = array_map(function ($elem) { return strlen($elem); }, array_keys($value));
                 $max = max($max);
             }
 
             foreach ($value as $a => $b) {
-
-                $key = !is_numeric($a) ? $a  . str_repeat(' ', ($max - (strlen($a))))  .'  : ' : null;
-                $output->writeLn('   '. $key . $b . "\n");
+                $key = !is_numeric($a) ? $a.str_repeat(' ', ($max - (strlen($a)))).'  : ' : null;
+                $output->writeLn('   '.$key.$b."\n");
             }
         }
     }
