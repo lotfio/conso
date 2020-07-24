@@ -173,7 +173,7 @@ $conso->command("test", function($input, $output){
         ]
   ]);
 ```
-![image](https://user-images.githubusercontent.com/18489496/88348026-9d63e680-cd4c-11ea-8efc-60ac5376064e.png)
+![image](https://user-images.githubusercontent.com/18489496/88392798-e94e7400-cdbc-11ea-8de6-5fab02cdfb01.png)
 
 ### :star: class commands
 - class commands are very helpful for big commands
