@@ -5,7 +5,7 @@ namespace Conso;
 /**
  * @author    <contact@lotfio.net>
  *
- * @version   1.6.0
+ * @version   1.6.1
  *
  * @license   MIT
  *
@@ -67,30 +67,27 @@ class CommandInvoker
      */
     public function showConsoleInformation(array $commands)
     {
-        $this->output->writeLn($this->app->getSignature()."\n");
-        $this->output->writeLn($this->app->getName().' ', 'yellow');
-        $this->output->writeLn('version ');
-        $this->output->writeLn($this->app->getVersion(), 'green');
-        $this->output->writeLn(' by '.$this->app->getAuthor());
+        $output = $this->output;
+        $app    = $this->app;
 
-        $this->output->writeLn("\n\nUsage: \n\n", 'yellow');
-        $this->output->writeLn("    command:subcommand [options] [flags]\n\n");
+        $output->writeLn($app->getSignature()."\n");
+        $output->writeLn($app->getName().' ', 'yellow');
+        $output->writeLn('version ');
+        $output->writeLn($app->getVersion(), 'green');
+        $output->writeLn(' by '.$app->getAuthor());
 
-        $this->output->writeLn("Special flags: \n\n", 'yellow');
+        $output->writeLn("\n\nUsage: \n\n", 'yellow');
+        $output->writeLn("  command:subcommand [options] [flags]\n\n");
+
+        $output->writeLn("Special flags: \n\n", 'yellow');
 
         $flags = $this->input->reservedFlags();
-        $this->output->writeLn('    '.$flags[0].'   ', 'green');
-        $this->output->writeLn('    '.$flags[1]."   \n", 'green');
-        $this->output->writeLn('    '.$flags[2].'   ', 'green');
-        $this->output->writeLn('    '.$flags[3]."   \n", 'green');
-        $this->output->writeLn('    '.$flags[4].'   ', 'green');
-        $this->output->writeLn('    '.$flags[5]."   \n", 'green');
-        $this->output->writeLn('    '.$flags[6].'   ', 'green');
-        $this->output->writeLn('    '.$flags[7]."   \n", 'green');
-        $this->output->writeLn('    '.$flags[8].'   ', 'green');
-        $this->output->writeLn($flags[9]."   \n", 'green');
-        $this->output->writeLn('    '.$flags[10].'   ', 'green');
-        $this->output->writeLn('    '.$flags[11]."   \n", 'green');
+
+        for($i = 0; $i < count($flags); $i++)
+        {   // 6 = --ansi length
+            $line = '  ' . $flags[$i] . str_repeat(' ', (6 - strlen($flags[$i])) + 3) . $flags[++$i] . "\n";
+            $output->writeLn($line, 'green');
+        }
     }
 
     /**

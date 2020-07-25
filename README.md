@@ -17,7 +17,7 @@
 ## 🔥 Introduction :
 Conso is a simple, lightweight PHP package that helps you create command line applications easily.
 
-![conso](https://user-images.githubusercontent.com/18489496/87862253-622d7600-c94e-11ea-8aef-1a79a70e8ff6.gif)
+![conso](https://user-images.githubusercontent.com/18489496/88460262-44ef2f00-ce9b-11ea-8b7a-18f385c0a3f3.gif)
 
 ## 📌 Requirements :
 - PHP     >= 7.2 or newer versions
@@ -241,7 +241,7 @@ class Test extends Command implements CommandInterface
      * @param  OutputInterface $output
      * @return void
      */
-    public function execute(InputInterface $input, OutputInterface $output, Conso $app) : void
+    public function execute(InputInterface $input, OutputInterface $output) : void
     {
         commandHelp($this->app->invokedCommand, $output);
     }
@@ -267,11 +267,59 @@ $conso->setVersion(); // set application version
 $conso->setAuthor(); // set application author
 
 ```
+## :star: accessing app from commands :
+ - from a callback command
+
+```php
+<?php
+
+// test command
+$conso->command("test", function($input, $output){
+
+    // get app config
+    $this->getName();
+    $this->getVersion();
+    $this->getAuthor();
+    $this->getCommandsPath();
+    $this->getCommandsNamespace();
+
+    // calling another command
+    $this->call('command:subcommand -f --flags');
+});
+
+```
+ - from a class command
+
+```php
+<?php
+
+    /**
+     * execute method
+     *
+     * @param  InputInterface  $input
+     * @param  OutputInterface $output
+     * @return void
+     */
+    public function execute(InputInterface $input, OutputInterface $output) : void
+    {
+        // get app config
+        $this->app->getName();
+        $this->app->getVersion();
+        $this->app->getAuthor();
+        $this->app->getCommandsPath();
+        $this->app->getCommandsNamespace();
+
+        // calling another command
+        $this->app->call('command:subcommand -f --flags');
+    }
+
+```
+
 
 ## ✨ TODO
 - improve code quality.
 - add testing helpers.
-- add compile command.
+- add compile command (compile your app to an executable .phar).
 
 ## ✨ Contributing
 

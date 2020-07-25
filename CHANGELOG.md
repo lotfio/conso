@@ -1,3 +1,7 @@
+# 1.6.1
+ - fix help
+ - update readme
+
 # 1.6.0
  - fix call command
  - better help function
