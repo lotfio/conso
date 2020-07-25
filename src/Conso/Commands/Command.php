@@ -5,7 +5,7 @@ namespace Conso\Commands;
 /**
  * @author    <contact@lotfio.net>
  *
- * @version   1.6.0
+ * @version   1.6.1
  *
  * @license   MIT
  *
