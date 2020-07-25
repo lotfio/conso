@@ -68,7 +68,7 @@ class CommandInvoker
     public function showConsoleInformation(array $commands)
     {
         $output = $this->output;
-        $app    = $this->app;
+        $app = $this->app;
 
         $output->writeLn($app->getSignature()."\n");
         $output->writeLn($app->getName().' ', 'yellow');
@@ -83,9 +83,8 @@ class CommandInvoker
 
         $flags = $this->input->reservedFlags();
 
-        for($i = 0; $i < count($flags); $i++)
-        {   // 6 = --ansi length
-            $line = '  ' . $flags[$i] . str_repeat(' ', (6 - strlen($flags[$i])) + 3) . $flags[++$i] . "\n";
+        for ($i = 0; $i < count($flags); $i++) {   // 6 = --ansi length
+            $line = '  '.$flags[$i].str_repeat(' ', (6 - strlen($flags[$i])) + 3).$flags[++$i]."\n";
             $output->writeLn($line, 'green');
         }
     }
