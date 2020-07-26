@@ -5,7 +5,7 @@ namespace Tests\Unit\Mocks;
 /**
  * @author    <contact@lotfio.net>
  *
- * @version   1.6.1
+ * @version   1.6.2
  *
  * @license   MIT
  *
