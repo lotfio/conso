@@ -203,6 +203,17 @@ trait ConsoTrait
     }
 
     /**
+     * load build in commands.
+     *
+     * @return void
+     */
+    public function loadBuildInCommands()
+    {
+        $conso = $this;
+        require_once dirname(__DIR__, 2) . '/commands.php';
+    }
+
+    /**
      * get available commands method.
      *
      * @return array

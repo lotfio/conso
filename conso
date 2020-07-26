@@ -30,6 +30,4 @@ $conso->setSignature("   ______
  $$$$$$/   $$$$$$/  $$/   $$/ $$$$$$$/   $$$$$$/
 ");
 
-require_once 'commands.php';
-
 $conso->run(0);
