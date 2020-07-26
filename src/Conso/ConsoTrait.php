@@ -210,7 +210,7 @@ trait ConsoTrait
     public function loadBuildInCommands()
     {
         $conso = $this;
-        require_once dirname(__DIR__, 2) . '/commands.php';
+        require_once dirname(__DIR__, 2).'/commands.php';
     }
 
     /**
