@@ -1,3 +1,6 @@
+# 1.6.2
+ - fix register build in commands
+
 # 1.6.1
  - fix help
  - update readme

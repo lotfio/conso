@@ -5,7 +5,7 @@ namespace Conso;
 /**
  * @author    <contact@lotfio.net>
  *
- * @version   1.6.1
+ * @version   1.6.2
  *
  * @license   MIT
  *
@@ -40,7 +40,7 @@ trait ConsoTrait
      *
      * @var string
      */
-    protected $version = '1.6.1';
+    protected $version = '1.6.2';
 
     /**
      * author.
