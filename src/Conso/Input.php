@@ -103,15 +103,14 @@ class Input implements InputInterface
      */
     private function extract(array $argv): void
     {
-
         // set command if no sub command
-        if (isset($argv[0]) && !preg_match('/^[\-]{1,2}[A-z]+(\-[A-z]+)?$/', $argv[0])) {
+        if (isset($argv[0]) && !preg_match('/^[\-]{1,2}[A-z]+((\-[A-z]+)|(\=[\w]+))?$/', $argv[0])) {
             $this->command = $argv[0] ?? null;
 
             // if command & sub command
             if (preg_match('/^([A-z]+)(\:)([A-z]+)$/', $argv[0])) {
                 $command = explode(':', $argv[0]);
-                $this->command = $command[0] ?? null;
+                $this->command    = $command[0] ?? null;
                 $this->subCommand = $command[1] ?? null;
             }
 
@@ -119,11 +118,52 @@ class Input implements InputInterface
             unset($argv[0]);
         }
 
-        $this->flags = array_values(array_filter($argv, function ($elem) {
-            return preg_match('/^[\-]{1,2}[A-z]+(\-[A-z]+)?$/', $elem);
-        }));
 
-        $this->options = array_values(array_diff($argv, $this->flags));
+        $flags = $this->captureFlags($argv);
+
+        $this->flags = $this->extractFlags($flags);
+
+        $this->options = array_values(array_diff($argv, $flags));
+    }
+
+    /**
+     * extract flags method
+     *
+     * @param array $argv
+     * @return array
+     */
+    private function captureFlags(array $argv) : array
+    {
+        $flags = array_filter($argv, function ($elem) {
+            return preg_match('/^[\-]{1,2}[A-z]+((\-[A-z]+)|(\=[\w]+))?$/', $elem);
+        });
+
+        return $flags;
+    }
+
+    /**
+     * extract flags
+     *
+     * @param  array $flags
+     * @return array
+     */
+    private function extractFlags(array $flags) : array
+    {
+        $flagsWithValues = [];
+
+        foreach($flags as $flag)
+        {
+            if(strpos($flag, '=') !== FALSE)
+            {
+                $exp = explode('=', $flag);
+                $flagsWithValues[$exp[0]] = $exp[1];
+                continue;
+            }
+
+            $flagsWithValues[$flag] = '';
+        }
+
+        return $flagsWithValues;
     }
 
     /**
@@ -171,13 +211,13 @@ class Input implements InputInterface
     /**
      * input flag method.
      *
-     * @param int $index
+     * @param string $flag
      *
-     * @return string|null
+     * @return mixed
      */
-    public function flag(int $index): ?string
+    public function flag(string $flag)
     {
-        return isset($this->flags[$index]) ? $this->flags[$index] : null;
+        return isset($this->flags[$flag]) ? $this->flags[$flag] : false;
     }
 
     /**
@@ -187,7 +227,7 @@ class Input implements InputInterface
      */
     public function flags(): array
     {
-        return $this->flags;
+        return array_keys($this->flags);
     }
 
     /**

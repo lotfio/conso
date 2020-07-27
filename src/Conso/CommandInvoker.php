@@ -123,21 +123,21 @@ class CommandInvoker
         $commands = $this->app->getCommands(); // defined commands
 
         // disable ansi
-        if ($this->input->flag(0) == '--no-ansi') {
+        if ($this->input->flag('--no-ansi') !== false ) {
             $this->output->disableAnsi();
         }
 
         // command help
-        if ($this->input->command() && ($this->input->flag(0) == '-h' || $this->input->flag(0) == '--help')) {
+        if ($this->input->command() && ($this->input->flag('-h') !== false || $this->input->flag('--help') !== false)) {
             return commandHelp($command, $this->output);
         }
 
         // version
-        if (($this->input->flag(0) == '-v' || $this->input->flag(0) == '--version')) {
+        if (($this->input->flag('-v') !== false || $this->input->flag('--version') !== false)) {
             return $this->output->writeLn("\n ".$this->app->getName().' version '.$this->app->getVersion()."\n", 'yellow');
         }
 
-        if (($this->input->flag(0) == '-c' || $this->input->flag(0) == '--commands')) {
+        if (($this->input->flag('-c') !== false || $this->input->flag('--commands') !== false)) {
             return $this->showConsoleCommands($commands);
         }
 

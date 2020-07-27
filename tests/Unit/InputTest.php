@@ -33,7 +33,7 @@ class InputTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->input = new Input('make:controller user --crud');
+        $this->input = new Input('make:controller user --crud --test=value');
     }
 
     /**
@@ -77,7 +77,7 @@ class InputTest extends TestCase
     }
 
     /**
-     * test input options.
+     * test input flags.
      *
      * @return void
      */
@@ -85,8 +85,22 @@ class InputTest extends TestCase
     {
         $this->assertContains('--crud', $this->input->flags());
         $this->assertEquals(
-            '--crud',
-            $this->input->flag(0)
+            '',
+            $this->input->flag('--crud')
+        );
+    }
+
+    /**
+     * test input flags values.
+     *
+     * @return void
+     */
+    public function testInputFlagsValues()
+    {
+        $this->assertContains('--test', $this->input->flags());
+        $this->assertEquals(
+            'value',
+            $this->input->flag('--test')
         );
     }
 }
