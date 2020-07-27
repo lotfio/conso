@@ -104,7 +104,7 @@ class Input implements InputInterface
     private function extract(array $argv): void
     {
         // set command if no sub command
-        if (isset($argv[0]) && !preg_match('/^[\-]{1,2}[A-z]+((\-[A-z]+)|(\=[\w]+))?$/', $argv[0])) {
+        if (isset($argv[0]) && !preg_match('/^[\-]{1,2}[A-z]+((\-\w+)|(\=.*))?$/', $argv[0])) {
             $this->command = $argv[0] ?? null;
 
             // if command & sub command
@@ -118,10 +118,9 @@ class Input implements InputInterface
             unset($argv[0]);
         }
 
+        $flags         = $this->captureFlags($argv);
 
-        $flags = $this->captureFlags($argv);
-
-        $this->flags = $this->extractFlags($flags);
+        $this->flags   = $this->extractFlags($flags);
 
         $this->options = array_values(array_diff($argv, $flags));
     }
@@ -135,7 +134,7 @@ class Input implements InputInterface
     private function captureFlags(array $argv) : array
     {
         $flags = array_filter($argv, function ($elem) {
-            return preg_match('/^[\-]{1,2}[A-z]+((\-[A-z]+)|(\=[\w]+))?$/', $elem);
+            return preg_match('/^[\-]{1,2}[A-z]+((\-\w+)|(\=.*))?$/', $elem);
         });
 
         return $flags;
@@ -248,5 +247,16 @@ class Input implements InputInterface
     public function reservedFlags()
     {
         return $this->reservedFlags;
+    }
+
+    /**
+     * read line method
+     *
+     * @param string $line
+     * @return void
+     */
+    public function readLine(string $line)
+    {
+        return readLine($line);
     }
 }

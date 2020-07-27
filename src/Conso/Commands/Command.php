@@ -80,7 +80,7 @@ class Command extends BaseCommand implements CommandInterface
         $name = $input->option(0);
 
         if (!$name) {
-            throw new InputException('command name is required.');
+            throw new InputException('command [name] is required.');
         }
         $command = $this->app->getCommandsPath().'/'.ucfirst($name).'.php';
 
@@ -88,7 +88,7 @@ class Command extends BaseCommand implements CommandInterface
             throw new InputException("command [$name] already exists.");
         }
         if (!is_writable($this->app->getCommandsPath())) {
-            throw new \Exception("no permissions to create a command at this location {$this->app->getCommandsPath()}.");
+            throw new \Exception("no permissions to create a command at this location [{$this->app->getCommandsPath()}].");
         }
         $content = file_get_contents(__DIR__.'/stubs/command');
         $content = str_replace('#command#', ucfirst($name), $content);
@@ -115,7 +115,7 @@ class Command extends BaseCommand implements CommandInterface
         $name = $input->option(0);
 
         if (!$name) {
-            throw new InputException('command name is required.');
+            throw new InputException('command [name] is required.');
         }
         $command = $this->app->getCommandsPath().'/'.ucfirst($name).'.php';
 
@@ -123,7 +123,7 @@ class Command extends BaseCommand implements CommandInterface
             throw new InputException("command [$name] does not exists.");
         }
         if (!is_writable($this->app->getCommandsPath())) {
-            throw new \Exception("no permissions to delete ($name) command");
+            throw new \Exception("no permissions to delete [$name] command");
         }
         if (unlink($command)) {
             $output->success("command [$name] deleted successfully.");

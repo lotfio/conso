@@ -97,6 +97,18 @@ class CommandLinkerTest extends TestCase
     }
 
     /**
+     * test wrong option.
+     *
+     * @return void
+     */
+    public function testLinkMethodWrongOption()
+    {
+        $this->expectException(InputException::class);
+        $linker = new CommandLinker(new Input('make:test --*/-*/-azaz --form'), $this->output);
+        $linker->link($this->commands);
+    }
+
+    /**
      * test wrong flag.
      *
      * @return void

@@ -59,9 +59,10 @@ class CommandLinker
      */
     public function link(array &$commands): ?array
     {
-        $command = $this->input->command();
+        $command    = $this->input->command();
         $subCommand = $this->input->subCommand();
-        $flags = $this->input->flags();
+        $options    = $this->input->options();
+        $flags      = $this->input->flags();
 
         // if command is a class
         for ($i = 0; $i < count($commands); $i++) {
@@ -76,7 +77,10 @@ class CommandLinker
 
         for ($i = 0; $i < count($commands); $i++) {
             if ($command == $commands[$i]['name'] || in_array($command, $commands[$i]['aliases'])) {
+
                 $this->linkSubCommand($subCommand, $commands[$i]['sub']);
+
+                $this->linkOptions($options);
 
                 $this->linkFlags($flags, $commands[$i]['flags']);
 
@@ -101,6 +105,19 @@ class CommandLinker
 
             throw new InputException("sub command ({$subCommand}) is not defined.");
         }
+    }
+
+    /**
+     * link options
+     *
+     * @param array $options
+     * @return void
+     */
+    public function linkOptions(array $options)
+    {
+        foreach($options as $option)
+            if(!preg_match('/^[A-z0-9]+$/', $option))
+                throw new InputException("oly alpha-numeric characters are allowed for options ([A-z0-9]+)");
     }
 
     /**
