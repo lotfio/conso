@@ -1,3 +1,7 @@
+# 1.7.0
+ - adding flag value support `--flag=value`
+ - fix options allow only alpha numeric
+
 # 1.6.2
  - fix register build in commands
 

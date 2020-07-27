@@ -58,7 +58,20 @@ require_once 'commands.php';
 
 $conso->run(0); // 0 for production & 1 for development
 ```
-- define a new `test` command in your `commands.php` :
+
+### :star: Available config methods :
+
+```php
+<?php
+
+$conso->setSignature(); // set application signature (top logo)
+$conso->setName();     // set application name
+$conso->setVersion(); // set application version
+$conso->setAuthor(); // set application author
+
+```
+
+- now define a new `test` command in your `commands.php` :
 
 ```php
 <?php
@@ -120,14 +133,18 @@ $conso->command("test", function($input, $output){
 ### :star: define command flags
 - you can define flags using the flag method `->flags(string|array $flag)`
 - this is a list of reserved flags `['-h', '--help', '-v', '--version', '-c', '--commands', '-q', '--quiet', '--ansi', '--no-ansi']`
+- you can also use pass values to flags `--flag=value` or `-f=value`
 
 ```php
 <?php
 // test command
 $conso->command("test", function($input, $output){
 
-    if($input->flag(0) == '-t')
+    if($input->flag('-t') !== false)
         $output->writeLn("\n flag -t is defined for this command.\n", 'red');
+
+    // you can get flag values
+    // $output->writeLn($input->flag('-t'));
 
 })->description("This is test command description :) ^^")->flags('-t');
 ```
@@ -177,14 +194,17 @@ $conso->command("test", function($input, $output){
 
 ### :star: class commands
 - class commands are very helpful for big commands
+- first you need to create an `app/Commands` folder.
+- you can also move your commands definitions file `commands.php` to app folder to clean up things.
+- don't forget to autoload your commands with composer `psr-4{ "App\\" : "app" }`
+- now you need add commands paths and namespaces to conso to allow the build in command (command) to automatically create commands for you.
 
-- first you need configure (path & namespace)
 ```php
     // add this to your conso file before run method
     $conso->setCommandsPath('path');
     $conso->setCommandsNamespace('namespace');
 ```
-
+git add
 - to create a class command run `php conso command:make {command name}`
 - for example lets create a test class command `php conso command:make test`
 - this will generate a `Test` command class like this:
@@ -192,7 +212,7 @@ $conso->command("test", function($input, $output){
 ```php
 <?php
 
-namespace Conso\Commands;
+namespace App\Commands;
 
 use function Conso\commandHelp;
 use Conso\{Conso, Command};
@@ -256,17 +276,6 @@ $conso->command('test', Your\NameSpace\Test::class);
 - by default `test` command will run the `execute` method if no sub command is provided
 - each sub command is a separate method
 
-## :star: Available config methods :
-
-```php
-<?php
-
-$conso->setSignature(); // set application signature (top logo)
-$conso->setName();     // set application name
-$conso->setVersion(); // set application version
-$conso->setAuthor(); // set application author
-
-```
 ## :star: accessing app from commands :
  - from a callback command
 
