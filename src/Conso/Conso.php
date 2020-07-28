@@ -94,17 +94,16 @@ class Conso
     public function run(int $env = 0)
     {
         // build in commands
-        if (!$this->output->isTestMode())
-                $this->loadBuildInCommands();
+        if (!$this->output->isTestMode()) {
+            $this->loadBuildInCommands();
+        }
 
         try {
             // pass table defined commands & match
             $this->invokedCommand = $this->linker->link($this->getCommands());
 
             return $this->invoker->invoke($this->invokedCommand);
-
         } catch (\Exception $e) {
-
             if ($this->output->isTestMode()) {  // is test mode
 
                 throw new \Exception($e);

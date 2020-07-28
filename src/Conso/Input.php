@@ -110,7 +110,7 @@ class Input implements InputInterface
             // if command & sub command
             if (preg_match('/^([A-z]+)(\:)([A-z]+)$/', $argv[0])) {
                 $command = explode(':', $argv[0]);
-                $this->command    = $command[0] ?? null;
+                $this->command = $command[0] ?? null;
                 $this->subCommand = $command[1] ?? null;
             }
 
@@ -118,20 +118,21 @@ class Input implements InputInterface
             unset($argv[0]);
         }
 
-        $flags         = $this->captureFlags($argv);
+        $flags = $this->captureFlags($argv);
 
-        $this->flags   = $this->extractFlags($flags);
+        $this->flags = $this->extractFlags($flags);
 
         $this->options = array_values(array_diff($argv, $flags));
     }
 
     /**
-     * extract flags method
+     * extract flags method.
      *
      * @param array $argv
+     *
      * @return array
      */
-    private function captureFlags(array $argv) : array
+    private function captureFlags(array $argv): array
     {
         $flags = array_filter($argv, function ($elem) {
             return preg_match('/^[\-]{1,2}[A-z]+((\-\w+)|(\=.*))?$/', $elem);
@@ -141,19 +142,18 @@ class Input implements InputInterface
     }
 
     /**
-     * extract flags
+     * extract flags.
      *
-     * @param  array $flags
+     * @param array $flags
+     *
      * @return array
      */
-    private function extractFlags(array $flags) : array
+    private function extractFlags(array $flags): array
     {
         $flagsWithValues = [];
 
-        foreach($flags as $flag)
-        {
-            if(strpos($flag, '=') !== FALSE)
-            {
+        foreach ($flags as $flag) {
+            if (strpos($flag, '=') !== false) {
                 $exp = explode('=', $flag);
                 $flagsWithValues[$exp[0]] = $exp[1];
                 continue;
@@ -250,13 +250,14 @@ class Input implements InputInterface
     }
 
     /**
-     * read line method
+     * read line method.
      *
      * @param string $line
+     *
      * @return void
      */
     public function readLine(string $line)
     {
-        return readLine($line);
+        return readline($line);
     }
 }
