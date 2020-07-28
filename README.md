@@ -20,8 +20,6 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 ![conso](https://user-images.githubusercontent.com/18489496/88460262-44ef2f00-ce9b-11ea-8b7a-18f385c0a3f3.gif)
 
 ## :collision: is it really lightweight ?
-<img width="823" alt="Screen Shot 2020-07-27 at 6 12 04 PM" src="https://user-images.githubusercontent.com/18489496/88639655-4d26b480-d0bd-11ea-8400-db325806dbee.png">
-
 <img width="825" alt="Screen Shot 2020-07-27 at 6 12 41 PM" src="https://user-images.githubusercontent.com/18489496/88639724-616ab180-d0bd-11ea-873a-2e25ea1fa113.png">
 
 ## 📌 Requirements :
