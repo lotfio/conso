@@ -19,6 +19,11 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 
 ![conso](https://user-images.githubusercontent.com/18489496/88460262-44ef2f00-ce9b-11ea-8b7a-18f385c0a3f3.gif)
 
+## :collision: is it really lightweight ?
+<img width="823" alt="Screen Shot 2020-07-27 at 6 12 04 PM" src="https://user-images.githubusercontent.com/18489496/88639655-4d26b480-d0bd-11ea-8400-db325806dbee.png">
+
+<img width="825" alt="Screen Shot 2020-07-27 at 6 12 41 PM" src="https://user-images.githubusercontent.com/18489496/88639724-616ab180-d0bd-11ea-873a-2e25ea1fa113.png">
+
 ## 📌 Requirements :
 - PHP     >= 7.2 or newer versions
 - PHPUnit >= 8 (for testing purpose)
@@ -195,16 +200,15 @@ $conso->command("test", function($input, $output){
 ### :star: class commands
 - class commands are very helpful for big commands
 - first you need to create an `app/Commands` folder.
-- you can also move your commands definitions file `commands.php` to app folder to clean up things.
+- you can also move your commands definitions file `commands.php` to `app` folder to clean up things.
 - don't forget to autoload your commands with composer `psr-4{ "App\\" : "app" }`
 - now you need add commands paths and namespaces to conso to allow the build in command (command) to automatically create commands for you.
 
 ```php
     // add this to your conso file before run method
-    $conso->setCommandsPath('path');
-    $conso->setCommandsNamespace('namespace');
+    $conso->setCommandsPath('app/Commands');
+    $conso->setCommandsNamespace('App\\Commands');
 ```
-git add
 - to create a class command run `php conso command:make {command name}`
 - for example lets create a test class command `php conso command:make test`
 - this will generate a `Test` command class like this:
