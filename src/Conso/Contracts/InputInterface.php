@@ -5,7 +5,7 @@ namespace  Conso\Contracts;
 /**
  * @author    <contact@lotfio.net>
  *
- * @version   1.6.2
+ * @version   1.7.0
  *
  * @license   MIT
  *
