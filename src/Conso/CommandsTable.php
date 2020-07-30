@@ -30,6 +30,20 @@ class CommandsTable
     ];
 
     /**
+     * command group
+     *
+     * @var ?string
+     */
+    private $group = 'main';
+
+    /**
+     * command namespace
+     *
+     * @var ?string
+     */
+    private $namespace = NULL;
+
+    /**
      * add command method.
      *
      * @param string $name
@@ -47,6 +61,8 @@ class CommandsTable
             'flags'         => [],
             'description'   => '',
             'help'          => [],
+            'group'         => $this->group,
+            'namespace'     => $this->namespace
         ];
 
         return $this;
@@ -128,6 +144,48 @@ class CommandsTable
         $this->assign('help', $help);
 
         return $this;
+    }
+
+    /**
+     * set command group
+     *
+     * @param string $group
+     * @return void
+     */
+    public function setGroup(string $group) : void
+    {
+        $this->group = $group;
+    }
+
+    /**
+     * unset group
+     *
+     * @return void
+     */
+    public function unsetGroup() : void
+    {
+        $this->group = 'main';
+    }
+
+    /**
+     * set namespace
+     *
+     * @param string $namespace
+     * @return void
+     */
+    public function setNamespace(string $namespace) : void
+    {
+        $this->namespace = $namespace;
+    }
+
+    /**
+     * unset namespace
+     *
+     * @return void
+     */
+    public function unsetNamespace() : void
+    {
+        $this->namespace = NULL;
     }
 
     /**

@@ -96,18 +96,41 @@ class CommandInvoker
      *
      * @return void
      */
-    public function showConsoleCommands(array $commands)
+    public function showConsoleCommands(array $commands) : void
     {
-        if (count($commands) > 0) {
-            $this->output->writeLn("\nAvailable Commands: \n\n", 'yellow');
+        if (count($commands) < 1) return;
 
-            $max = max(array_map(function ($elem) { return count($elem); }, $commands));
+        // sort & get max length command
+        sort($commands);
+        $max = max(array_map(function ($elem) { return count($elem); }, $commands));
+
+        // group commands
+        $grouped = [];
+
+        foreach($commands as $command)
+            $grouped[$command['group']][] = $command;
+
+        $this->output->writeLn("\nAvailable Commands:\n\n", 'yellow');
+
+        if(isset($grouped['main'])) //no groups
+        {
+            foreach($grouped['main'] as $command)
+            {
+                $this->output->writeLn('  '.$command['name'].str_repeat(' ', ($max - strlen($command['name'])) + 4), 'green');
+                $this->output->writeLn($command['description']."\n");
+            }
+
+            unset($grouped['main']);
+        }
+
+        foreach($grouped as $group => $commands) // if groups
+        {
+            $this->output->writeLn("\n$group\n\n", 'yellow');
 
             foreach ($commands as $command) {
                 $this->output->writeLn('  '.$command['name'].str_repeat(' ', ($max - strlen($command['name'])) + 4), 'green');
                 $this->output->writeLn($command['description']."\n");
             }
-            $this->output->writeLn("\n");
         }
     }
 
@@ -167,7 +190,6 @@ class CommandInvoker
     protected function invokeCallback(array $command)
     {
         $closure = \Closure::bind($command['action'], $this->app);
-
         return call_user_func_array($closure, [$this->input, $this->output]);
     }
 
@@ -181,7 +203,10 @@ class CommandInvoker
     protected function invokeClassMethod(array $command)
     {
         $subCommand = $this->input->subCommand();
-        $class = ucfirst($command['action']);
+
+        // append namespace
+        $namespace = (!is_null($command['namespace'])) ? rtrim($command['namespace'], '\\') . '\\' : '';
+        $class     =  $namespace . ucfirst($command['action']);
 
         if (!class_exists($class)) {
             throw new InvokerException("command class ($class) is not defined.");

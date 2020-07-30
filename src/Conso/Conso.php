@@ -85,6 +85,30 @@ class Conso
     }
 
     /**
+     * command group method
+     *
+     * @return void
+     */
+    public function group(string $name, callable $callback) : void
+    {
+        $this->table->setGroup($name);
+        call_user_func($callback, $this);
+        $this->table->unsetGroup();
+    }
+
+    /**
+     * command group method
+     *
+     * @return void
+     */
+    public function namespace(string $namespace, callable $callback) : void
+    {
+        $this->table->setNamespace($namespace);
+        call_user_func($callback, $this);
+        $this->table->unsetNamespace();
+    }
+
+    /**
      * run application method.
      *
      * @param int $env

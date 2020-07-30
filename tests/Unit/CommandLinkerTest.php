@@ -56,6 +56,8 @@ class CommandLinkerTest extends TestCase
                 'flags'         => ['--form'],
                 'description'   => 'This is make command',
                 'help'          => [],
+                'group'         => 'main',
+                'namespace'     => NULL
             ],
         ];
     }

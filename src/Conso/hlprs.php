@@ -69,12 +69,20 @@ function readCommandPropertiesFromClass(array &$command): void
 {
     $list = ['sub', 'flags', 'description', 'help', 'aliases'];
 
-    if (is_string($command['action']) && class_exists($command['action'])) { // if is controller
-        foreach ($list as $lst) {
-            if (empty($command[$lst])) {
-                $command[$lst] = readProtectedProperty($command['action'], $lst);
+    if (is_string($command['action'])) { // if is controller
+
+        $namespace = (!is_null($command['namespace'])) ? rtrim($command['namespace'], '\\') . '\\' : '';
+        $class     =  $namespace . ucfirst($command['action']);
+
+        if(class_exists($class))
+        {
+            foreach ($list as $lst) {
+                if (empty($command[$lst])) {
+                    $command[$lst] = readProtectedProperty($class, $lst);
+                }
             }
         }
+
     } // fill from command class if not defined by method
 }
 
