@@ -57,7 +57,7 @@ class CommandLinkerTest extends TestCase
                 'description'   => 'This is make command',
                 'help'          => [],
                 'group'         => 'main',
-                'namespace'     => NULL
+                'namespace'     => null,
             ],
         ];
     }

@@ -96,9 +96,11 @@ class CommandInvoker
      *
      * @return void
      */
-    public function showConsoleCommands(array $commands) : void
+    public function showConsoleCommands(array $commands): void
     {
-        if (count($commands) < 1) return;
+        if (count($commands) < 1) {
+            return;
+        }
 
         // sort & get max length command
         sort($commands);
@@ -107,15 +109,14 @@ class CommandInvoker
         // group commands
         $grouped = [];
 
-        foreach($commands as $command)
+        foreach ($commands as $command) {
             $grouped[$command['group']][] = $command;
+        }
 
         $this->output->writeLn("\nAvailable Commands:\n\n", 'yellow');
 
-        if(isset($grouped['main'])) //no groups
-        {
-            foreach($grouped['main'] as $command)
-            {
+        if (isset($grouped['main'])) { //no groups
+            foreach ($grouped['main'] as $command) {
                 $this->output->writeLn('  '.$command['name'].str_repeat(' ', ($max - strlen($command['name'])) + 4), 'green');
                 $this->output->writeLn($command['description']."\n");
             }
@@ -123,8 +124,7 @@ class CommandInvoker
             unset($grouped['main']);
         }
 
-        foreach($grouped as $group => $commands) // if groups
-        {
+        foreach ($grouped as $group => $commands) { // if groups
             $this->output->writeLn("\n$group\n\n", 'yellow');
 
             foreach ($commands as $command) {
@@ -190,6 +190,7 @@ class CommandInvoker
     protected function invokeCallback(array $command)
     {
         $closure = \Closure::bind($command['action'], $this->app);
+
         return call_user_func_array($closure, [$this->input, $this->output]);
     }
 
@@ -205,8 +206,8 @@ class CommandInvoker
         $subCommand = $this->input->subCommand();
 
         // append namespace
-        $namespace = (!is_null($command['namespace'])) ? rtrim($command['namespace'], '\\') . '\\' : '';
-        $class     =  $namespace . ucfirst($command['action']);
+        $namespace = (!is_null($command['namespace'])) ? rtrim($command['namespace'], '\\').'\\' : '';
+        $class = $namespace.ucfirst($command['action']);
 
         if (!class_exists($class)) {
             throw new InvokerException("command class ($class) is not defined.");
