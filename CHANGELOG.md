@@ -1,3 +1,7 @@
+# 1.8.0
+ - adding commands namespace method `namespace(string $namespace)`
+ - adding commands group method  `group(string $name)`
+
 # 1.7.0
  - adding flag value support `--flag=value`
  - fix options allow only alpha numeric

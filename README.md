@@ -3,7 +3,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/License-MIT-f1c40f"          alt="License">
     <img src="https://img.shields.io/badge/PHP-7.2-3498db.svg"          alt="PHP version">
-    <img src="https://img.shields.io/badge/version-1.7.0-2c3e50.svg"    alt="Version">
+    <img src="https://img.shields.io/badge/version-1.8.0-2c3e50.svg"    alt="Version">
     <img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg"   alt="Coverage">
     <img src="https://travis-ci.org/lotfio/conso.svg?branch=master"     alt="Build Status">
     <img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi">
@@ -194,6 +194,38 @@ $conso->command("test", function($input, $output){
   ]);
 ```
 ![image](https://user-images.githubusercontent.com/18489496/88392798-e94e7400-cdbc-11ea-8de6-5fab02cdfb01.png)
+
+### :star: commands namespace
+ - you can wrap commands in the same namespace with `namespace()` method which makes things cleaner
+
+```php
+<?php
+
+$conso->namespace('Conso\\Commands', function($conso){
+
+    // all commands withing Conso\Commands namespace
+    $conso->command("command", Command::class);
+    $conso->command("test",    Test::class);
+    $conso->command("make",    Make::class);
+
+});
+
+```
+### :star: group commands
+ - you can group commands using the `group()` method
+```php
+<?php
+
+$conso->group('my group of commands:', function($conso){
+
+    $conso->command("command", function(){})->description('This is command description');
+    $conso->command("test",    function(){})->description('This is command description');
+    $conso->command("make",    function(){})->description('This is command description');
+
+});
+
+```
+![image](https://user-images.githubusercontent.com/18489496/88970755-3fd31b00-d2b3-11ea-9860-2ff024a6a2dc.png)
 
 ### :star: class commands
 - class commands are very helpful for big commands
