@@ -10,7 +10,7 @@
     <img src="https://img.shields.io/badge/downloads-1k-e74c3c.svg"     alt="Downloads">
     </p>
   <p align="center">
-    <strong>Conso (PHP console applications for geeks).</strong>
+    <strong>Conso (PHP console applications for cool kids).</strong>
   </p>
 </p>
 
