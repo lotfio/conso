@@ -360,6 +360,30 @@ $conso->namespace('Conso\\Commands', function($conso){
 
 ```
 
+### :star: http support
+- you can invoke conso from the browser or any http client just by passing commands to the input instance
+```php
+<?php declare(strict_types=1);
+
+use Conso\{
+    Conso,Input,Output
+};
+
+require 'vendor/autoload.php';
+
+// you can sanitize and pass your command her
+$command = 'command:make HttpCommand';
+
+$input   = new Input($command);
+
+$conso   = new Conso($input, new Output);
+
+require 'commands.php';
+
+$conso->run();
+
+```
+
 ## ✨ TODO
 - improve code quality.
 - add testing helpers.
