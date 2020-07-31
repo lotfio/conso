@@ -91,7 +91,7 @@ class Input implements InputInterface
         // get argv or user argv
         $argv = (is_string($userArgv) && strlen($userArgv) > 0)
               ? array_values(array_filter(explode(' ', $userArgv)))
-              : array_values($argv);
+              : ($argv ? array_values($argv) : []);
 
         $this->extract($argv);
     }

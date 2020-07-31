@@ -78,6 +78,9 @@ class Output implements OutputInterface
     {
         $str = $this->lineFormatter($line, $color, $bg, $bold);
 
+        if($this->isHttp())
+            return  print nl2br($str);
+
         return ($this->testMode) ? $str : fwrite(STDOUT, $str, strlen($str));
     }
 
@@ -94,7 +97,7 @@ class Output implements OutputInterface
         if (!array_key_exists($bg, $this->bg)) {
             throw new OutputException("$color background color is not a defined color");
         }
-        if (!$this->is256() || $this->noAnsi == true) {
+        if (!$this->is256() || $this->noAnsi == true || $this->isHttp()) {
             return $line;
         }
 
@@ -122,33 +125,30 @@ class Output implements OutputInterface
     {
         $class = get_class($e);
 
-        // output error in dev
-        if (php_sapi_name() == 'cli') { // if cli
-            if ($env == 1) {
-                $this->writeLn("=>\n", 'yellow');
-                $this->writeLn(' - error    : ', 'yellow');
-                $this->writeLn(" {$class}\n", 'red');
-                $this->writeLn(' - message  : ', 'yellow');
-                $this->writeLn(" {$e->getMessage()}\n", 'red');
-                $this->writeLn(' - file     : ', 'yellow');
-                $this->writeLn(" {$e->getFile()}\n", 'red');
-                $this->writeLn(' - line     : ', 'yellow');
-                $this->writeLn(" {$e->getLine()}\n", 'red');
-                $this->writeLn('=>', 'yellow');
-
-                return;
-            }
-            // output error in production
-            $max = max([strlen($e->getMessage()), strlen($class)]) + 8; // get max
-            $this->writeLn("\n".str_repeat(' ', $max + 6)."\n", 'white', 'red');
-            $this->writeLn("    [{$class}]", 'white', 'red');
-            $this->writeLn(str_repeat(' ', $max - strlen($class))."\n", 'white', 'red');
-            $this->writeLn("      {$e->getMessage()}", 'white', 'red');
-            $this->writeLn(str_repeat(' ', $max - strlen($e->getMessage()))."\n", 'white', 'red');
-            $this->writeLn(str_repeat(' ', $max + 6)."\n", 'white', 'red');
+        if ($env == 1) {
+            $this->writeLn("=>\n", 'yellow');
+            $this->writeLn(' - error    : ', 'yellow');
+            $this->writeLn(" {$class}\n", 'red');
+            $this->writeLn(' - message  : ', 'yellow');
+            $this->writeLn(" {$e->getMessage()}\n", 'red');
+            $this->writeLn(' - file     : ', 'yellow');
+            $this->writeLn(" {$e->getFile()}\n", 'red');
+            $this->writeLn(' - line     : ', 'yellow');
+            $this->writeLn(" {$e->getLine()}\n", 'red');
+            $this->writeLn('=>', 'yellow');
 
             return;
         }
+
+        // output error in production
+        $max = max([strlen($e->getMessage()), strlen($class)]) + 8; // get max
+        $this->writeLn("\n".str_repeat(' ', $max + 6)."\n", 'white', 'red');
+        $this->writeLn("    [{$class}]", 'white', 'red');
+        $this->writeLn(str_repeat(' ', $max - strlen($class))."\n", 'white', 'red');
+        $this->writeLn("      {$e->getMessage()}", 'white', 'red');
+        $this->writeLn(str_repeat(' ', $max - strlen($e->getMessage()))."\n", 'white', 'red');
+        $this->writeLn(str_repeat(' ', $max + 6)."\n", 'white', 'red');
+        return;
     }
 
     /**
@@ -208,6 +208,16 @@ class Output implements OutputInterface
     public function isTestMode(): bool
     {
         return $this->testMode;
+    }
+
+    /**
+     * check if request is http
+     *
+     * @return boolean
+     */
+    public function isHttp(): bool
+    {
+        return (php_sapi_name() !== 'cli');
     }
 
     /**
