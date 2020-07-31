@@ -71,6 +71,7 @@ $conso->setSignature(); // set application signature (top logo)
 $conso->setName();     // set application name
 $conso->setVersion(); // set application version
 $conso->setAuthor(); // set application author
+$conso->disableBuiltInCommands(); // disable builtin commands
 
 ```
 
@@ -195,22 +196,7 @@ $conso->command("test", function($input, $output){
 ```
 ![image](https://user-images.githubusercontent.com/18489496/88392798-e94e7400-cdbc-11ea-8de6-5fab02cdfb01.png)
 
-### :star: commands namespace
- - you can wrap commands in the same namespace with `namespace()` method which makes things cleaner
 
-```php
-<?php
-
-$conso->namespace('Conso\\Commands', function($conso){
-
-    // all commands withing Conso\Commands namespace
-    $conso->command("command", Command::class);
-    $conso->command("test",    Test::class);
-    $conso->command("make",    Make::class);
-
-});
-
-```
 ### :star: group commands
  - you can group commands using the `group()` method
 ```php
@@ -357,7 +343,22 @@ $conso->command("test", function($input, $output){
     }
 
 ```
+### :star: commands namespace
+ - you can wrap commands in the same namespace with `namespace()` method which makes things cleaner
 
+```php
+<?php
+
+$conso->namespace('Conso\\Commands', function($conso){
+
+    // all commands withing Conso\Commands namespace
+    $conso->command("command", Command::class);
+    $conso->command("test",    Test::class);
+    $conso->command("make",    Make::class);
+
+});
+
+```
 
 ## ✨ TODO
 - improve code quality.

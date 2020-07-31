@@ -118,9 +118,7 @@ class Conso
     public function run(int $env = 0)
     {
         // build in commands
-        if (!$this->output->isTestMode()) {
-            $this->loadBuildInCommands();
-        }
+        $this->loadBuildInCommands();
 
         try {
             // pass table defined commands & match

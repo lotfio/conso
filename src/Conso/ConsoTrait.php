@@ -64,6 +64,13 @@ trait ConsoTrait
     protected $commandsNamespace = 'Conso\\Commands';
 
     /**
+     * built in commands
+     *
+     * @var boolean
+     */
+    protected $builtInCommands = true;
+
+    /**
      * set signature method.
      *
      * @return void
@@ -203,14 +210,26 @@ trait ConsoTrait
     }
 
     /**
+     * disable built in commands
+     *
+     * @return void
+     */
+    public function disableBuiltInCommands() : void
+    {
+        $this->builtInCommands = false;
+    }
+
+    /**
      * load build in commands.
      *
      * @return void
      */
     public function loadBuildInCommands()
     {
-        $conso = $this;
-        require_once dirname(__DIR__, 2).'/commands.php';
+        if(!$this->output->isTestMode() && $this->builtInCommands == true) {
+            $conso = $this;
+            require_once dirname(__DIR__, 2).'/commands.php';
+        }
     }
 
     /**
