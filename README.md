@@ -3,7 +3,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/License-MIT-f1c40f"          alt="License">
     <img src="https://img.shields.io/badge/PHP-7.2-3498db.svg"          alt="PHP version">
-    <img src="https://img.shields.io/badge/version-1.8.0-2c3e50.svg"    alt="Version">
+    <img src="https://img.shields.io/badge/version-1.9.0-2c3e50.svg"    alt="Version">
     <img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg"   alt="Coverage">
     <img src="https://travis-ci.org/lotfio/conso.svg?branch=master"     alt="Build Status">
     <img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi">
@@ -17,7 +17,7 @@
 ## 🔥 Introduction :
 Conso is a simple, lightweight PHP package that helps you create command line applications easily.
 
-![conso](https://user-images.githubusercontent.com/18489496/88688263-6cdbce00-d0f9-11ea-85f2-aa832a7fe987.gif)
+![conso](https://user-images.githubusercontent.com/18489496/89343333-6a064d80-d6a4-11ea-9b64-c429684f9014.gif)
 
 ## :collision: is it really lightweight ?
 <img width="825" alt="Screen Shot 2020-07-27 at 6 12 41 PM" src="https://user-images.githubusercontent.com/18489496/88639724-616ab180-d0bd-11ea-873a-2e25ea1fa113.png">
@@ -137,7 +137,8 @@ $conso->command("test", function($input, $output){
 ### :star: define command flags
 - you can define flags using the flag method `->flags(string|array $flag)`
 - this is a list of reserved flags `['-h', '--help', '-v', '--version', '-c', '--commands', '-q', '--quiet', '--ansi', '--no-ansi']`
-- you can also use pass values to flags `--flag=value` or `-f=value`
+- for debug you can use `-vv or --verbose` flags to get more details about the error
+- you can also pass values to flags `--flag=value` or `-f=value`
 
 ```php
 <?php
@@ -173,7 +174,7 @@ $conso->command("test", function($input, $output){
 
 
 ### :star: define command help
-- you can add help instruction to a command using the help method `->help(array $help)`
+- you can add help instructions to a command using the help method `->help(array $help)`
 - command help can be displayed using the `-h` or `--help` flags
 - help array must be an array of sub commands, options and flags with their descriptions
 ```php

@@ -1,3 +1,8 @@
+# 1.9.0
+ - adding verbosity level `-vv --verbose`
+ - adding invoke command from `http` (you can now invoke conso from http)
+ - adding disable built in commands `$conso->disableBuiltInCommands()`
+
 # 1.8.0
  - adding commands namespace method `namespace(string $namespace)`
  - adding commands group method  `group(string $name)`
