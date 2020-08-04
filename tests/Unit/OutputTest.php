@@ -52,25 +52,23 @@ class OutputTest extends TestCase
     }
 
     /**
-     * test output with no verbosity
+     * test output with no verbosity.
      *
      * @return void
      */
     public function testOutputNoVerbosity()
     {
-        try{
+        try {
             throw new \Exception('test exception');
-        }catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->assertFalse(
                 $this->output->exception($e)
             );
         }
-
     }
 
     /**
-     * test output with verbosity
+     * test output with verbosity.
      *
      * @return void
      */
@@ -78,14 +76,12 @@ class OutputTest extends TestCase
     {
         $this->output->enableVerbosity(); // enable verbosity (dev mode)
 
-        try{
+        try {
             throw new \Exception('test exception');
-        }catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             $this->assertTrue(
                 $this->output->exception($e)
             );
         }
-
     }
 }

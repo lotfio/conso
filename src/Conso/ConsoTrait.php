@@ -64,9 +64,9 @@ trait ConsoTrait
     protected $commandsNamespace = 'Conso\\Commands';
 
     /**
-     * built in commands
+     * built in commands.
      *
-     * @var boolean
+     * @var bool
      */
     protected $builtInCommands = true;
 
@@ -210,11 +210,11 @@ trait ConsoTrait
     }
 
     /**
-     * disable built in commands
+     * disable built in commands.
      *
      * @return void
      */
-    public function disableBuiltInCommands() : void
+    public function disableBuiltInCommands(): void
     {
         $this->builtInCommands = false;
     }
@@ -226,7 +226,7 @@ trait ConsoTrait
      */
     public function loadBuildInCommands()
     {
-        if(!$this->output->isTestMode() && $this->builtInCommands == true) {
+        if (!$this->output->isTestMode() && $this->builtInCommands == true) {
             $conso = $this;
             require_once dirname(__DIR__, 2).'/commands.php';
         }
