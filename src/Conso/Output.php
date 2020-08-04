@@ -38,9 +38,9 @@ class Output implements OutputInterface
     private $testMode = false;
 
     /**
-     * verbosity
+     * verbosity.
      *
-     * @var boolean
+     * @var bool
      */
     public $verbosity = false;
 
@@ -85,8 +85,9 @@ class Output implements OutputInterface
     {
         $str = $this->lineFormatter($line, $color, $bg, $bold);
 
-        if($this->isHttp())
+        if ($this->isHttp()) {
             return  print nl2br($str);
+        }
 
         return ($this->testMode) ? $str : fwrite(STDOUT, $str, strlen($str));
     }
@@ -155,6 +156,7 @@ class Output implements OutputInterface
         $this->writeLn("      {$e->getMessage()}", 'white', 'red');
         $this->writeLn(str_repeat(' ', $max - strlen($e->getMessage()))."\n", 'white', 'red');
         $this->writeLn(str_repeat(' ', $max + 6)."\n", 'white', 'red');
+
         return 0;
     }
 
@@ -196,7 +198,7 @@ class Output implements OutputInterface
     }
 
     /**
-     * enabling verbosity
+     * enabling verbosity.
      *
      * @return void
      */
@@ -228,13 +230,13 @@ class Output implements OutputInterface
     }
 
     /**
-     * check if request is http
+     * check if request is http.
      *
-     * @return boolean
+     * @return bool
      */
     public function isHttp(): bool
     {
-        return (php_sapi_name() !== 'cli');
+        return php_sapi_name() !== 'cli';
     }
 
     /**

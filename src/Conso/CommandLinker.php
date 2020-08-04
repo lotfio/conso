@@ -145,7 +145,7 @@ class CommandLinker
     }
 
     /**
-     * check flags before link
+     * check flags before link.
      *
      * @return void
      */
