@@ -66,6 +66,7 @@ class Input implements InputInterface
         '-q',       '--quiet',
         '--ansi',   '--no-ansi',
         '-n',       '--no-interaction',
+        '-vv',       '--verbose'
     ];
 
     /**

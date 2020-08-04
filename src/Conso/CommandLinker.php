@@ -64,6 +64,9 @@ class CommandLinker
         $options = $this->input->options();
         $flags = $this->input->flags();
 
+        // check flags before link
+        $this->checkFlagsBeforeLink();
+
         // if command is a class
         for ($i = 0; $i < count($commands); $i++) {
             readCommandPropertiesFromClass($commands[$i]);
@@ -138,6 +141,23 @@ class CommandLinker
                     throw new InputException("flag ({$flag}) is not defined.");
                 }
             }
+        }
+    }
+
+    /**
+     * check flags before link
+     *
+     * @return void
+     */
+    private function checkFlagsBeforeLink()
+    {
+        // disable ansi
+        if ($this->input->flag('--no-ansi') !== false) {
+            $this->output->disableAnsi();
+        }
+
+        if (($this->input->flag('-vv') !== false || $this->input->flag('--verbose') !== false)) {
+            $this->output->enableVerbosity();
         }
     }
 }

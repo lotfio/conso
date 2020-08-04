@@ -38,6 +38,13 @@ class Output implements OutputInterface
     private $testMode = false;
 
     /**
+     * verbosity
+     *
+     * @var boolean
+     */
+    public $verbosity = false;
+
+    /**
      * colors.
      *
      * @var array
@@ -119,13 +126,13 @@ class Output implements OutputInterface
     /**
      * exception output.
      *
-     * @return void
+     * @return bool
      */
-    public function exception(\Exception $e, $env = 0): void
+    public function exception(\Exception $e): bool
     {
         $class = get_class($e);
 
-        if ($env == 1) {
+        if ($this->verbosity === true) {
             $this->writeLn("=>\n", 'yellow');
             $this->writeLn(' - error    : ', 'yellow');
             $this->writeLn(" {$class}\n", 'red');
@@ -137,7 +144,7 @@ class Output implements OutputInterface
             $this->writeLn(" {$e->getLine()}\n", 'red');
             $this->writeLn('=>', 'yellow');
 
-            return;
+            return 1;
         }
 
         // output error in production
@@ -148,7 +155,7 @@ class Output implements OutputInterface
         $this->writeLn("      {$e->getMessage()}", 'white', 'red');
         $this->writeLn(str_repeat(' ', $max - strlen($e->getMessage()))."\n", 'white', 'red');
         $this->writeLn(str_repeat(' ', $max + 6)."\n", 'white', 'red');
-        return;
+        return 0;
     }
 
     /**
@@ -186,6 +193,16 @@ class Output implements OutputInterface
     public function disableAnsi(): void
     {
         $this->noAnsi = true;
+    }
+
+    /**
+     * enabling verbosity
+     *
+     * @return void
+     */
+    public function enableVerbosity(): void
+    {
+        $this->verbosity = true;
     }
 
     /**

@@ -115,7 +115,7 @@ class Conso
      *
      * @return mixed
      */
-    public function run(int $env = 0)
+    public function run()
     {
         // build in commands
         $this->loadBuildInCommands();
@@ -130,7 +130,7 @@ class Conso
 
                 throw new \Exception($e);
             }
-            $this->output->exception($e, $env);
+            $this->output->exception($e);
         }
     }
 }

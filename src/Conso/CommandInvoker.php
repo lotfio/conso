@@ -145,11 +145,6 @@ class CommandInvoker
     {
         $commands = $this->app->getCommands(); // defined commands
 
-        // disable ansi
-        if ($this->input->flag('--no-ansi') !== false) {
-            $this->output->disableAnsi();
-        }
-
         // command help
         if ($this->input->command() && ($this->input->flag('-h') !== false || $this->input->flag('--help') !== false)) {
             return commandHelp($command, $this->output);
