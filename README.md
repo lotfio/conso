@@ -59,7 +59,7 @@ $conso = new Conso(new Input, new Output);
 // include your commands
 require_once 'commands.php';
 
-$conso->run(0); // 0 for production & 1 for development
+$conso->run();
 ```
 
 ### :star: Available config methods :
