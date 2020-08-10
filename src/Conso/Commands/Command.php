@@ -42,7 +42,7 @@ class Command extends BaseCommand implements CommandInterface
     /**
      * command help.
      *
-     * @var string
+     * @var array
      */
     protected $help = [
         'sub commands' => [
