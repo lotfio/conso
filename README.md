@@ -262,7 +262,7 @@ class Test extends Command implements CommandInterface
     /**
      * command help
      *
-     * @var string
+     * @var array
      */
     protected $help  = [
 
