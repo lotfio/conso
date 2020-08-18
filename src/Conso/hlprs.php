@@ -1,7 +1,5 @@
 <?php
 
-namespace Conso;
-
 /**
  * @author    <contact@lotfio.net>
  *

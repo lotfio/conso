@@ -10,7 +10,6 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use function Conso\commandHelp;
 use Conso\{Conso, Command};
 use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
 

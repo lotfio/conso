@@ -15,7 +15,6 @@ namespace Conso\Commands;
  */
 
 use Conso\Command as BaseCommand;
-use function Conso\commandHelp;
 use Conso\Contracts\CommandInterface;
 use Conso\Contracts\InputInterface;
 use Conso\Contracts\OutputInterface;

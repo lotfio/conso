@@ -235,7 +235,6 @@ $conso->group('my group of commands:', function($conso){
 
 namespace App\Commands;
 
-use function Conso\commandHelp;
 use Conso\{Conso, Command};
 use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
 
