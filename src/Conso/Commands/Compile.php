@@ -122,30 +122,41 @@ class Compile extends Command implements CommandInterface
      */
     protected function createPhar(array $rules)
     {
+        deleteTree($rules['build'] . "package");
+        copyDirectory($rules['src'][0], $rules['build'] . "package/src/Conso");
+        copyDirectory("vendor", $rules['build'] . "package/vendor");
+
+        $stub = file_get_contents("conso");
+        $stub = preg_replace("/\#.*\n/", NULL, $stub);
+        $stub = preg_replace('/\$conso->run\(\);/', '$conso->disableBuiltInCommands(); $conso->run();', $stub);
+
+        file_put_contents($rules['build'] . "package/conso", $stub);
+
         // create phar
         $phar = new \Phar($rules['build'] . $rules['phar']);
 
         // start buffering. Mandatory to modify stub to add shebang
-        //$phar->startBuffering();
+        $phar->startBuffering();
 
         // Create the default stub from conso entry point
-        //$defaultStub = $phar->createDefaultStub($rules['stub']);
+        $defaultStub = $phar->createDefaultStub($rules['stub']);
 
         // Add the rest of the apps files
-        $phar->buildFromDirectory($rules['src'][0]);
+        $phar->buildFromDirectory($rules['build'] . "package/");
 
         // Customize the stub to add the shebang
-        //$stub = "#!/usr/bin/env php \n" . $defaultStub;
+        $stub = "#!/usr/bin/env php \n" . $defaultStub;
 
         // Add the stub
-        //$phar->setStub($stub);
+        $phar->setStub($stub);
 
-        //$phar->stopBuffering();
+        $phar->stopBuffering();
 
         // plus - compressing it into gzip  
-        //$phar->compressFiles(\Phar::GZ);
+        $phar->compressFiles(\Phar::GZ);
 
         # Make the file executable
-        //chmod($rules['build'] . $rules['phar'], 0770);
+        chmod($rules['build'] . $rules['phar'], 0770);
+        deleteTree($rules['build'] . "package");
     }
 }
