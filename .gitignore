@@ -1,6 +1,8 @@
 /vendor/
+/build/*
 composer.lock
 phpunit
 *.cache
 TODO
-pkg.json
+conso.json
+stub

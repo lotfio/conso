@@ -10,7 +10,7 @@
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\{Conso, Command};
+use Conso\Command;
 use Conso\Exceptions\{CompileException,InputException};
 use Conso\Contracts\{CommandInterface,InputInterface,OutputInterface};
 
@@ -51,12 +51,12 @@ class Compile extends Command implements CommandInterface
     protected $description = 'Compile your package to a shareable single phar file.';
 
     /**
-     * set up command dependecies
+     * set up command dependencies
      */
     public function __construct()
     {
         $this->cwd = getcwd();
-        $this->packageFile = $this->cwd . DIRECTORY_SEPARATOR . 'pkg.json';
+        $this->packageFile = $this->cwd . DIRECTORY_SEPARATOR . 'conso.json';
     }
 
     /**
@@ -70,6 +70,21 @@ class Compile extends Command implements CommandInterface
     {
         if(!\file_exists($this->packageFile))
             throw new CompileException("package file ($this->packageFile) not found");
+
+        if(ini_get('phar.readonly') == 1)
+            throw new CompileException("phar is read only mode ! it should be turned off from php.init to compile.");
+
+        // read package file
+        $rules = (array) json_decode(file_get_contents($this->packageFile));
+
+        // validate package file
+        if(!array_key_exists('src', $rules))   throw new CompileException("source (src) directory is missing from package file.");
+        if(!array_key_exists('build', $rules)) throw new CompileException("build (build) directory is missing from package file.");
+        if(!array_key_exists('stub', $rules))  throw new CompileException("stub (stub) file is missing from package file.");
+        if(!array_key_exists('phar', $rules))  throw new CompileException("output (phar) file is missing from package file.");
+        
+        // create a phar file if everything went well
+        $this->createPhar($rules);
     }
 
     /**
@@ -90,12 +105,47 @@ class Compile extends Command implements CommandInterface
                 "src/Conso"
             ),
             "build" => "build/",
-            "stub"  => "conso"
+            "stub"  => "stub",
+            "phar"  => "conso.phar"
         );
 
         if(\file_put_contents($this->packageFile, json_encode($content, JSON_PRETTY_PRINT)))
             exit($output->writeLn("\nbuild file created successfully.\n\n", 'green'));
 
         $output->writeLn("error creating build file.\n", 'red');
+    }
+
+    /**
+     * create phar archive
+     *
+     * @return void
+     */
+    protected function createPhar(array $rules)
+    {
+        // create phar
+        $phar = new \Phar($rules['build'] . $rules['phar']);
+
+        // start buffering. Mandatory to modify stub to add shebang
+        //$phar->startBuffering();
+
+        // Create the default stub from conso entry point
+        //$defaultStub = $phar->createDefaultStub($rules['stub']);
+
+        // Add the rest of the apps files
+        $phar->buildFromDirectory($rules['src'][0]);
+
+        // Customize the stub to add the shebang
+        //$stub = "#!/usr/bin/env php \n" . $defaultStub;
+
+        // Add the stub
+        //$phar->setStub($stub);
+
+        //$phar->stopBuffering();
+
+        // plus - compressing it into gzip  
+        //$phar->compressFiles(\Phar::GZ);
+
+        # Make the file executable
+        //chmod($rules['build'] . $rules['phar'], 0770);
     }
 }
