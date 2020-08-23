@@ -19,7 +19,7 @@ Conso is a simple, lightweight PHP package that helps you create command line ap
 
 ![conso](https://user-images.githubusercontent.com/18489496/89343333-6a064d80-d6a4-11ea-9b64-c429684f9014.gif)
 
-## :collision: is it really lightweight ?
+## :collision: Is it really lightweight ?
 <img width="825" alt="Screen Shot 2020-07-27 at 6 12 41 PM" src="https://user-images.githubusercontent.com/18489496/88639724-616ab180-d0bd-11ea-873a-2e25ea1fa113.png">
 
 ## 📌 Requirements :
@@ -38,7 +38,7 @@ composer require lotfio/conso
 composer test
 ```
 
-## 🎉 write your first command
+## 🎉 Write your first command
 - create a `commands.php` file.
 - create a `conso` file (you can change the name as you like).
 - include your `commands.php` file into `conso` executable file.
@@ -99,7 +99,7 @@ $conso->command("test", function($input, $output){
 ![run-test](https://user-images.githubusercontent.com/18489496/87862317-ec75da00-c94e-11ea-9690-894c35911d81.png)
 
 
-### :star: add description
+### :star: Add description
 - `->description(string $description)`;
 
 ```php
@@ -113,7 +113,7 @@ $conso->command("test", function($input, $output){
 ![description](https://user-images.githubusercontent.com/18489496/87862367-89387780-c94f-11ea-8166-6fc9bc598fdd.png)
 
 
-### :star: define sub commands
+### :star: Define sub commands
 - `->sub(string|array $subCommand)`;
 
 ```php
@@ -134,7 +134,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87862391-bedd6080-c94f-11ea-808e-bba3738b0a4b.png)
 
 
-### :star: define command flags
+### :star: Define command flags
 - you can define flags using the flag method `->flags(string|array $flag)`
 - this is a list of reserved flags `['-h', '--help', '-v', '--version', '-c', '--commands', '-q', '--quiet', '--ansi', '--no-ansi']`
 - for debug you can use `-vv or --verbose` flags to get more details about the error
@@ -157,7 +157,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87862405-095edd00-c950-11ea-9cd7-f26b2823981f.png)
 
 
-### :star: add command alias
+### :star: Add command alias
 - you can add an alias to a command with the alias method  `->alias(string $alias)`
 
 ```php
@@ -173,7 +173,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/87862421-21cef780-c950-11ea-8a08-adf0efcab72e.png)
 
 
-### :star: define command help
+### :star: Define command help
 - you can add help instructions to a command using the help method `->help(array $help)`
 - command help can be displayed using the `-h` or `--help` flags
 - help array must be an array of sub commands, options and flags with their descriptions
@@ -198,7 +198,7 @@ $conso->command("test", function($input, $output){
 ![image](https://user-images.githubusercontent.com/18489496/88392798-e94e7400-cdbc-11ea-8de6-5fab02cdfb01.png)
 
 
-### :star: group commands
+### :star: Group commands
  - you can group commands using the `group()` method
 ```php
 <?php
@@ -214,7 +214,7 @@ $conso->group('my group of commands:', function($conso){
 ```
 ![image](https://user-images.githubusercontent.com/18489496/88970755-3fd31b00-d2b3-11ea-9860-2ff024a6a2dc.png)
 
-### :star: class commands
+### :star: Class commands
 - class commands are very helpful for big commands
 - first you need to create an `app/Commands` folder.
 - you can also move your commands definitions file `commands.php` to `app` folder to clean up things.
@@ -296,7 +296,7 @@ $conso->command('test', Your\NameSpace\Test::class);
 - by default `test` command will run the `execute` method if no sub command is provided
 - each sub command is a separate method
 
-## :star: accessing app from commands :
+## :star: Accessing app from commands :
  - from a callback command
 
 ```php
@@ -343,7 +343,7 @@ $conso->command("test", function($input, $output){
     }
 
 ```
-### :star: commands namespace
+### :star: Commands namespace
  - you can wrap commands in the same namespace with `namespace()` method which makes things cleaner
 
 ```php
@@ -360,7 +360,7 @@ $conso->namespace('Conso\\Commands', function($conso){
 
 ```
 
-### :star: http support
+### :star: Http support
 - you can invoke conso from the browser or any http client just by passing commands to the input instance
 ```php
 <?php declare(strict_types=1);
@@ -384,7 +384,7 @@ $conso->run();
 
 ```
 
-## ✨ TODO
+## ✨ Todo
 - improve code quality.
 - add testing helpers.
 - add compile command (compile your app to an executable .phar).
