@@ -31,7 +31,7 @@ class Compile extends Command implements CommandInterface
      * @var array
      */
     protected $flags = [
-
+        '--web'
     ];
 
     /**
@@ -81,7 +81,8 @@ class Compile extends Command implements CommandInterface
         $this->validateBuildFile($buildFile);
         
         // create a phar file if everything went well
-       $this->createPhar($buildFile);
+        $shebang = ($input->flag('--web') === false) ? true : false;
+        $this->createPhar($buildFile, $shebang);
     }
 
     /**
@@ -154,25 +155,12 @@ class Compile extends Command implements CommandInterface
     }
 
     /**
-     * create a stub file
-     * 
-     * @param   string $file
-     * @return void
-     */
-    private function createStubFile(string $file)
-    {
-        //$stub = file_get_contents($file);
-        //$stub = preg_replace("/\#.*\n/", NULL, $stub);
-        //$stub = preg_replace('/\$conso->run\(\);/', '$conso->disableBuiltInCommands(); $conso->run();', $stub);
-        //file_put_contents($rules['build'] . "package/conso", $stub);
-    }
-
-    /**
-     * create phar archive
+     * create a phar
      *
+     * @param array $rules
      * @return void
      */
-    private function createPhar(array $rules)
+    private function createPhar(array $rules, bool $shebang = false)
     {
         $buildLocation = rtrim($rules['build'], '/') . "/package/";
 
@@ -198,15 +186,14 @@ class Compile extends Command implements CommandInterface
         // Add the rest of the apps files
         $phar->buildFromDirectory($buildLocation);
 
-        // Customize the stub to add the shebang
+        // add shebang
         $stub = "#!/usr/bin/env php \n" . $defaultStub;
+        $phar->setStub($shebang === true ? $stub : $defaultStub);
 
-        // Add the stub
-        $phar->setStub($stub);
-
+        // stop buffering
         $phar->stopBuffering();
 
-        // plus - compressing it into gzip  
+        // gzip compressin
         $phar->compressFiles(\Phar::GZ);
 
         # Make the file executable
