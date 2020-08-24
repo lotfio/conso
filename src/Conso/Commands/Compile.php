@@ -48,7 +48,7 @@ class Compile extends Command implements CommandInterface
      *
      * @var string
      */
-    protected $description = 'Compile your package to a shareable single phar file.';
+    protected $description = 'Compile your package to a shareable phar file.';
 
     /**
      * set up command dependencies
@@ -102,7 +102,8 @@ class Compile extends Command implements CommandInterface
 
         $content = array(
             "src" => array(
-                "src/Conso"
+                "src/Conso",
+                "vendor"
             ),
             "build" => "build/",
             "stub"  => "stub",
@@ -116,11 +117,33 @@ class Compile extends Command implements CommandInterface
     }
 
     /**
+     * validate build file 
+     *
+     *  @param string
+     * @return void
+     */
+    private function validateBuildFile(array $file)
+    {
+
+    }
+
+    /**
+     * create a stub file
+     * 
+     * @param   string $file
+     * @return void
+     */
+    private function createStubFile(string $file)
+    {
+
+    }
+
+        /**
      * create phar archive
      *
      * @return void
      */
-    protected function createPhar(array $rules)
+    private function createPhar(array $rules)
     {
         deleteTree($rules['build'] . "package");
         copyDirectory($rules['src'][0], $rules['build'] . "package/src/Conso");
@@ -159,4 +182,5 @@ class Compile extends Command implements CommandInterface
         chmod($rules['build'] . $rules['phar'], 0770);
         deleteTree($rules['build'] . "package");
     }
+
 }
