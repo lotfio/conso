@@ -14,21 +14,14 @@ namespace Tests\Unit;
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\CommandInvoker;
 use Conso\Conso;
 use Conso\Input;
 use Conso\Output;
-use PHPUnit\Framework\TestCase;
+use Conso\CommandInvoker;
+use Conso\Testing\TestCase;
 
 class CommandInvokerTest extends TestCase
 {
-    /**
-     * output.
-     *
-     * @var object
-     */
-    private $output;
-
     /**
      * commands.
      *
@@ -43,10 +36,8 @@ class CommandInvokerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->output = new Output();
-        $this->output->disableAnsi();
-        $this->output->enableTestMode();
-
+        parent::setUp();
+        
         $this->commands = [
             [
                 'name'          => 'make',

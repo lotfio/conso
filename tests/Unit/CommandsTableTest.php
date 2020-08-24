@@ -15,7 +15,7 @@ namespace Tests\Unit;
  */
 
 use Conso\CommandsTable;
-use PHPUnit\Framework\TestCase;
+use Conso\Testing\TestCase;
 
 class CommandsTableTest extends TestCase
 {

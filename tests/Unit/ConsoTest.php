@@ -17,17 +17,10 @@ namespace Tests\Unit;
 use Conso\Conso;
 use Conso\Input;
 use Conso\Output;
-use PHPUnit\Framework\TestCase;
+use Conso\Testing\TestCase;
 
 class ConsoTest extends TestCase
 {
-    /**
-     * output.
-     *
-     * @var object
-     */
-    private $output;
-
     /**
      * set up.
      *
@@ -35,9 +28,7 @@ class ConsoTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->output = new Output();
-        $this->output->disableAnsi();
-        $this->output->enableTestMode();
+        parent::setUp();
     }
 
     /**

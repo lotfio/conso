@@ -14,21 +14,14 @@ namespace Tests\Unit;
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\CommandLinker;
-use Conso\Exceptions\InputException;
 use Conso\Input;
 use Conso\Output;
-use PHPUnit\Framework\TestCase;
+use Conso\CommandLinker;
+use Conso\Testing\TestCase;
+use Conso\Exceptions\InputException;
 
 class CommandLinkerTest extends TestCase
 {
-    /**
-     * output.
-     *
-     * @var object
-     */
-    private $output;
-
     /**
      * commands.
      *
@@ -43,9 +36,7 @@ class CommandLinkerTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->output = new Output();
-        $this->output->disableAnsi();
-        $this->output->enableTestMode();
+        parent::setUp();
 
         $this->commands = [
             [

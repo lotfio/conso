@@ -15,17 +15,10 @@ namespace Tests\Unit;
  */
 
 use Conso\Output;
-use PHPUnit\Framework\TestCase;
+use Conso\Testing\TestCase;
 
 class OutputTest extends TestCase
 {
-    /**
-     * output.
-     *
-     * @var object
-     */
-    private $output;
-
     /**
      * set up.
      *
@@ -33,9 +26,7 @@ class OutputTest extends TestCase
      */
     public function setUp(): void
     {
-        $this->output = new Output();
-        $this->output->enableTestMode(); // disable write to STDOUT useful for testing
-        $this->output->disableAnsi();   // disable ansi no colors needed
+        parent::setUp();
     }
 
     /**
