@@ -31,7 +31,7 @@ class Compile extends Command implements CommandInterface
      * @var array
      */
     protected $flags = [
-        '--web'
+        '--no-shebang'
     ];
 
     /**
@@ -56,7 +56,7 @@ class Compile extends Command implements CommandInterface
     public function __construct()
     {
         $this->cwd = getcwd();
-        $this->packageFile = $this->cwd . DIRECTORY_SEPARATOR . 'conso.json';
+        $this->packageFile = $this->cwd . '/conso.json';
     }
 
     /**
@@ -81,7 +81,7 @@ class Compile extends Command implements CommandInterface
         $this->validateBuildFile($buildFile);
         
         // create a phar file if everything went well
-        $shebang = ($input->flag('--web') === false) ? true : false;
+        $shebang = ($input->flag('--no-shebang') === false) ? true : false;
         $this->createPhar($buildFile, $shebang);
     }
 
