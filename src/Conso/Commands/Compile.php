@@ -75,16 +75,13 @@ class Compile extends Command implements CommandInterface
             throw new CompileException("phar is read only mode ! it should be turned off from php.init to compile.");
 
         // read package file
-        $rules = (array) json_decode(file_get_contents($this->packageFile));
+        $buildFile = (array) json_decode(file_get_contents($this->packageFile));
 
-        // validate package file
-        if(!array_key_exists('src', $rules))   throw new CompileException("source (src) directory is missing from package file.");
-        if(!array_key_exists('build', $rules)) throw new CompileException("build (build) directory is missing from package file.");
-        if(!array_key_exists('stub', $rules))  throw new CompileException("stub (stub) file is missing from package file.");
-        if(!array_key_exists('phar', $rules))  throw new CompileException("output (phar) file is missing from package file.");
+        // validate build file
+        $this->validateBuildFile($buildFile);
         
         // create a phar file if everything went well
-        $this->createPhar($rules);
+       // $this->createPhar($buildFile);
     }
 
     /**
@@ -100,15 +97,15 @@ class Compile extends Command implements CommandInterface
         if(\file_exists($this->packageFile))
             throw new InputException("build file ({$this->packageFile}) exists already.");
 
-        $content = array(
-            "src" => array(
+        $content = [
+            "src" => [
                 "src/Conso",
                 "vendor"
-            ),
+            ],
             "build" => "build/",
-            "stub"  => "stub",
+            "stub"  => "conso",
             "phar"  => "conso.phar"
-        );
+        ];
 
         if(\file_put_contents($this->packageFile, json_encode($content, JSON_PRETTY_PRINT)))
             exit($output->writeLn("\nbuild file created successfully.\n\n", 'green'));
@@ -124,7 +121,37 @@ class Compile extends Command implements CommandInterface
      */
     private function validateBuildFile(array $file)
     {
+        if(!is_array($file) || count($file) < 4)
+            throw new CompileException("build file is not a valid json file.");
 
+        // validate package file
+        if(!in_array('src', array_keys($file)))
+            throw new CompileException("source (src) directory is missing from package file.");
+
+        if(!in_array('build', array_keys($file)))
+            throw new CompileException("build (build) directory is missing from package file.");
+
+        if(!in_array('stub', array_keys($file)))
+            throw new CompileException("stub (stub) file is missing from package file.");
+
+        if(!in_array('phar', array_keys($file)))
+            throw new CompileException("output (phar) file is missing from package file.");
+
+        if(!is_array($file['src']))
+            throw new CompileException("source (src) directory must be an array of valid directories.");
+
+        foreach($file['src'] as $dir)
+            if(!is_dir($dir))
+                throw new CompileException("source ($dir) directory is not a valid directory.");
+        
+        if(!is_string($file['build']) || !is_dir($file['build']) || !is_writable($file['build']))
+            throw new CompileException("build ({$file['build']}) directory is not a valid directory.");
+
+        if(!is_string($file['stub']) || !file_exists($file['stub']))
+            throw new CompileException("stub file ({$file['stub']}) not found.");
+
+        if(!is_string($file['phar']) || strlen($file['phar']) < 1 || strrpos($file['phar'], '.phar') === false)
+            throw new CompileException("pahr file ({$file['phar']}) must be a valid file ends with .phar extension.");
     }
 
     /**
@@ -138,7 +165,7 @@ class Compile extends Command implements CommandInterface
 
     }
 
-        /**
+    /**
      * create phar archive
      *
      * @return void
@@ -182,5 +209,4 @@ class Compile extends Command implements CommandInterface
         chmod($rules['build'] . $rules['phar'], 0770);
         deleteTree($rules['build'] . "package");
     }
-
 }
