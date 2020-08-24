@@ -81,7 +81,7 @@ class Compile extends Command implements CommandInterface
         $this->validateBuildFile($buildFile);
         
         // create a phar file if everything went well
-       // $this->createPhar($buildFile);
+       $this->createPhar($buildFile);
     }
 
     /**
@@ -124,7 +124,6 @@ class Compile extends Command implements CommandInterface
         if(!is_array($file) || count($file) < 4)
             throw new CompileException("build file is not a valid json file.");
 
-        // validate package file
         if(!in_array('src', array_keys($file)))
             throw new CompileException("source (src) directory is missing from package file.");
 
@@ -150,8 +149,8 @@ class Compile extends Command implements CommandInterface
         if(!is_string($file['stub']) || !file_exists($file['stub']))
             throw new CompileException("stub file ({$file['stub']}) not found.");
 
-        if(!is_string($file['phar']) || strlen($file['phar']) < 1 || strrpos($file['phar'], '.phar') === false)
-            throw new CompileException("pahr file ({$file['phar']}) must be a valid file ends with .phar extension.");
+        if(!is_string($file['phar']) || strlen($file['phar']) < 1 || preg_match('/\.phar$/', $file['phar']) == false)
+            throw new CompileException("phar file ({$file['phar']}) must be a valid file ends with .phar extension.");
     }
 
     /**
@@ -162,7 +161,10 @@ class Compile extends Command implements CommandInterface
      */
     private function createStubFile(string $file)
     {
-
+        //$stub = file_get_contents($file);
+        //$stub = preg_replace("/\#.*\n/", NULL, $stub);
+        //$stub = preg_replace('/\$conso->run\(\);/', '$conso->disableBuiltInCommands(); $conso->run();', $stub);
+        //file_put_contents($rules['build'] . "package/conso", $stub);
     }
 
     /**
@@ -172,18 +174,20 @@ class Compile extends Command implements CommandInterface
      */
     private function createPhar(array $rules)
     {
-        deleteTree($rules['build'] . "package");
-        copyDirectory($rules['src'][0], $rules['build'] . "package/src/Conso");
-        copyDirectory("vendor", $rules['build'] . "package/vendor");
+        $buildLocation = rtrim($rules['build'], '/') . "/package/";
 
-        $stub = file_get_contents("conso");
-        $stub = preg_replace("/\#.*\n/", NULL, $stub);
-        $stub = preg_replace('/\$conso->run\(\);/', '$conso->disableBuiltInCommands(); $conso->run();', $stub);
+        // delete old build files if any
+        deleteTree($buildLocation);
 
-        file_put_contents($rules['build'] . "package/conso", $stub);
+        // copy project
+        foreach($rules['src'] as $src)
+            copyDirectory($src, $buildLocation . rtrim($src, '/'));
+
+        // copy stub file
+        copy($rules['stub'], $buildLocation . $rules['stub']);
 
         // create phar
-        $phar = new \Phar($rules['build'] . $rules['phar']);
+        $phar = new \Phar(rtrim($rules['build'], '/') . "/" . $rules['phar']);
 
         // start buffering. Mandatory to modify stub to add shebang
         $phar->startBuffering();
@@ -192,7 +196,7 @@ class Compile extends Command implements CommandInterface
         $defaultStub = $phar->createDefaultStub($rules['stub']);
 
         // Add the rest of the apps files
-        $phar->buildFromDirectory($rules['build'] . "package/");
+        $phar->buildFromDirectory($buildLocation);
 
         // Customize the stub to add the shebang
         $stub = "#!/usr/bin/env php \n" . $defaultStub;
@@ -206,7 +210,7 @@ class Compile extends Command implements CommandInterface
         $phar->compressFiles(\Phar::GZ);
 
         # Make the file executable
-        chmod($rules['build'] . $rules['phar'], 0770);
-        deleteTree($rules['build'] . "package");
+        chmod(rtrim($rules['build'], '/') . "/" . $rules['phar'], 0770);
+        deleteTree($buildLocation);
     }
 }
