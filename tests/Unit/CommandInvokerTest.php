@@ -14,10 +14,9 @@ namespace Tests\Unit;
  * @copyright 2019 Lotfio Lakehal
  */
 
+use Conso\CommandInvoker;
 use Conso\Conso;
 use Conso\Input;
-use Conso\Output;
-use Conso\CommandInvoker;
 use Conso\Testing\TestCase;
 
 class CommandInvokerTest extends TestCase
@@ -37,7 +36,7 @@ class CommandInvokerTest extends TestCase
     public function setUp(): void
     {
         parent::setUp();
-        
+
         $this->commands = [
             [
                 'name'          => 'make',

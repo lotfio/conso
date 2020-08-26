@@ -14,11 +14,10 @@ namespace Tests\Unit;
  * @copyright 2019 Lotfio Lakehal
  */
 
-use Conso\Input;
-use Conso\Output;
 use Conso\CommandLinker;
-use Conso\Testing\TestCase;
 use Conso\Exceptions\InputException;
+use Conso\Input;
+use Conso\Testing\TestCase;
 
 class CommandLinkerTest extends TestCase
 {

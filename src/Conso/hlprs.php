@@ -117,46 +117,49 @@ function commandHelp(array $command, $output)
 }
 
 /**
- * copy directory recursively
+ * copy directory recursively.
  *
  * @param string $source
  * @param string $destination
+ *
  * @return void
  */
-function copyDirectory(string $source, string $destination) : void
+function copyDirectory(string $source, string $destination): void
 {
     mkdir($destination, 0755, true);
 
     foreach (
     $iterator = new \RecursiveIteratorIterator(
         new \RecursiveDirectoryIterator($source, \RecursiveDirectoryIterator::SKIP_DOTS),
-        \RecursiveIteratorIterator::SELF_FIRST) as $item
-    )
-    {
+        \RecursiveIteratorIterator::SELF_FIRST
+    ) as $item
+    ) {
         if ($item->isDir()) {
-            mkdir($destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+            mkdir($destination.DIRECTORY_SEPARATOR.$iterator->getSubPathName());
         } else {
-            copy($item, $destination . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
+            copy($item, $destination.DIRECTORY_SEPARATOR.$iterator->getSubPathName());
         }
     }
 }
 
 /**
- * delete directory recursively
+ * delete directory recursively.
  *
  * @param string $dir
+ *
  * @return void
  */
 function deleteTree(string $dir)
-{ 
-    if(!is_dir($dir))
+{
+    if (!is_dir($dir)) {
         return false;
-        
-    $files = array_diff(scandir($dir), array('.', '..')); 
-
-    foreach ($files as $file) { 
-        (is_dir("$dir/$file")) ? deleteTree("$dir/$file") : unlink("$dir/$file"); 
     }
 
-    return rmdir($dir); 
-} 
+    $files = array_diff(scandir($dir), ['.', '..']);
+
+    foreach ($files as $file) {
+        (is_dir("$dir/$file")) ? deleteTree("$dir/$file") : unlink("$dir/$file");
+    }
+
+    return rmdir($dir);
+}
