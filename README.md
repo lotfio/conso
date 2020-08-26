@@ -386,22 +386,25 @@ $conso->run();
 ### :star: Compile your app to an executable shareable single `.phar` file :
 - you can use this feature from version `2.0` and above.
 - to compile your application and create a shareable `.phar` file use the built in `compile` command.
-- run `php conso compile:init` to create a `conso.json build file`
+- run `php conso compile:init` to create a `conso.json` build file.
+
 ![compile:init](https://user-images.githubusercontent.com/18489496/91350990-68313500-e7df-11ea-8fe2-e0ed1db373af.png)
+
 - this will generate a json file like follow:
-```json
+```js
 {
-    "src": [ // your pacakge directories to compile should be added here
+    "src": [ /* your pacakge directories to compile should be added here */
         "src\/Conso", 
-        "vendor" // package dependencies if any
+        "vendor" /* package dependencies if any */
     ],
-    "build": "build", // build location 
-    "stub": "conso",  // stub file (the entry point of your phar)
-    "phar": "conso.phar" // output (your phar file name)
+    "build": "build", /* build location */
+    "stub": "conso",  /* stub file (the entry point of your phar) */
+    "phar": "conso.phar" /* output (your phar file name) */
 }
 
 ```
-- your stub file should look something like this
+- your stub file should look something like this:
+
 ```php
 <?php // no need for shebang it will be added automatically 
 
@@ -427,10 +430,12 @@ $conso->disableBuiltInCommands(); // disable conso built in commands
 
 $conso->run();
 ```
-- no you can run `php conso compile` and you will get your package compiled to a `phar` file.
+- now you can run `php conso compile` and you will get your package compiled to a `phar` file.
+
 ![compiled](https://user-images.githubusercontent.com/18489496/91352004-1ab5c780-e7e1-11ea-8535-5d1260656720.png)
 
 - you can use `--no-shebang` flag to avoid adding shebang to your `phar` file (this is useful if you want to invoke your `phar` file from `http`)
+
 
 ### :star: Testing helpers:
 - you can use `Conso\Testing\TestCase` test helper class for testing which helps you to :
