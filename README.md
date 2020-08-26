@@ -3,7 +3,7 @@
   <p align="center">
     <img src="https://img.shields.io/badge/License-MIT-f1c40f"          alt="License">
     <img src="https://img.shields.io/badge/PHP-7.2-3498db.svg"          alt="PHP version">
-    <img src="https://img.shields.io/badge/version-1.9.0-2c3e50.svg"    alt="Version">
+    <img src="https://img.shields.io/badge/version-2.0.0-2c3e50.svg"    alt="Version">
     <img src="https://img.shields.io/badge/coverage-40%25-27ae60.svg"   alt="Coverage">
     <img src="https://travis-ci.org/lotfio/conso.svg?branch=master"     alt="Build Status">
     <img src="https://github.styleci.io/repos/165832668/shield?branch=master" alt="StyleCi">
@@ -15,7 +15,7 @@
 </p>
 
 ## 🔥 Introduction :
-Conso is a simple, lightweight PHP package that helps you create command line applications easily.
+Conso is a simple, lightweight PHP package that helps you create (executable, `.phar`, shareable) command line applications easily.
 
 ![conso](https://user-images.githubusercontent.com/18489496/89343333-6a064d80-d6a4-11ea-9b64-c429684f9014.gif)
 
@@ -383,11 +383,62 @@ require 'commands.php';
 $conso->run();
 
 ```
+### :star: Compile your app to an executable shareable single `.phar` file :
+- you can use this feature from version `2.0` and above.
+- to compile your application and create a shareable `.phar` file use the built in `compile` command.
+- run `php conso compile:init` to create a `conso.json build file`
+![compile:init](https://user-images.githubusercontent.com/18489496/91350990-68313500-e7df-11ea-8fe2-e0ed1db373af.png)
+- this will generate a json file like follow:
+```json
+{
+    "src": [ // your pacakge directories to compile should be added here
+        "src\/Conso", 
+        "vendor" // package dependencies if any
+    ],
+    "build": "build", // build location 
+    "stub": "conso",  // stub file (the entry point of your phar)
+    "phar": "conso.phar" // output (your phar file name)
+}
+
+```
+- your stub file should look something like this
+```php
+<?php // no need for shebang it will be added automatically 
+
+declare(strict_types=1);
+
+use Conso\{
+    Conso,Input,Output
+};
+
+require 'vendor/autoload.php';
+
+$conso = new Conso(new Input, new Output);
+
+$conso->setName("app name");
+$conso->setVersion("2.0.0");
+
+$conso->setSignature(" app signature ");
+
+$conso->disableBuiltInCommands(); // disable conso built in commands
+
+// include your commands
+// require 'app/commands.php';
+
+$conso->run();
+```
+- no you can run `php conso compile` and you will get your package compiled to a `phar` file.
+![compiled](https://user-images.githubusercontent.com/18489496/91352004-1ab5c780-e7e1-11ea-8535-5d1260656720.png)
+
+- you can use `--no-shebang` flag to avoid adding shebang to your `phar` file (this is useful if you want to invoke your `phar` file from `http`)
+
+### :star: Testing helpers:
+- you can use `Conso\Testing\TestCase` test helper class for testing which helps you to :
+    - turn on testing mode for you (return results instead of outputing to STDOUT).
+    - disable ansi colors which is not needed when testing.
 
 ## ✨ Todo
 - improve code quality.
-- add testing helpers.
-- add compile command (compile your app to an executable .phar).
 
 ## ✨ Contributing
 
