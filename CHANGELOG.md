@@ -1,3 +1,8 @@
+# 2.0.0
+  - added compile command `conso compile` compile you app to a phar file
+  - added Cosno `TestCase` class helper for easy commands testing
+  - cleanup commandHelp
+
 # 1.9.0
  - adding verbosity level `-vv --verbose`
  - adding invoke command from `http` (you can now invoke conso from http)
