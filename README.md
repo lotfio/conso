@@ -17,7 +17,7 @@
 ## 🔥 Introduction :
 Conso is a simple, lightweight PHP package that helps you create (executable, `.phar`, shareable) command line applications easily.
 
-![conso](https://user-images.githubusercontent.com/18489496/89343333-6a064d80-d6a4-11ea-9b64-c429684f9014.gif)
+![conso](https://user-images.githubusercontent.com/18489496/91354364-8a798180-e7e4-11ea-8f47-2b67580aee02.gif)
 
 ## :collision: Is it really lightweight ?
 <img width="825" alt="Screen Shot 2020-07-27 at 6 12 41 PM" src="https://user-images.githubusercontent.com/18489496/88639724-616ab180-d0bd-11ea-873a-2e25ea1fa113.png">

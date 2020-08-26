@@ -97,7 +97,7 @@ class Output implements OutputInterface
      *
      * @return void
      */
-    public function lineFormatter(string $line, string $color, string $bg, int $bold) // needs to check if colors exists and staff & validate is256 not testing & supported
+    public function lineFormatter(string $line, string $color, string $bg, int $bold)
     {
         if (!array_key_exists($color, $this->colors)) {
             throw new OutputException("$color color is not a defined color");
