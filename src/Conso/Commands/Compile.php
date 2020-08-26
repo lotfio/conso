@@ -82,7 +82,10 @@ class Compile extends Command implements CommandInterface
         
         // create a phar file if everything went well
         $shebang = ($input->flag('--no-shebang') === false) ? true : false;
-        $this->createPhar($buildFile, $shebang);
+        if($this->createPhar($buildFile, $shebang))
+            exit($output->writeLn("\npackage compiled successfully .\n\n", 'green'));
+        
+        $output->writeLn("error compiling package.\n", 'red');
     }
 
     /**
@@ -90,7 +93,7 @@ class Compile extends Command implements CommandInterface
      *
      * @return void
      */
-    public function init(InputInterface $input, OutputInterface $output)
+    public function init(InputInterface $input, OutputInterface $output) : void
     {
         if(!\is_writable($this->cwd))
             throw new InputException("{$this->cwd} is not writable.");
@@ -103,7 +106,7 @@ class Compile extends Command implements CommandInterface
                 "src/Conso",
                 "vendor"
             ],
-            "build" => "build/",
+            "build" => "build",
             "stub"  => "conso",
             "phar"  => "conso.phar"
         ];
@@ -120,7 +123,7 @@ class Compile extends Command implements CommandInterface
      *  @param string
      * @return void
      */
-    private function validateBuildFile(array $file)
+    private function validateBuildFile(array $file) : void
     {
         if(!is_array($file) || count($file) < 4)
             throw new CompileException("build file is not a valid json file.");
@@ -160,7 +163,7 @@ class Compile extends Command implements CommandInterface
      * @param array $rules
      * @return void
      */
-    private function createPhar(array $rules, bool $shebang = false)
+    private function createPhar(array $rules, bool $shebang = false) : bool
     {
         $buildLocation = rtrim($rules['build'], '/') . "/package/";
 
@@ -198,6 +201,6 @@ class Compile extends Command implements CommandInterface
 
         # Make the file executable
         chmod(rtrim($rules['build'], '/') . "/" . $rules['phar'], 0770);
-        deleteTree($buildLocation);
+        return deleteTree($buildLocation);
     }
 }
