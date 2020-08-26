@@ -1,7 +1,6 @@
 <?php namespace Conso\Commands;
 
 /**
- *
  * @author    <contact@lotfio.net>
  * @package   Conso PHP Console Creator
  * @version   2.0.0
@@ -40,7 +39,12 @@ class Compile extends Command implements CommandInterface
      * @var array
      */
     protected $help  = [
-
+        'sub' => [
+            'init'   => 'initialize .json build file'
+        ],
+        'flags' => [
+            '--no-shebang' => 'no stub shebang, usefull when invoking phar from http'
+        ]
     ];
 
     /**
@@ -120,7 +124,7 @@ class Compile extends Command implements CommandInterface
     /**
      * validate build file 
      *
-     *  @param string
+     * @param  string
      * @return void
      */
     private function validateBuildFile(array $file) : void
@@ -160,7 +164,7 @@ class Compile extends Command implements CommandInterface
     /**
      * create a phar
      *
-     * @param array $rules
+     * @param  array $rules
      * @return void
      */
     private function createPhar(array $rules, bool $shebang = false) : bool
