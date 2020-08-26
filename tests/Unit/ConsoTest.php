@@ -16,7 +16,6 @@ namespace Tests\Unit;
 
 use Conso\Conso;
 use Conso\Input;
-use Conso\Output;
 use Conso\Testing\TestCase;
 
 class ConsoTest extends TestCase
