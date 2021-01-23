@@ -31,7 +31,7 @@ class InputTest extends TestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->input = new Input('make:controller user --crud --test=value');
     }
