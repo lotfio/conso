@@ -31,7 +31,7 @@ class TestCase extends PHPUnitTestCase
      *
      * @return void
      */
-    public function setUp(): void
+    protected function setUp(): void
     {
         $this->output = new Output();
         $this->output->disableAnsi();
